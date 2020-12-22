@@ -12,18 +12,28 @@ struct matrix {
 
 int main()
 {
-	struct matrix m;
-	FILE *fp;
-	fp = fopen("B.txt", "r");
-	//char string[255];
-	//char string2[255];
+	struct matrix ma;
+	FILE *fp_a;
+	fp_a = fopen("A.txt", "r");
+	fscanf(fp_a, "%d %d %d %d %d %d", &ma.rows, &ma.columns, &ma.m11, &ma.m12, &ma.m21, &ma.m22);
+	printf("A = \n%d %d \n%d %d", ma.m11, ma.m12, ma.m21, ma.m22);
+	fclose(fp_a);
+	
+	printf("\n");
+	
+	struct matrix mb;
+	FILE *fp_b;
+	fp_b = fopen("B.txt", "r");
+	fscanf(fp_b, "%d %d %d %d %d %d", &mb.rows, &mb.columns, &mb.m11, &mb.m12, &mb.m21, &mb.m22);
+	printf("B = \n%d %d \n%d %d", mb.m11, mb.m12, mb.m21, mb.m22);
+	fclose(fp_b);
 
-	//fprintf(fp, "hello world! %d", 1234);
+	printf("\n");
 
-	fscanf(fp, "%d %d %d %d %d %d", &m.rows, &m.columns, &m.m11, &m.m12, &m.m21, &m.m22);
-	printf("B = \n%d %d \n%d %d", m.m11, m.m12, m.m21, m.m22);
-
-	fclose(fp);
+	printf("AB = \n%d %d \n%d %d ", 
+		ma.m11*mb.m11+ma.m12*mb.m21, ma.m11*mb.m12+ma.m12*mb.m22,
+		ma.m21*mb.m11+ma.m22*mb.m21, ma.m21*mb.m12+ma.m22*mb.m22
+		);
 
 	return 0;
 }
