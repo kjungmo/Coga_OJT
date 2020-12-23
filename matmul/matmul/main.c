@@ -62,7 +62,31 @@ int main(void)
 		ma.m21*mb.m11+ma.m22*mb.m21, ma.m21*mb.m12+ma.m22*mb.m22
 		);
 
-
+	// 행렬 틀 만들기
+		// 행 선언
+		int **p = (int**)malloc(sizeof(int*) * 행의 개수);
+		// 열 선언
+		for (int i = 0; i < 행의 개수; i++)
+		{
+			*(p + i) = (int*)malloc(sizeof(int) * 열의 개수);
+		}
+	// 행렬에 값을 채우기
+		for (int i = 0; i < 행의 개수; i++)
+		{
+			for (int j = 0; j < 열의 개수; j++)
+			{
+				*(*(p + i) + j) = i * 행의 개수 + j;
+			}
+		}
+	// 값 출력
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				printf("%d ", *(*(p + i) + j));
+			}
+			printf("\n");
+		}
 	return 0;
 }
 
