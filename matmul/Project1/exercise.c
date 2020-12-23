@@ -5,7 +5,7 @@
 int main(void)
 {
 	// A.txt의 숫자 읽어오기
-	int row_a, col_a, row_b, col_b, i, j, k;
+	int row_a, col_a, row_b, col_b, i, j;
 	FILE *f_a;
 
 	f_a = fopen("A.txt", "r");
@@ -77,7 +77,12 @@ int main(void)
 	{
 		for (j = 0; j < col_b; j++)
 		{
-			*(*(matAB + i) + j) = i * row_a + j;
+			//*(*(matAB + i) + j) = i * row_a + j;
+			*(*(matAB + i) + j) =
+				(*(*(mat_a + i))) * (*(*(mat_b) + j)) +
+				(*(*(mat_a + i) + 1)) * (*(*(mat_b + 1) + j));
+				
+			//	행렬 곱셈을 넣어주자;
 		}
 	}
 

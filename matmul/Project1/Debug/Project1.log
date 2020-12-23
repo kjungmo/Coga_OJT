@@ -1,3 +1,2 @@
 ﻿  exercise.c
-f:\github\coga_ojt\matmul\project1\exercise.c(8): warning C4101: 'k' :참조되지 않은 지역 변수입니다.
   Project1.vcxproj -> F:\Github\Coga_OJT\matmul\Debug\Project1.exe
