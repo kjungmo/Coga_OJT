@@ -2,91 +2,105 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct matrix {
-	int rows;
-	int columns;
-	int m11;
-	int m12;
-	int m21;
-	int m22;
-};
-
 int main(void)
 {
+	// A.txt의 숫자 읽어오기
+	int row_a, col_a, row_b, col_b, i, j, k;
+	FILE *f_a;
 
-	//for (int i = 1; i < argc; i++)
-	//{
-	//	
-	//	printf("argv[%d] = %s\n", i, argv[i]);
-	//	FILE *fp;
-	//	fp = fopen(*argv[i], "r");
-	//	//fscanf(fp, "%d %d %d %d %d %d"
-	//	if (fp == NULL)
-	//	{
-	//		printf("파일 %s을 열 수 없습니다.\n", *argv[i]);
-	//		exit(1);
-	//	}
-	//	printf("파일 %s을 열 수 있습니다.\n", *argv[i]);
-	//	/*fscanf(fp, "%d %d %d %d %d %d", &m.rows, &m.columns, &m.m11, &m.m12, &m.m21, &m.m22);
-	//	printf("A = \n%d %d \n%d %d\n", m.m11, m.m12, m.m21, m.m22);*/
+	f_a = fopen("A.txt", "r");
+	fscanf(f_a, "%d %d", &row_a, &col_a);
+	printf("%d X %d 행렬 \n", row_a, col_a);
 
-	//	fclose(fp);
-	//}
+	// 행렬 메모리 할당
+	int **mat_a = (int**)malloc((sizeof(int*)) * row_a);
+	for (i = 0; i < row_a; i++)
+	{
+		*(mat_a + i) = (int*)malloc(sizeof(int) * col_a);
+	}
 
-	struct matrix ma;
-	FILE *fp_a;
-	fp_a = fopen("A.txt", "r");
-	int *a = malloc(sizeof(int));
-	printf("%d\n", a);
-	free(a);
-	a = malloc(sizeof(int));
-	printf("%d\n", a);
-	
-	fscanf(fp_a, "%d %d %d %d %d %d", &ma.rows, &ma.columns, &ma.m11, &ma.m12, &ma.m21, &ma.m22);
-	printf("A = \n%d %d \n%d %d", ma.m11, ma.m12, ma.m21, ma.m22);
-	fclose(fp_a);
-	free(a);
+	//행렬 값을 넣어줌
+	for (i = 0; i < row_a; i++)
+	{
+		for (j = 0; j < col_a; j++)
+		{
+			fscanf(f_a, "%d", *(mat_a + i) + j);
+			printf("%d", *(*(mat_a + i) + j));
+		}
+		printf("\n");
+	}
 	printf("\n");
-	
-	struct matrix mb;
-	FILE *fp_b;
-	fp_b = fopen("B.txt", "r");
-	fscanf(fp_b, "%d %d %d %d %d %d", &mb.rows, &mb.columns, &mb.m11, &mb.m12, &mb.m21, &mb.m22);
-	printf("B = \n%d %d \n%d %d", mb.m11, mb.m12, mb.m21, mb.m22);
-	fclose(fp_b);
+	fclose(f_a);
 
+	// B.txt의 숫자 읽어오기
+	FILE *f_b;
+
+	f_b = fopen("B.txt", "r");
+	fscanf(f_b, "%d %d", &row_b, &col_b);
+	printf("%d X %d 행렬 \n", row_b, col_b);
+
+	// 행렬 메모리 할당
+	int **mat_b = (int**)malloc((sizeof(int*)) * row_b);
+	for (i = 0; i < row_b; i++)
+	{
+		*(mat_b + i) = (int*)malloc(sizeof(int) * col_b);
+	}
+
+	//행렬 값을 넣어줌
+	for (i = 0; i < row_b; i++)
+	{
+		for (j = 0; j < col_b; j++)
+		{
+			fscanf(f_b, "%d", *(mat_b + i) + j);
+			printf("%d", *(*(mat_b + i) + j));
+		}
+		printf("\n");
+	}
 	printf("\n");
+	fclose(f_b);
 
-	printf("AB = \n%d %d \n%d %d ", 
-		ma.m11*mb.m11+ma.m12*mb.m21, ma.m11*mb.m12+ma.m12*mb.m22,
-		ma.m21*mb.m11+ma.m22*mb.m21, ma.m21*mb.m12+ma.m22*mb.m22
-		);
+	// 행렬곱 불가 디버그
+	if (col_a != row_b)
+	{
+		printf("행렬곱 계산이 불가합니다.");
+		exit(-1);
+	}
 
-	// 행렬 틀 만들기
-		// 행 선언
-		int **p = (int**)malloc(sizeof(int*) * 행의 개수);
-		// 열 선언
-		for (int i = 0; i < 행의 개수; i++)
+	//AB 행렬 메모리 할당
+	int **matAB;
+	matAB = (int**)malloc(sizeof(int*) * row_a);
+
+	for (i = 0; i < row_a; i++)
+	{
+		*(matAB + i) = (int*)malloc(sizeof(int) * col_b);
+	}
+
+	//행렬 값을 넣어줌
+	for (i = 0; i < row_a; i++)
+	{
+		for (j = 0; j < col_b; j++)
 		{
-			*(p + i) = (int*)malloc(sizeof(int) * 열의 개수);
-		}
-	// 행렬에 값을 채우기
-		for (int i = 0; i < 행의 개수; i++)
-		{
-			for (int j = 0; j < 열의 개수; j++)
+			int sum = 0;
+			for (k = 0; k < col_a; k++)
 			{
-				*(*(p + i) + j) = i * 행의 개수 + j;
+				int mul = (*(*(mat_a + i) + k)) * (*(*(mat_b + k) + j));
+				sum += mul;
 			}
+			(*(*(matAB + i) + j)) = sum;
+
 		}
-	// 값 출력
-		for (int i = 0; i < 3; i++)
+	}
+
+	//행렬 출력
+	printf("AB = \n");
+	for (i = 0; i < row_a; i++)
+	{
+		for (j = 0; j < col_b; j++)
 		{
-			for (int j = 0; j < 3; j++)
-			{
-				printf("%d ", *(*(p + i) + j));
-			}
-			printf("\n");
+			printf("%d ", *(*(matAB + i) + j));
 		}
+		printf("\n");
+	}
+
 	return 0;
 }
-
