@@ -3,9 +3,12 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,c
 
 
-### Python ###
-# Jupyter Notebook
-*checkpoints.ipynb
+### Jupyter Notebook ###
+# gitignore template for Jupyter Notebooks
+# website : http://jupyter.org/
+
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
 
 ### C ###
 # Prerequisites
