@@ -102,7 +102,6 @@ $RECYCLE.BIN/
 *.user
 *.userosscache
 *.sln.docstates
-*.sln
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -135,8 +134,6 @@ Generated\ Files/
 .vs/
 .bin/
 .obj/
-*.vcxproj
-*.vcxproj.*
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
