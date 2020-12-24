@@ -134,7 +134,7 @@ Generated\ Files/
 .vs/
 .bin/
 .obj/
-*.vcxproj/
+*.vcxproj
 *.vcxproj.*
 
 # MSTest test Results
