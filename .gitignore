@@ -2,6 +2,14 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio,c
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,c
 
+
+### Jupyter Notebook ###
+# gitignore template for Jupyter Notebooks
+# website : http://jupyter.org/
+
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
 ### C ###
 # Prerequisites
 *.d
