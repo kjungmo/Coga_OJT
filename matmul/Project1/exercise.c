@@ -10,13 +10,13 @@
 int main(int argc, char *argv[])
 {
 
-	if (argc == 3)
+	if (argc > 2 )
 	{
 		int row_a, col_a, row_b, col_b, i, j, k;
 
 
 		// A.txt의 숫자 읽어오기
-
+		//as
 		FILE *f_a;
 		f_a = fopen(argv[1], "r");
 		fscanf(f_a, "%d %d", &row_a, &col_a);
