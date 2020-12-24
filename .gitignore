@@ -134,6 +134,8 @@ Generated\ Files/
 .vs/
 .bin/
 .obj/
+*.vcxproj/
+*.vcxproj.*
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
