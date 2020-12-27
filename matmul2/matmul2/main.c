@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 			//*mat + i = (int**)malloc((sizeof(int*)) * row);
 
 			int **mat = (int**)malloc((sizeof(int*)) * row);
-			*mat = *mat + (i * row * col);
+			*mat = *(mat + (i * row * col));
 
 			for (j = 0; j < row; j++)
 			{
