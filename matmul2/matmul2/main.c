@@ -260,7 +260,7 @@ int main(int argc, char *argv[])
 //int matmul(int **a, int **b)
 //{
 //	int row, col; 
-//	int col = sizeof(b[0]) / sizeof(int);
+//	int col = sizeof(b[0]) / sizeof(int); 이부분이 잘못됐다.
 //
 //	int **matAB = (int**)malloc(sizeof(int*) * row);
 //	for (int i = 0; i < row; i++)
