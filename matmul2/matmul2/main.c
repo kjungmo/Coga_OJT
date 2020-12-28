@@ -10,11 +10,47 @@ int matmul(int **a, int **b);
 int main(int argc, char *argv[])
 {
 	
-	// 명령행 인자의 개수가 2개인 경우
-	if (argc < 3)
+	// 명령행 인자가 exe 한개인 경우
+	if (argc < 1)
 	{
-		//TODO
-		// 행렬인자가 1개인 경우
+
+		printf("행렬 .txt파일이 존재하지 않습니다.");
+
+	}
+
+
+	// 행렬 인자가 2개인 경우 ( txt파일이 1개만 존재하는 경우)
+	else if (argc = 2)
+	{
+		// 행렬 .txt 파일이 1개인 경우 해당 행렬만 프롬프트에 출력
+		int row, col, i, j, k, l;
+
+		FILE *f = fopen(argv[1], "r");
+		fscanf(f, "%d%d", &row, &col);
+
+		int **mat = (int**)malloc((sizeof(int*)) * row);
+
+		for (i = 0; i < row; i++)
+		{
+			*(mat + i) = (int*)malloc(sizeof(int) * col);
+		}
+
+		char *sliced = strtok(argv[1], ".");
+		printf("%s = \n", sliced);
+
+		//행렬 값 넣어서 출력
+		for (i = 0; i < row; i++)
+		{
+			for (j = 0; j < col; j++)
+			{
+				fscanf(f, "%d", *(mat + i) + j);
+				printf("%d ", *(*(mat + i) + j));
+			}
+			printf("\n");
+		}
+		printf("\n");
+		fclose(f);
+		
 	}
 
 	// 명령행 인자가 4개 이상인 경우
@@ -66,7 +102,7 @@ int main(int argc, char *argv[])
 			printf("\n");
 			fclose(f);
 
-			matmul(mat, mat * 4);
+			/*matmul(mat, mat * 4);*/
 
 		}
 		
