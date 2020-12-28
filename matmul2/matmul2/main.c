@@ -7,6 +7,44 @@
 
 //int matmul(int **a, int **b);
 
+void createMatrix(char *argv[])
+{
+	int row, col, i, j, k;
+
+	FILE *f = fopen(argv, "r");
+	fscanf(f, "%d%d", &row, &col);
+	printf("%d X %d sized Matrix\n", row, col);
+
+	int **mat = (int**)malloc((sizeof(int*) * row));
+
+	for (i = 0; i < row; i++)
+	{
+		*(mat + i) = (int*)malloc(sizeof(int) * col);
+	}
+
+	char *sliced = strtok(argv, ".");
+	printf("%s = \n", sliced);
+
+	for (j = 0; j < row; j++)
+	{
+		for (k = 0; k < col; k++)
+		{
+			fscanf(f, "%d", *(mat + j) + k);
+			printf("%d ", *(*(mat + j) + k));
+		}
+		printf("\n");
+	}
+	printf("sizeof(mat) : %i\n", sizeof(mat)); 
+	printf("sizeof(*mat) : %i\n", sizeof(*mat)); //8
+	printf("sizeof(**mat) : %i\n", sizeof(**mat)); //4
+
+	printf("&mat : %p\n", &mat);
+	printf("&*mat : %p\n", &*mat);
+	printf("&**mat : %p\n", &**mat);
+
+	free(mat); // temporary ( planning to make a function for free() )
+}
+
 int main(int argc, char *argv[])
 {
 	
@@ -18,7 +56,6 @@ int main(int argc, char *argv[])
 
 	}
 
-	// if more than 3 command line arguments (more than 2 matrix text files)
 	else if (argc = 3)
 	{
 
@@ -26,164 +63,187 @@ int main(int argc, char *argv[])
 
 		for (int i = 0; i + 1 < argc; i++)
 		{
-			FILE *f = fopen(argv[i + 1], "r");
-			fscanf(f, "%d%d", &row, &col);
-
-			// allocate memory for Matrix
-			//int **mat;
-			//*mat + i = (int**)malloc((sizeof(int*)) * row);
-
-			int **mat = (int**)malloc((sizeof(int*)) * row);
-			//*mat = *(mat + (i * row * col));
+			createMatrix(argv[i + 1]); // only using a function
 			
-			for (j = 0; j < row; j++)
-			{
-				*(mat + j) = (int*)malloc(sizeof(int) * col);
-			}
-
-			char *sliced = strtok(argv[i + 1], ".");
-			printf("%s = \n", sliced);
-
-			//print values
-			for (k = 0; k < row; k++)
-			{
-				for (l = 0; l < col; l++)
-				{
-					fscanf(f, "%d", *(mat + k) + l);
-					printf("%d ", *(*(mat + k) + l));
-				}
-				printf("\n");
-			}
 			printf("\n");
-			
-			printf("sizeof(mat) : %i\n", sizeof(mat)); //8(64bit)
-			printf("sizeof(*mat) : %i\n", sizeof(*mat)); //8
-			printf("sizeof(**mat) : %i\n", sizeof(**mat)); //4
 
-			printf("&mat : %p\n", &mat);
-			printf("&*mat : %p\n", &*mat);
-			printf("&**mat : %p\n", &**mat);
 
-			free(mat);
-			fclose(f);
-
-			/*matmul(mat, mat * 4);*/
 
 		}
 
 
 
-
-
-
-		//int row_a, col_a, row_b, col_b, i, j, k;
-
-
-		//// read values from A.txt
-
-		//FILE *f_a;
-		//f_a = fopen(argv[1], "r");
-		//fscanf(f_a, "%d %d", &row_a, &col_a);
-
-		//// allocate memory for Matrix
-		//int **mat_a = (int**)malloc((sizeof(int*)) * row_a);
-		//for (i = 0; i < row_a; i++)
-		//{
-		//	*(mat_a + i) = (int*)malloc(sizeof(int) * col_a);
-		//}
-
-		//char *filenameA[10] = { NULL };
-		//char *slicedA = strtok(argv[1], ".");
-		//printf("%s = \n", slicedA);
-
-		////print values
-		//for (i = 0; i < row_a; i++)
-		//{
-		//	for (j = 0; j < col_a; j++)
-		//	{
-		//		fscanf(f_a, "%d", *(mat_a + i) + j);
-		//		printf("%d ", *(*(mat_a + i) + j));
-		//	}
-		//	printf("\n");
-		//}
-		//printf("\n");
-		//fclose(f_a);
-
-		//// read values from B.txt
-
-		//FILE *f_b;
-		//f_b = fopen(argv[2], "r");
-		//fscanf(f_b, "%d %d", &row_b, &col_b);
-
-		//// allocate memory for Matrix
-		//int **mat_b = (int**)malloc((sizeof(int*)) * row_b);
-		//for (i = 0; i < row_b; i++)
-		//{
-		//	*(mat_b + i) = (int*)malloc(sizeof(int) * col_b);
-		//}
-
-		//char *filenameB[10] = { NULL };
-		//char *slicedB = strtok(argv[2], ".");
-		//printf("%s = \n", slicedB);
-
-
-		////print values
-		//for (i = 0; i < row_b; i++)
-		//{
-		//	for (j = 0; j < col_b; j++)
-		//	{
-		//		fscanf(f_b, "%d", *(mat_b + i) + j);
-		//		printf("%d ", *(*(mat_b + i) + j));
-		//	}
-		//	printf("\n");
-		//}
-		//printf("\n");
-		//fclose(f_b);
-
-		//// matrix multiplication not allowed when
-		//if (col_a != row_b)
-		//{
-		//	printf("Matrix multiplication cannot be done.");
-		//	exit(-1);
-		//}
-
-		//// matrix AB memory allocation 
-		//int **matAB;
-		//matAB = (int**)malloc(sizeof(int*) * row_a);
-
-		//for (i = 0; i < row_a; i++)
-		//{
-		//	*(matAB + i) = (int*)malloc(sizeof(int) * col_b);
-		//}
-
-		//// values in Matrix
-		//for (i = 0; i < row_a; i++)
-		//{
-		//	for (j = 0; j < col_b; j++)
-		//	{
-		//		int sum = 0;
-		//		for (k = 0; k < col_a; k++)
-		//		{
-		//			int mul = (*(*(mat_a + i) + k)) * (*(*(mat_b + k) + j));
-		//			sum += mul;
-		//		}
-		//		(*(*(matAB + i) + j)) = sum;
-
-		//	}
-		//}
-
-		//// print values 
-		//printf("AB = \n");
-		//for (i = 0; i < row_a; i++)
-		//{
-		//	for (j = 0; j < col_b; j++)
-		//	{
-		//		printf("%d ", *(*(matAB + i) + j));
-		//	}
-		//	printf("\n");
-		//}
-
 	}
+
+
+	///////===================/////////////// erase
+
+	// if more than 3 command line arguments (more than 2 matrix text files)
+	//else if (argc = 3)
+	//{
+
+	//	int row, col, i, j, k, l;
+
+	//	for (int i = 0; i + 1 < argc; i++)
+	//	{
+	//		FILE *f = fopen(argv[i + 1], "r");
+	//		fscanf(f, "%d%d", &row, &col);
+
+	//		// allocate memory for Matrix
+	//		//int **mat;
+	//		//*mat + i = (int**)malloc((sizeof(int*)) * row);
+
+	//		int **mat = (int**)malloc((sizeof(int*)) * row);
+	//		//*mat = *(mat + (i * row * col));
+	//		
+	//		for (j = 0; j < row; j++)
+	//		{
+	//			*(mat + j) = (int*)malloc(sizeof(int) * col);
+	//		}
+
+	//		char *sliced = strtok(argv[i + 1], ".");
+	//		printf("%s = \n", sliced);
+
+	//		//print values
+	//		for (k = 0; k < row; k++)
+	//		{
+	//			for (l = 0; l < col; l++)
+	//			{
+	//				fscanf(f, "%d", *(mat + k) + l);
+	//				printf("%d ", *(*(mat + k) + l));
+	//			}
+	//			printf("\n");
+	//		}
+	//		printf("\n");
+	//		
+	//		printf("sizeof(mat) : %i\n", sizeof(mat)); //8(64bit)
+	//		printf("sizeof(*mat) : %i\n", sizeof(*mat)); //8
+	//		printf("sizeof(**mat) : %i\n", sizeof(**mat)); //4
+
+	//		printf("&mat : %p\n", &mat);
+	//		printf("&*mat : %p\n", &*mat);
+	//		printf("&**mat : %p\n", &**mat);
+
+	//		free(mat);
+	//		fclose(f);
+
+	//		/*matmul(mat, mat * 4);*/
+
+	//	}
+
+
+
+
+
+
+	//	//int row_a, col_a, row_b, col_b, i, j, k;
+
+
+	//	//// read values from A.txt
+
+	//	//FILE *f_a;
+	//	//f_a = fopen(argv[1], "r");
+	//	//fscanf(f_a, "%d %d", &row_a, &col_a);
+
+	//	//// allocate memory for Matrix
+	//	//int **mat_a = (int**)malloc((sizeof(int*)) * row_a);
+	//	//for (i = 0; i < row_a; i++)
+	//	//{
+	//	//	*(mat_a + i) = (int*)malloc(sizeof(int) * col_a);
+	//	//}
+
+	//	//char *filenameA[10] = { NULL };
+	//	//char *slicedA = strtok(argv[1], ".");
+	//	//printf("%s = \n", slicedA);
+
+	//	////print values
+	//	//for (i = 0; i < row_a; i++)
+	//	//{
+	//	//	for (j = 0; j < col_a; j++)
+	//	//	{
+	//	//		fscanf(f_a, "%d", *(mat_a + i) + j);
+	//	//		printf("%d ", *(*(mat_a + i) + j));
+	//	//	}
+	//	//	printf("\n");
+	//	//}
+	//	//printf("\n");
+	//	//fclose(f_a);
+
+	//	//// read values from B.txt
+
+	//	//FILE *f_b;
+	//	//f_b = fopen(argv[2], "r");
+	//	//fscanf(f_b, "%d %d", &row_b, &col_b);
+
+	//	//// allocate memory for Matrix
+	//	//int **mat_b = (int**)malloc((sizeof(int*)) * row_b);
+	//	//for (i = 0; i < row_b; i++)
+	//	//{
+	//	//	*(mat_b + i) = (int*)malloc(sizeof(int) * col_b);
+	//	//}
+
+	//	//char *filenameB[10] = { NULL };
+	//	//char *slicedB = strtok(argv[2], ".");
+	//	//printf("%s = \n", slicedB);
+
+
+	//	////print values
+	//	//for (i = 0; i < row_b; i++)
+	//	//{
+	//	//	for (j = 0; j < col_b; j++)
+	//	//	{
+	//	//		fscanf(f_b, "%d", *(mat_b + i) + j);
+	//	//		printf("%d ", *(*(mat_b + i) + j));
+	//	//	}
+	//	//	printf("\n");
+	//	//}
+	//	//printf("\n");
+	//	//fclose(f_b);
+
+	//	//// matrix multiplication not allowed when
+	//	//if (col_a != row_b)
+	//	//{
+	//	//	printf("Matrix multiplication cannot be done.");
+	//	//	exit(-1);
+	//	//}
+
+	//	//// matrix AB memory allocation 
+	//	//int **matAB;
+	//	//matAB = (int**)malloc(sizeof(int*) * row_a);
+
+	//	//for (i = 0; i < row_a; i++)
+	//	//{
+	//	//	*(matAB + i) = (int*)malloc(sizeof(int) * col_b);
+	//	//}
+
+	//	//// values in Matrix
+	//	//for (i = 0; i < row_a; i++)
+	//	//{
+	//	//	for (j = 0; j < col_b; j++)
+	//	//	{
+	//	//		int sum = 0;
+	//	//		for (k = 0; k < col_a; k++)
+	//	//		{
+	//	//			int mul = (*(*(mat_a + i) + k)) * (*(*(mat_b + k) + j));
+	//	//			sum += mul;
+	//	//		}
+	//	//		(*(*(matAB + i) + j)) = sum;
+
+	//	//	}
+	//	//}
+
+	//	//// print values 
+	//	//printf("AB = \n");
+	//	//for (i = 0; i < row_a; i++)
+	//	//{
+	//	//	for (j = 0; j < col_b; j++)
+	//	//	{
+	//	//		printf("%d ", *(*(matAB + i) + j));
+	//	//	}
+	//	//	printf("\n");
+	//	//}
+
+	//}
 
 
 	// 명령행 인자가 4개 이상인 경우 (행렬 .txt파일이 3개 이상인 경우)
