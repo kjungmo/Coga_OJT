@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 			//*mat + i = (int**)malloc((sizeof(int*)) * row);
 
 			int **mat = (int**)malloc((sizeof(int*)) * row);
-			*mat = *(mat + (i * row * col));
+			//*mat = *(mat + (i * row * col));
 			
 			for (j = 0; j < row; j++)
 			{
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 			}
 			printf("\n");
 			
-			printf("sizeof(mat) : %i\n", sizeof(mat)); //8
+			printf("sizeof(mat) : %i\n", sizeof(mat)); //8(64bit)
 			printf("sizeof(*mat) : %i\n", sizeof(*mat)); //8
 			printf("sizeof(**mat) : %i\n", sizeof(**mat)); //4
 
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 			printf("&*mat : %p\n", &*mat);
 			printf("&**mat : %p\n", &**mat);
 
-			
+			free(mat);
 			fclose(f);
 
 			/*matmul(mat, mat * 4);*/
@@ -259,7 +259,7 @@ int main(int argc, char *argv[])
 // 행렬을 인자로 받아서 새로운 행렬을 만드는 함수
 //int matmul(int **a, int **b)
 //{
-//	int row = sizeof(a) / sizeof(a[0]);
+//	int row, col; 
 //	int col = sizeof(b[0]) / sizeof(int);
 //
 //	int **matAB = (int**)malloc(sizeof(int*) * row);
