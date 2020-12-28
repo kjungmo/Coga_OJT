@@ -5,16 +5,16 @@
 
 
 
-int matmul(int **a, int **b);
+//int matmul(int **a, int **b);
 
 int main(int argc, char *argv[])
 {
 	
 	// 명령행 인자가 exe 한개인 경우
-	if (argc < 1)
+	if (argc < 2)
 	{
 
-		printf("행렬 .txt파일이 존재하지 않습니다.");
+		printf("행렬 .txt파일이 존재하지 않습니다.\n");
 
 	}
 
@@ -53,26 +53,16 @@ int main(int argc, char *argv[])
 		
 	}
 
-	// 명령행 인자가 4개 이상인 경우
-	else if (argc >= 4)
+	// 명령행 인자가 3개인 경우 (행렬 txt파일이 2개)
+	else if (argv = 3)
 	{
-		//TODO 
-		//행렬인자가 3개 이상인 경우
-	}
 
-	// 명령행 인자가 3개인 경우
-	else
-	{
-		
 		int row, col, i, j, k, l;
-
-		// 명령행 인자로 들어오는 파일들로부터 함수 값 출력
 
 		for (int i = 0; i + 1 < argc; i++)
 		{
 			FILE *f = fopen(argv[i + 1], "r");
 			fscanf(f, "%d%d", &row, &col);
-			//printf("%d %d\n", row, col);
 
 			// 행렬 메모리 할당
 			//int **mat;
@@ -86,7 +76,7 @@ int main(int argc, char *argv[])
 				*(mat + j) = (int*)malloc(sizeof(int) * col);
 			}
 
-			char *sliced = strtok(argv[ i + 1 ], ".");
+			char *sliced = strtok(argv[i + 1], ".");
 			printf("%s = \n", sliced);
 
 			//행렬 값 넣어서 출력
@@ -105,12 +95,12 @@ int main(int argc, char *argv[])
 			/*matmul(mat, mat * 4);*/
 
 		}
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
 		//int row_a, col_a, row_b, col_b, i, j, k;
 
 
@@ -219,6 +209,29 @@ int main(int argc, char *argv[])
 		//}
 
 	}
+
+
+	// 명령행 인자가 4개 이상인 경우 (행렬 .txt파일이 3개 이상인 경우)
+	else
+	{
+		//TODO 
+		//행렬 txt가 3개 이상인 경우
+		// 순차적으로 1번 2번 행렬을 곱하고 곱한 행렬 값을 메모리에 저장한다
+		// 1번과 2번 행렬의 메모리를 free해주고
+		// 3번 메모리 공간을 확보하고 값을 저장한다
+		// 12곱과 3을 곱하고 123행렬 메모리 할당 + 값을 메모리에 저장한다
+		// 12곱과 3의 메모리를 free
+
+		// 이후에도 행렬이 존재한다면 같은 방식으로 
+		// 곱이 존재한다면? 곱 메모리가 순차적으로 먼저 생기고, argv[i]를 이동시키면서 해당 행렬을 불러온다.
+
+		
+
+
+	}
+
+
+	
 	
 	////////////////////////////////////////////////////////////////
 	
@@ -269,19 +282,19 @@ int main(int argc, char *argv[])
 }
 
 // 행렬을 인자로 받아서 새로운 행렬을 만드는 함수
-int matmul(int **a, int **b)
-{
-	int row = sizeof(a) / sizeof(a[0]);
-	int col = sizeof(b[0]) / sizeof(int);
-
-	int **matAB = (int**)malloc(sizeof(int*) * row);
-	for (int i = 0; i < row; i++)
-	{
-		*(matAB + i) = (int*)malloc(sizeof(int) * col);
-	}
+//int matmul(int **a, int **b)
+//{
+//	int row = sizeof(a) / sizeof(a[0]);
+//	int col = sizeof(b[0]) / sizeof(int);
+//
+//	int **matAB = (int**)malloc(sizeof(int*) * row);
+//	for (int i = 0; i < row; i++)
+//	{
+//		*(matAB + i) = (int*)malloc(sizeof(int) * col);
+//	}
 
 	// 함수에 값으로는 입력 인자로 들어온 행렬의 곱 
 	//TODO
 
-	return matAB;
-}
+	//return matAB;
+//}
