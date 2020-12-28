@@ -10,51 +10,16 @@
 int main(int argc, char *argv[])
 {
 	
-	// 명령행 인자가 exe 한개인 경우
-	if (argc < 2)
+	// 
+	if (argc < 3)
 	{
 
-		printf("행렬 .txt파일이 존재하지 않습니다.\n");
+		printf("Error. \n");
 
 	}
 
-
-	// 행렬 인자가 2개인 경우 ( txt파일이 1개만 존재하는 경우)
-	else if (argc = 2)
-	{
-		// 행렬 .txt 파일이 1개인 경우 해당 행렬만 프롬프트에 출력
-		int row, col, i, j, k, l;
-
-		FILE *f = fopen(argv[1], "r");
-		fscanf(f, "%d%d", &row, &col);
-
-		int **mat = (int**)malloc((sizeof(int*)) * row);
-
-		for (i = 0; i < row; i++)
-		{
-			*(mat + i) = (int*)malloc(sizeof(int) * col);
-		}
-
-		char *sliced = strtok(argv[1], ".");
-		printf("%s = \n", sliced);
-
-		//행렬 값 넣어서 출력
-		for (i = 0; i < row; i++)
-		{
-			for (j = 0; j < col; j++)
-			{
-				fscanf(f, "%d", *(mat + i) + j);
-				printf("%d ", *(*(mat + i) + j));
-			}
-			printf("\n");
-		}
-		printf("\n");
-		fclose(f);
-		
-	}
-
-	// 명령행 인자가 3개인 경우 (행렬 txt파일이 2개)
-	else if (argv = 3)
+	// if more than 3 command line arguments (more than 2 matrix text files)
+	else if (argc = 3)
 	{
 
 		int row, col, i, j, k, l;
@@ -64,13 +29,13 @@ int main(int argc, char *argv[])
 			FILE *f = fopen(argv[i + 1], "r");
 			fscanf(f, "%d%d", &row, &col);
 
-			// 행렬 메모리 할당
+			// allocate memory for Matrix
 			//int **mat;
 			//*mat + i = (int**)malloc((sizeof(int*)) * row);
 
 			int **mat = (int**)malloc((sizeof(int*)) * row);
 			*mat = *(mat + (i * row * col));
-
+			
 			for (j = 0; j < row; j++)
 			{
 				*(mat + j) = (int*)malloc(sizeof(int) * col);
@@ -79,7 +44,7 @@ int main(int argc, char *argv[])
 			char *sliced = strtok(argv[i + 1], ".");
 			printf("%s = \n", sliced);
 
-			//행렬 값 넣어서 출력
+			//print values
 			for (k = 0; k < row; k++)
 			{
 				for (l = 0; l < col; l++)
@@ -90,6 +55,16 @@ int main(int argc, char *argv[])
 				printf("\n");
 			}
 			printf("\n");
+			
+			printf("sizeof(mat) : %i\n", sizeof(mat)); //8
+			printf("sizeof(*mat) : %i\n", sizeof(*mat)); //8
+			printf("sizeof(**mat) : %i\n", sizeof(**mat)); //4
+
+			printf("&mat : %p\n", &mat);
+			printf("&*mat : %p\n", &*mat);
+			printf("&**mat : %p\n", &**mat);
+
+			
 			fclose(f);
 
 			/*matmul(mat, mat * 4);*/
@@ -104,13 +79,13 @@ int main(int argc, char *argv[])
 		//int row_a, col_a, row_b, col_b, i, j, k;
 
 
-		//// A.txt의 숫자 읽어오기
+		//// read values from A.txt
 
 		//FILE *f_a;
 		//f_a = fopen(argv[1], "r");
 		//fscanf(f_a, "%d %d", &row_a, &col_a);
 
-		//// 행렬 메모리 할당
+		//// allocate memory for Matrix
 		//int **mat_a = (int**)malloc((sizeof(int*)) * row_a);
 		//for (i = 0; i < row_a; i++)
 		//{
@@ -121,7 +96,7 @@ int main(int argc, char *argv[])
 		//char *slicedA = strtok(argv[1], ".");
 		//printf("%s = \n", slicedA);
 
-		////행렬 값 넣어서 출력
+		////print values
 		//for (i = 0; i < row_a; i++)
 		//{
 		//	for (j = 0; j < col_a; j++)
@@ -134,13 +109,13 @@ int main(int argc, char *argv[])
 		//printf("\n");
 		//fclose(f_a);
 
-		////B.txt의 숫자 읽어오기
+		//// read values from B.txt
 
 		//FILE *f_b;
 		//f_b = fopen(argv[2], "r");
 		//fscanf(f_b, "%d %d", &row_b, &col_b);
 
-		//// 행렬 메모리 할당
+		//// allocate memory for Matrix
 		//int **mat_b = (int**)malloc((sizeof(int*)) * row_b);
 		//for (i = 0; i < row_b; i++)
 		//{
@@ -152,7 +127,7 @@ int main(int argc, char *argv[])
 		//printf("%s = \n", slicedB);
 
 
-		////행렬 값 넣어서 출력
+		////print values
 		//for (i = 0; i < row_b; i++)
 		//{
 		//	for (j = 0; j < col_b; j++)
@@ -165,14 +140,14 @@ int main(int argc, char *argv[])
 		//printf("\n");
 		//fclose(f_b);
 
-		//// 행렬곱 불가 디버그
+		//// matrix multiplication not allowed when
 		//if (col_a != row_b)
 		//{
-		//	printf("행렬곱 계산이 불가합니다.");
+		//	printf("Matrix multiplication cannot be done.");
 		//	exit(-1);
 		//}
 
-		////AB 행렬 메모리 할당
+		//// matrix AB memory allocation 
 		//int **matAB;
 		//matAB = (int**)malloc(sizeof(int*) * row_a);
 
@@ -181,7 +156,7 @@ int main(int argc, char *argv[])
 		//	*(matAB + i) = (int*)malloc(sizeof(int) * col_b);
 		//}
 
-		////행렬 값을 넣어줌
+		//// values in Matrix
 		//for (i = 0; i < row_a; i++)
 		//{
 		//	for (j = 0; j < col_b; j++)
@@ -197,7 +172,7 @@ int main(int argc, char *argv[])
 		//	}
 		//}
 
-		////행렬 출력
+		//// print values 
 		//printf("AB = \n");
 		//for (i = 0; i < row_a; i++)
 		//{
