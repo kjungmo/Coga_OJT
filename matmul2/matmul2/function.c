@@ -3,7 +3,7 @@
 #include <stdlib.h>    
 #include <string.h>
 
-int main(int argc, char *argv[])
+int mai_n(int argc, char *argv[])
 {
     int row, col, i, j, k;
 

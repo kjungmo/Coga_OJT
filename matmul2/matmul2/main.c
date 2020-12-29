@@ -30,11 +30,11 @@ int **createMatrix(char *argv[])
         for (k = 0; k < col; k++)
         {
             fscanf(f, "%d", *(mat + j) + k);
-            //printf("%d ", *(*(mat + j) + k));
+            printf("%d ", *(*(mat + j) + k));
         }
         printf("\n");
     }
-    //printf("memory address : %p\n", &mat);
+    printf("memory address : %p\n", &mat);
     fclose(f);
     //free(mat); // temporary ( planning to make a function for free() )
     return mat;
@@ -45,7 +45,7 @@ void printMatrix(int **mat)
 
 }
 
-int main_a(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     // 
     if (argc < 3)
