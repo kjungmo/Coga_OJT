@@ -3,41 +3,129 @@
 #include <stdlib.h>
 #include <string.h>
 
-
+//typedef struct{
+//    int row;
+//    int col;
+//    int **mat;
+//}MatrixValues;
+//
+//typedef struct{
+//    MatrixValues data[100];
+//    int rows;
+//    int cols;
+//    int** mat;
+//}Matrix;
 
 //int matmul(int **a, int **b);
 
-int **createMatrix(char *argv[])
+int **createMatrixMul(char *argv1[], char *argv2[])
 {
-    int row, col, i, j, k;
+    int row1, col1, row2, col2, i, j, k;
 
-    FILE *f = fopen(argv, "r");
-    fscanf(f, "%d%d", &row, &col);
-    printf("%d X %d sized Matrix\n", row, col);
+    // first Matrix
+    FILE *f1 = fopen(argv1, "r");
+    fscanf(f1, "%d%d", &row1, &col1);
+    printf("%d X %d sized Matrix\n", row1, col1);
 
-    int **mat = (int**)malloc((sizeof(int*) * row));
+    int **mat1 = (int**)malloc((sizeof(int*) * row1));
 
-    for (i = 0; i < row; i++)
+    for (i = 0; i < row1; i++)
     {
-        *(mat + i) = (int*)malloc(sizeof(int) * col);
+        mat1[i] = (int*)malloc(sizeof(int) * col1);
     }
 
-    char *sliced = strtok(argv, ".");
-    printf("%s = \n", sliced);
+    char *sliced1 = strtok(argv1, ".");
+    printf("%s = \n", sliced1);
 
-    for (j = 0; j < row; j++)
+    for (j = 0; j < row1; j++)
     {
-        for (k = 0; k < col; k++)
+        for (k = 0; k < col1; k++)
         {
-            fscanf(f, "%d", *(mat + j) + k);
-            printf("%d ", *(*(mat + j) + k));
+            fscanf(f1, "%d", &mat1[j][k]);
+            printf("%d ", mat1[j][k]);
         }
         printf("\n");
     }
-    printf("memory address : %p\n", &mat);
-    fclose(f);
-    //free(mat); // temporary ( planning to make a function for free() )
-    return mat;
+    printf("memory address &: %p\n", &mat1);// mat is located in stack 
+    printf("memory address : %p\n", mat1); // but malloc is in heap
+    fclose(f1);
+   
+
+    // second Matrix
+    FILE *f2 = fopen(argv2, "r");
+    fscanf(f2, "%d%d", &row2, &col2);
+    printf("%d X %d sized Matrix\n", row2, col2);
+
+    int **mat2 = (int**)malloc((sizeof(int*) * row2));
+
+    for (i = 0; i < row2; i++)
+    {
+        mat2[i] = (int*)malloc(sizeof(int) * col2);
+    }
+
+    char *sliced2 = strtok(argv2, ".");
+    printf("%s = \n", sliced2);
+
+    for (j = 0; j < row2; j++)
+    {
+        for (k = 0; k < col2; k++)
+        {
+            fscanf(f2, "%d", &mat2[j][k]);
+            printf("%d ", mat2[j][k]);
+        }
+        printf("\n");
+    }
+    printf("memory address &: %p\n", &mat2);// mat is located in stack 
+    printf("memory address : %p\n", mat2); // but malloc is in heap
+    fclose(f2);
+  
+    
+    // check if the matrix multiplication can be further processed
+    if (col1 != row2)
+    {
+        printf("Error\n");
+        return 1;
+    }
+
+    int **matAB;
+    matAB = (int**)malloc((sizeof(int*) * row1));
+    
+    for (i = 0; i < row1; i++)
+    {
+        matAB[i] = (int*)malloc(sizeof(int) * col2);
+    }
+    
+    for (i = 0; i < row1; i++)
+    {
+        for (j = 0; j < col2; j++)
+        {
+            int sum = 0;
+            for (k = 0; k < row2; k++)
+            {
+                sum += mat1[i][k] * mat2[k][j];
+            }
+            matAB[i][j] = sum;
+            printf("%d ", matAB[i][j]);
+        }
+        printf("\n");
+    }
+
+
+    for (i = 0; i < row2; i++)
+    {
+        free(mat2[i]);
+    }
+    free(mat2);
+
+    for (i = 0; i < row1; i++)
+    {
+        free(mat1[i]);
+    }
+    free(mat1);
+
+
+    return matAB;
+
 }
 
 void printMatrix(int **mat)
@@ -47,7 +135,7 @@ void printMatrix(int **mat)
 
 int main(int argc, char *argv[])
 {
-    // 
+    
     if (argc < 3)
     {
 
@@ -59,18 +147,24 @@ int main(int argc, char *argv[])
     {
 
         int row, col, i, j, k, l;
+        int **matA, matB;
 
+        int **matAB = createMatrixMul(argv[1], argv[2]);
+        
         //for (int i = 0; i + 1 < argc; i++)
         //{
-        //    createMatrix(argv[i + 1]); // only using a function
-
-        //    printf("\n");
-        //    
+        //    //matA = createMatrix(argv[i + 1]);
+        //    //matB = createMatrix(argv[i + 2]);
+        //    //printf("\n");
+        //    //printf("matA's address : %p\n", matA);
+        //    //printf("matB's address : %p\n", matB);
+        //    ////matA + matB ;
+        //    //printf("\n");
+        //    //
 
 
         //}
-        createMatrix(argv[1]);
-        createMatrix(argv[2]);
+        
 
 
     }
@@ -317,16 +411,22 @@ int main(int argc, char *argv[])
 }
 
 // 행렬을 인자로 받아서 새로운 행렬을 만드는 함수
-//int matmul(int **a, int **b)
+//int** matmul(int **a, int **b)
 //{
-//	int row, col; 
-//	int col = sizeof(b[0]) / sizeof(int); 이부분이 잘못됐다.
+//	int row, col;
+//    int** matAB;
 //
-//	int **matAB = (int**)malloc(sizeof(int*) * row);
+//
+//    matAB = (int**)malloc(sizeof(int*) * col );
+//	int col = sizeof(b[0]) / sizeof(int); //이부분이 잘못됐다.
+//
+//	int **matAB = (int**)malloc((sizeof(int*) * row));
 //	for (int i = 0; i < row; i++)
 //	{
 //		*(matAB + i) = (int*)malloc(sizeof(int) * col);
 //	}
+//    return matAB;
+//}
 
 // 함수에 값으로는 입력 인자로 들어온 행렬의 곱 
 //TODO

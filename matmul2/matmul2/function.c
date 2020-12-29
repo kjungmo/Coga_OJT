@@ -3,7 +3,7 @@
 #include <stdlib.h>    
 #include <string.h>
 
-int mai_n(int argc, char *argv[])
+int main_(int argc, char *argv[])
 {
     int row, col, i, j, k;
 
@@ -30,6 +30,9 @@ int mai_n(int argc, char *argv[])
         }
         printf("\n");
     }
+    printf("size of mat : %d\n",sizeof(&mat));
+    //printf("size of mat[] : %d\n",sizeof(mat[0]));
+    //printf("size of mat[][] : %d\n",sizeof(mat[0][0]));
 
     for (i = 0; i < row; i++)
     {
@@ -40,5 +43,12 @@ int mai_n(int argc, char *argv[])
     fclose(f);
     //free(mat); // temporary ( planning to make a function for free() )
     
+    row = 0;
+    for (i = 0; i < row;)
+    while(mat[i] =! NULL) 
+    {
+        row += 1;
+        printf("%d", row);
+    }
     return 0;
 }
