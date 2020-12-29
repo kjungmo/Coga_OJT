@@ -1,26 +1,42 @@
 #include <stdio.h>
-#include <stdlib.h>    // malloc, free 함수가 선언된 헤더 파일
+#include <stdlib.h>    
 
-int main_a()
+int main()
 {
     int num1 = 20;
     int *numPtr1;
-    int **numPP;
+    int **numPP1;
 
     numPtr1 = &num1;
-    numPP = &numPtr1;
+    numPP1 = &numPtr1;
 
-    int *numPtr2;     // int형 포인터 선언
+    int *numPtr2;
+    int **numPP2;
 
-    numPtr2 = malloc(sizeof(int));    // int의 크기 4바이트만큼 동적 메모리 할당
+    numPtr2 = malloc(sizeof(int));
+    numPP2 = (int*)malloc(sizeof(int) * 2);
 
-    printf("%p\n", numPtr1);    // 006BFA60: 변수 num1의 메모리 주소 출력
-    // 컴퓨터마다, 실행할 때마다 달라짐
-
-    printf("%p\n", numPtr2);     // 009659F0: 새로 할당된 메모리의 주소 출력
-    // 컴퓨터마다, 실행할 때마다 달라짐
-
-    free(numPtr2);    // 동적으로 할당한 메모리 해제
+    printf("num1 address : %p\n", &num1);
+    printf("numPtr1 address : %p\n", numPtr1); 
+    printf("numPP1 address : %p\n", numPP1); 
+    printf("\n");
+    printf("size of numPtr1 : %i\n", sizeof(numPtr1));
+    printf("size of *numPtr1 : %i\n", sizeof(*numPtr1));
+    printf("size of numPP2 : %i\n", sizeof(numPP1));
+    printf("size of *numPP2 : %i\n", sizeof(*numPP1));
+    printf("size of **numPP2 : %i\n", sizeof(**numPP1));
+    printf("\n");
+    printf("numPtr2 address : %p\n", numPtr2); 
+    printf("numPP2 address : %p\n", numPP2); 
+    printf("numPP2 + 1 address : %p\n", numPP2 + 1);
+    
+    printf("\n");
+    printf("size of numPtr2 : %i\n", sizeof(numPtr2));
+    printf("size of *numPtr2 : %i\n", sizeof(*numPtr2));
+    printf("size of numPP2 : %i\n", sizeof(numPP2));
+    printf("size of *numPP2 : %i\n", sizeof(*numPP2));
+    free(numPtr2);
+    free(numPP2);
 
     return 0;
 }

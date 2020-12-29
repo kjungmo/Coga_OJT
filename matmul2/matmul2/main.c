@@ -7,7 +7,7 @@
 
 //int matmul(int **a, int **b);
 
-int** createMatrix(char *argv[])
+int **createMatrix(char *argv[])
 {
     int row, col, i, j, k;
 
@@ -45,7 +45,7 @@ void printMatrix(int **mat)
 
 }
 
-int main(int argc, char *argv[])
+int main_a(int argc, char *argv[])
 {
     // 
     if (argc < 3)
