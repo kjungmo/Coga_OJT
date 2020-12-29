@@ -1,42 +1,44 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>    
+#include <string.h>
 
-int main()
+int main(int argc, char *argv[])
 {
-    int num1 = 20;
-    int *numPtr1;
-    int **numPP1;
+    int row, col, i, j, k;
 
-    numPtr1 = &num1;
-    numPP1 = &numPtr1;
+    FILE *f = fopen(argv[1], "r");
+    fscanf(f, "%d%d", &row, &col);
+    printf("%d X %d sized Matrix\n", row, col);
 
-    int *numPtr2;
-    int **numPP2;
+    int **mat = malloc(sizeof(int*) * row);
 
-    numPtr2 = malloc(sizeof(int));
-    numPP2 = (int*)malloc(sizeof(int) * 2);
+    for (i = 0; i < row; i++)
+    {
+        mat[i] = malloc(sizeof(int) * col);
+    }
 
-    printf("num1 address : %p\n", &num1);
-    printf("numPtr1 address : %p\n", numPtr1); 
-    printf("numPP1 address : %p\n", numPP1); 
-    printf("\n");
-    printf("size of numPtr1 : %i\n", sizeof(numPtr1));
-    printf("size of *numPtr1 : %i\n", sizeof(*numPtr1));
-    printf("size of numPP2 : %i\n", sizeof(numPP1));
-    printf("size of *numPP2 : %i\n", sizeof(*numPP1));
-    printf("size of **numPP2 : %i\n", sizeof(**numPP1));
-    printf("\n");
-    printf("numPtr2 address : %p\n", numPtr2); 
-    printf("numPP2 address : %p\n", numPP2); 
-    printf("numPP2 + 1 address : %p\n", numPP2 + 1);
+    char *sliced = strtok(argv[1], ".");
+    printf("%s = \n", sliced);
+
+    for (j = 0; j < row; j++)
+    {
+        for (k = 0; k < col; k++)
+        {
+            fscanf(f, "%d", &mat[j][k]);
+            printf("%i ", mat[j][k]);
+        }
+        printf("\n");
+    }
+
+    for (i = 0; i < row; i++)
+    {
+        free(mat[i]);
+    }
+    free(mat);
+    //printf("memory address : %p\n", &mat);
+    fclose(f);
+    //free(mat); // temporary ( planning to make a function for free() )
     
-    printf("\n");
-    printf("size of numPtr2 : %i\n", sizeof(numPtr2));
-    printf("size of *numPtr2 : %i\n", sizeof(*numPtr2));
-    printf("size of numPP2 : %i\n", sizeof(numPP2));
-    printf("size of *numPP2 : %i\n", sizeof(*numPP2));
-    free(numPtr2);
-    free(numPP2);
-
     return 0;
 }
