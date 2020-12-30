@@ -10,132 +10,135 @@ typedef struct MatrixValues{
     char *filename;
 }MatrixValues;
 
-
+MatrixValues MatMul(MatrixValues matrix1, MatrixValues matrix2);
 MatrixValues createMatrix(char *argv);
-MatrixValues MatMul(MatrixValues a, MatrixValues b);
-void printMatrix(MatrixValues a);
+void printMatrix(MatrixValues matrix);
+void freeMatrix(MatrixValues matrix);
+
 
 int main(int argc, char *argv[])
 {
-    
+    // when argument values are less than 3
     if (argc < 3)
     {
-
         printf("Error. \n");
-
     }
 
-    else if (argc == 3)
-    {
-        MatrixValues mat1, mat2, mat12;
-        mat1 = createMatrix(argv[1]);
-        printMatrix(mat1);
-        mat2 = createMatrix(argv[2]);
-        printMatrix(mat2);
-        mat12 = MatMul(mat1, mat2);
-        printMatrix(mat12);
- 
-    }
-
-    // 명령행 인자가 4개 이상인 경우 (행렬 .txt파일이 3개 이상인 경우)
     else
     {
-        //TODO 
-        //행렬 txt가 3개 이상인 경우
-        // 순차적으로 1번 2번 행렬을 곱하고 곱한 행렬 값을 메모리에 저장한다
-        // 1번과 2번 행렬의 메모리를 free해주고
-        // 3번 메모리 공간을 확보하고 값을 저장한다
-        // 12곱과 3을 곱하고 123행렬 메모리 할당 + 값을 메모리에 저장한다
-        // 12곱과 3의 메모리를 free
+        MatrixValues Matrix_front, Matrix_rear, Matrix_result;
+        for (int i = 1; i < argc; i++)
+        {
+            if ( i == 1)
+            {
+                Matrix_front = createMatrix(argv[i]);
+                printMatrix(Matrix_front);
+                continue;
+            }
 
-        // 이후에도 행렬이 존재한다면 같은 방식으로 
-        // 곱이 존재한다면? 곱 메모리가 순차적으로 먼저 생기고, argv[i]를 이동시키면서 해당 행렬을 불러온다.
+            Matrix_rear = createMatrix(argv[i]);
+            printMatrix(Matrix_rear);
 
+            Matrix_result = MatMul(Matrix_front, Matrix_rear);
+            printMatrix(Matrix_result);
 
+            freeMatrix(Matrix_rear);
 
-
+            //swap values
+            Matrix_front = Matrix_result;
+            //freeMatrix(Matrix_result);
+        }
     }
     return 0;
 }
 
 
 //multiplies two matrices and returns MatrixValues( includes row, col, **mat)
-MatrixValues MatMul(MatrixValues a, MatrixValues b)
+MatrixValues MatMul(MatrixValues matrixA, MatrixValues matrixB)
 {
-    if (a.col != b.row)
+    if (matrixA.col != matrixB.row)
     {
         printf("Error\n");
         exit(0);
     }
     int sum, i, j, k;
-    MatrixValues matAB = { 0 };
-    matAB.row = a.row;
-    matAB.col = b.row;
-    matAB.mat = (int**)malloc(sizeof(int*) * matAB.col);
-    matAB.filename = strcat(a.filename,b.filename);
-    for (i = 0; i < matAB.row; i++)
+    MatrixValues matrixAB = { 0 };
+    matrixAB.row = matrixA.row;
+    matrixAB.col = matrixB.row;
+    matrixAB.mat = (int**)malloc(sizeof(int*) * matrixAB.col);
+    matrixAB.filename = strcat(matrixA.filename, matrixB.filename);
+    for (i = 0; i < matrixAB.row; i++)
     {
-        *(matAB.mat + i) = (int*)malloc(sizeof(int) * matAB.col);
+        *(matrixAB.mat + i) = (int*)malloc(sizeof(int) * matrixAB.col);
     }
     
-    for (i = 0; i < a.row; i++)
+    for (i = 0; i < matrixA.row; i++)
     {
-        for (j = 0; j < b.col; j++)
+        for (j = 0; j < matrixB.col; j++)
         {
             sum = 0;
-            for (k = 0; k < b.row; k++)
+            for (k = 0; k < matrixB.row; k++)
             {
-                sum += a.mat[i][k] * b.mat[k][j];
+                sum += matrixA.mat[i][k] * matrixB.mat[k][j];
             }
-            matAB.mat[i][j] = sum;
+            matrixAB.mat[i][j] = sum;
         }
     }
-    return matAB;
+    return matrixAB;
 }
 
 // creates matrix and returns MatrixValues(includes row, col, **mat)
 MatrixValues createMatrix(char *argv)
 {
-    MatrixValues mat = { 0 };
+    MatrixValues matrix = { 0 };
     int i, j, k;
 
     // start filestream
     FILE *f;
     f = fopen(argv, "r");
-    fscanf(f, "%d%d", &mat.row, &mat.col);
-    mat.filename = strtok(argv, ".");
+    fscanf(f, "%d%d", &matrix.row, &matrix.col);
+    matrix.filename = strtok(argv, ".");
 
     // allocate memory for matrix
-    mat.mat = (int**)malloc(sizeof(int*) * mat.row);
-    for (i = 0; i < mat.row; i++)
+    matrix.mat = (int**)malloc(sizeof(int*) * matrix.row);
+    for (i = 0; i < matrix.row; i++)
     {
-        *(mat.mat + i) = (int*)malloc(sizeof(int) * mat.col);
+        *(matrix.mat + i) = (int*)malloc(sizeof(int) * matrix.col);
     }
 
     // get & print values from matrix
-    for (i = 0; i < mat.row; i++)
+    for (i = 0; i < matrix.row; i++)
     {
-        for (j = 0; j < mat.col; j++)
+        for (j = 0; j < matrix.col; j++)
         {
-            fscanf(f, "%d", &mat.mat[i][j]);
+            fscanf(f, "%d", &matrix.mat[i][j]);
         }
     }
 
     fclose(f);
 
-    return mat;
+    return matrix;
 }
 
-void printMatrix(MatrixValues a)
+void printMatrix(MatrixValues matrix)
 {
     int i, j;
-    printf("%s = \n", a.filename);
-    for (i = 0; i < a.row; i++)
+    printf("%s = \n", matrix.filename);
+    for (i = 0; i < matrix.row; i++)
     {
-        for (j = 0; j < a.col; j++)
+        for (j = 0; j < matrix.col; j++)
         {
-            printf("%d ", a.mat[i][j]);
+            printf("%d ", matrix.mat[i][j]);
         }
         printf("\n");
     }
+}
+
+void freeMatrix(MatrixValues matrix)
+{
+    for (int i = 0; i < matrix.row; i++)
+    {
+        free(matrix.mat[i]);
+    }
+    free(matrix.mat);
 }
