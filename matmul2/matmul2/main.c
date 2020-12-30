@@ -8,15 +8,13 @@ typedef struct MatrixValues{
     int col;
     int **mat;
     char *filename;
-    struct MatrixValues* swap;
-
 }MatrixValues;
 
-MatrixValues MatMul(MatrixValues, MatrixValues);
+MatrixValues multiplyMatrix(MatrixValues, MatrixValues);
 MatrixValues createMatrix(char*);
 void printMatrix(MatrixValues);
 void freeMatrix(MatrixValues);
-void swapMatrix(MatrixValues*, MatrixValues*);
+
 
 int main(int argc, char *argv[])
 {
@@ -28,41 +26,31 @@ int main(int argc, char *argv[])
 
     else
     {
-        MatrixValues Matrix_front, Matrix_rear, Matrix_result;
-        for (int i = 1; i < argc; i++)
+        MatrixValues frontMatrix, rearMatrix, resultMatrix;
+        frontMatrix = createMatrix(argv[1]);
+        printMatrix(frontMatrix);
+
+        for (int i = 2; i < argc; i++)
         {
-            if ( i == 1)
-            {
-                Matrix_front = createMatrix(argv[i]);
-                printMatrix(Matrix_front);
-                continue;
-            }
+            rearMatrix = createMatrix(argv[i]);
+            printMatrix(rearMatrix);
+
+            resultMatrix = multiplyMatrix(frontMatrix, rearMatrix);
+            printMatrix(resultMatrix);
+
+            freeMatrix(frontMatrix);
+            freeMatrix(rearMatrix);
             
-
-            Matrix_rear = createMatrix(argv[i]);
-            printMatrix(Matrix_rear);
-
-            Matrix_result = MatMul(Matrix_front, Matrix_rear);
-            printMatrix(Matrix_result);
-
-            
-
-            //swap values
-            swapMatrix(&Matrix_result, &Matrix_front);
-
-            //free Memory allocation
-            freeMatrix(Matrix_rear);
-            freeMatrix(Matrix_result);
+            frontMatrix = resultMatrix;
         }
-        
-        freeMatrix(Matrix_front);
+        freeMatrix(resultMatrix);
     }
     return 0;
 }
 
 
 //multiplies two matrices and returns MatrixValues( includes row, col, **mat)
-MatrixValues MatMul(MatrixValues matrixA, MatrixValues matrixB)
+MatrixValues multiplyMatrix(MatrixValues matrixA, MatrixValues matrixB)
 {
     if (matrixA.col != matrixB.row)
     {
@@ -151,14 +139,4 @@ void freeMatrix(MatrixValues matrix)
         free(matrix.mat[i]);
     }
     free(matrix.mat);
-}
-
-void swapMatrix(MatrixValues *matrix1, MatrixValues *matrix2)
-{
-    MatrixValues temp;
-    
-    temp = *matrix1;
-    *matrix1 = *matrix2;
-    *matrix2 = temp;
-
 }
