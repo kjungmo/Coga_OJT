@@ -16,7 +16,7 @@ MatrixValues MatMul(MatrixValues, MatrixValues);
 MatrixValues createMatrix(char*);
 void printMatrix(MatrixValues);
 void freeMatrix(MatrixValues);
-void swapMatrix(MatrixValues*, MatrixValues *);
+void swapMatrix(MatrixValues*, MatrixValues*);
 
 int main(int argc, char *argv[])
 {
