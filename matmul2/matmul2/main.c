@@ -8,13 +8,15 @@ typedef struct MatrixValues{
     int col;
     int **mat;
     char *filename;
+    struct MatrixValues* swap;
+
 }MatrixValues;
 
 MatrixValues MatMul(MatrixValues matrix1, MatrixValues matrix2);
 MatrixValues createMatrix(char *argv);
 void printMatrix(MatrixValues matrix);
 void freeMatrix(MatrixValues matrix);
-
+void swapMatrix(MatrixValues *matrix1, MatrixValues *matrix2);
 
 int main(int argc, char *argv[])
 {
@@ -35,6 +37,7 @@ int main(int argc, char *argv[])
                 printMatrix(Matrix_front);
                 continue;
             }
+            
 
             Matrix_rear = createMatrix(argv[i]);
             printMatrix(Matrix_rear);
@@ -42,12 +45,17 @@ int main(int argc, char *argv[])
             Matrix_result = MatMul(Matrix_front, Matrix_rear);
             printMatrix(Matrix_result);
 
-            freeMatrix(Matrix_rear);
+            
 
             //swap values
-            Matrix_front = Matrix_result;
-            //freeMatrix(Matrix_result);
+            swapMatrix(&Matrix_result, &Matrix_front);
+
+            //free Memory allocation
+            freeMatrix(Matrix_rear);
+            freeMatrix(Matrix_result);
         }
+        
+        freeMatrix(Matrix_front);
     }
     return 0;
 }
@@ -61,12 +69,14 @@ MatrixValues MatMul(MatrixValues matrixA, MatrixValues matrixB)
         printf("Error\n");
         exit(0);
     }
+
     int sum, i, j, k;
     MatrixValues matrixAB = { 0 };
     matrixAB.row = matrixA.row;
     matrixAB.col = matrixB.row;
-    matrixAB.mat = (int**)malloc(sizeof(int*) * matrixAB.col);
+    matrixAB.mat = (int**)malloc(sizeof(int*) * matrixAB.row);
     matrixAB.filename = strcat(matrixA.filename, matrixB.filename);
+
     for (i = 0; i < matrixAB.row; i++)
     {
         *(matrixAB.mat + i) = (int*)malloc(sizeof(int) * matrixAB.col);
@@ -91,7 +101,7 @@ MatrixValues MatMul(MatrixValues matrixA, MatrixValues matrixB)
 MatrixValues createMatrix(char *argv)
 {
     MatrixValues matrix = { 0 };
-    int i, j, k;
+    int i, j;
 
     // start filestream
     FILE *f;
@@ -141,4 +151,14 @@ void freeMatrix(MatrixValues matrix)
         free(matrix.mat[i]);
     }
     free(matrix.mat);
+}
+
+void swapMatrix(MatrixValues *matrix1, MatrixValues *matrix2)
+{
+    MatrixValues temp;
+    
+    temp = *matrix1;
+    *matrix1 = *matrix2;
+    *matrix2 = temp;
+
 }
