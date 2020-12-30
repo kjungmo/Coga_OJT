@@ -18,12 +18,27 @@
 
 //int matmul(int **a, int **b);
 
+FILE* fileStream(char *argv[])
+{
+    FILE *f;
+    f = fopen(argv, "r");
+    return f;
+}
+
+void fileClose(FILE *f)
+{
+    fclose(f);
+}
+
 int **createMatrixMul(char *argv1[], char *argv2[])
 {
     int row1, col1, row2, col2, i, j, k;
+    FILE *f1, *f2;
 
     // first Matrix
-    FILE *f1 = fopen(argv1, "r");
+    //FILE *f1 = fopen(argv1, "r");
+    
+    f1 = fileStream(argv1);
     fscanf(f1, "%d%d", &row1, &col1);
     printf("%d X %d sized Matrix\n", row1, col1);
 
@@ -48,11 +63,11 @@ int **createMatrixMul(char *argv1[], char *argv2[])
     }
     printf("memory address &: %p\n", &mat1);// mat is located in stack 
     printf("memory address : %p\n", mat1); // but malloc is in heap
-    fclose(f1);
+    fileClose(f1);
    
 
     // second Matrix
-    FILE *f2 = fopen(argv2, "r");
+    f2 = fopen(argv2, "r");
     fscanf(f2, "%d%d", &row2, &col2);
     printf("%d X %d sized Matrix\n", row2, col2);
 
