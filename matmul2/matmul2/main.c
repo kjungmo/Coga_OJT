@@ -12,11 +12,11 @@ typedef struct MatrixValues{
 
 }MatrixValues;
 
-MatrixValues MatMul(MatrixValues matrix1, MatrixValues matrix2);
-MatrixValues createMatrix(char *argv);
-void printMatrix(MatrixValues matrix);
-void freeMatrix(MatrixValues matrix);
-void swapMatrix(MatrixValues *matrix1, MatrixValues *matrix2);
+MatrixValues MatMul(MatrixValues, MatrixValues);
+MatrixValues createMatrix(char*);
+void printMatrix(MatrixValues);
+void freeMatrix(MatrixValues);
+void swapMatrix(MatrixValues*, MatrixValues *);
 
 int main(int argc, char *argv[])
 {
