@@ -86,16 +86,16 @@ MatrixValues multiplyMatrix(MatrixValues matrixA, MatrixValues matrixB)
 }
 
 // creates matrix and returns MatrixValues(includes row, col, **mat)
-MatrixValues createMatrix(char *argv)
+MatrixValues createMatrix(char *file)
 {
     MatrixValues matrix = { 0 };
     int i, j;
 
     // start filestream
     FILE *f;
-    f = fopen(argv, "r");
+    f = fopen(file, "r");
     fscanf(f, "%d%d", &matrix.row, &matrix.col);
-    matrix.filename = strtok(argv, ".");
+    matrix.filename = strtok(file, ".");
 
     // allocate memory for matrix
     matrix.mat = (int**)malloc(sizeof(int*) * matrix.row);
