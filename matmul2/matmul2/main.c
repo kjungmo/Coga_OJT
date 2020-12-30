@@ -26,31 +26,59 @@ MatrixValues MatMul(MatrixValues a, MatrixValues b)
     {
         *(matAB.mat + i) = (int*)malloc(sizeof(int) * matAB.col);
     }
-    
+    printf("AB = \n");
     for (i = 0; i < a.row; i++)
     {
         for (j = 0; j < b.col; j++)
-        sum = 0;
         {
+        sum = 0;
             for (k = 0; k < b.row; k++)
             {
                 sum += a.mat[i][k] * b.mat[k][j];
             }
-            matAB.mat[i][j] = sum;
+        matAB.mat[i][j] = sum;
+        printf("%d ", matAB.mat[i][j]);
         }
+        printf("\n");
     }
     return matAB;
-
- //   matAB = (int**)malloc(sizeof(int*) * col );
-	//int col = sizeof(b[0]) / sizeof(int); //이부분이 잘못됐다.
-
-	//int **matAB = (int**)malloc((sizeof(int*) * row));
-	//for (int i = 0; i < row; i++)
-	//{
-	//	*(matAB + i) = (int*)malloc(sizeof(int) * col);
-	//}
- //   return matAB;
 }
+
+MatrixValues createMatrix(char *argv[])
+{
+    MatrixValues mat = {0};
+    int i, j, k;
+    
+    // start filestream
+    FILE *f;
+    f = fopen(argv, "r");
+    fscanf(f, "%d%d", &mat.row, &mat.col);
+    char *sliced = strtok(argv, ".");
+    printf("%s = \n", sliced);
+
+    // allocate memory for matrix
+    mat.mat = (int**)malloc(sizeof(int*) * mat.row);
+    for (i = 0; i < mat.row; i++)
+    {
+        *(mat.mat + i) = (int*)malloc(sizeof(int) * mat.col);
+    }
+
+    // get & print values from matrix
+    for (i = 0; i < mat.row; i++)
+    {
+        for (j = 0; j < mat.col; j++)
+        {
+            fscanf(f, "%d", &mat.mat[i][j]);
+            printf("%d ", mat.mat[i][j]);
+        }
+        printf("\n");
+    }
+
+    fclose(f);
+
+    return mat;
+}
+
 FILE* fileStream(char *argv[])
 {
     FILE *f;
@@ -202,11 +230,14 @@ int main(int argc, char *argv[])
 
     else if (argc = 3)
     {
+        MatrixValues mat1, mat2, mat12;
+        mat1 = createMatrix(argv[1]);
+        mat2 = createMatrix(argv[2]);
+        mat12 = MatMul(mat1, mat2);
+        //int row, col, i, j, k, l;
+        //int **matA, matB;
 
-        int row, col, i, j, k, l;
-        int **matA, matB;
-
-        int **matAB = createMatrixMul(argv[1], argv[2]);
+        //int **matAB = createMatrixMul(argv[1], argv[2]);
         
         //for (int i = 0; i + 1 < argc; i++)
         //{
