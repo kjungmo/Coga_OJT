@@ -8,16 +8,49 @@ typedef struct MatrixValues{
     int col;
     int **mat;
 }MatrixValues;
-//
-//typedef struct{
-//    MatrixValues data[100];
-//    int rows;
-//    int cols;
-//    int** mat;
-//}Matrix;
 
 //int matmul(int **a, int **b);
+MatrixValues MatMul(MatrixValues a, MatrixValues b)
+{
+    if (a.col != b.row)
+    {
+        printf("Error\n");
+        exit(0);
+    }
+    int sum, i, j, k;
+    MatrixValues matAB = { 0 };
+    matAB.row = a.row;
+    matAB.col = b.row;
+    matAB.mat = (int**)malloc(sizeof(int*) * matAB.col);
+    for (i = 0; i < matAB.row; i++)
+    {
+        *(matAB.mat + i) = (int*)malloc(sizeof(int) * matAB.col);
+    }
+    
+    for (i = 0; i < a.row; i++)
+    {
+        for (j = 0; j < b.col; j++)
+        sum = 0;
+        {
+            for (k = 0; k < b.row; k++)
+            {
+                sum += a.mat[i][k] * b.mat[k][j];
+            }
+            matAB.mat[i][j] = sum;
+        }
+    }
+    return matAB;
 
+ //   matAB = (int**)malloc(sizeof(int*) * col );
+	//int col = sizeof(b[0]) / sizeof(int); //이부분이 잘못됐다.
+
+	//int **matAB = (int**)malloc((sizeof(int*) * row));
+	//for (int i = 0; i < row; i++)
+	//{
+	//	*(matAB + i) = (int*)malloc(sizeof(int) * col);
+	//}
+ //   return matAB;
+}
 FILE* fileStream(char *argv[])
 {
     FILE *f;
@@ -435,22 +468,7 @@ int main(int argc, char *argv[])
 }
 
 // 행렬을 인자로 받아서 새로운 행렬을 만드는 함수
-//int** matmul(int **a, int **b)
-//{
-//	int row, col;
-//    int** matAB;
-//
-//
-//    matAB = (int**)malloc(sizeof(int*) * col );
-//	int col = sizeof(b[0]) / sizeof(int); //이부분이 잘못됐다.
-//
-//	int **matAB = (int**)malloc((sizeof(int*) * row));
-//	for (int i = 0; i < row; i++)
-//	{
-//		*(matAB + i) = (int*)malloc(sizeof(int) * col);
-//	}
-//    return matAB;
-//}
+
 
 // 함수에 값으로는 입력 인자로 들어온 행렬의 곱 
 //TODO
