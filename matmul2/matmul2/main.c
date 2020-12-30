@@ -6,7 +6,7 @@
 typedef struct MatrixValues{
     int row;
     int col;
-    int **mat;
+    int *mat;
     char *filename;
 }MatrixValues;
 
@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
             printMatrix(rearMatrix);
 
             resultMatrix = multiplyMatrix(frontMatrix, rearMatrix);
+            //if (resultMatrix.mat == NULL) exit(1);
             printMatrix(resultMatrix);
 
             freeMatrix(frontMatrix);
@@ -52,24 +53,22 @@ int main(int argc, char *argv[])
 //multiplies two matrices and returns MatrixValues( includes row, col, **mat)
 MatrixValues multiplyMatrix(MatrixValues matrixA, MatrixValues matrixB)
 {
+    int sum, i, j, k;
+    MatrixValues matrixAB = { 0 };
+    
+
     if (matrixA.col != matrixB.row)
     {
         printf("Error\n");
         exit(0);
+        //*matrixAB.mat = NULL;
     }
-
-    int sum, i, j, k;
-    MatrixValues matrixAB = { 0 };
+       
     matrixAB.row = matrixA.row;
-    matrixAB.col = matrixB.row;
-    matrixAB.mat = (int**)malloc(sizeof(int*) * matrixAB.row);
+    matrixAB.col = matrixB.col;
+    matrixAB.mat = (int*)malloc(sizeof(int) * (matrixAB.row * matrixAB.col));
     matrixAB.filename = strcat(matrixA.filename, matrixB.filename);
 
-    for (i = 0; i < matrixAB.row; i++)
-    {
-        *(matrixAB.mat + i) = (int*)malloc(sizeof(int) * matrixAB.col);
-    }
-    
     for (i = 0; i < matrixA.row; i++)
     {
         for (j = 0; j < matrixB.col; j++)
@@ -77,9 +76,9 @@ MatrixValues multiplyMatrix(MatrixValues matrixA, MatrixValues matrixB)
             sum = 0;
             for (k = 0; k < matrixB.row; k++)
             {
-                sum += matrixA.mat[i][k] * matrixB.mat[k][j];
+                sum += matrixA.mat[i * matrixA.row + k] * matrixB.mat[k + j * matrixB.col];
             }
-            matrixAB.mat[i][j] = sum;
+            matrixAB.mat[i * matrixAB.row + j] = sum;
         }
     }
     return matrixAB;
@@ -98,18 +97,12 @@ MatrixValues createMatrix(char *file)
     matrix.filename = strtok(file, ".");
 
     // allocate memory for matrix
-    matrix.mat = (int**)malloc(sizeof(int*) * matrix.row);
-    for (i = 0; i < matrix.row; i++)
-    {
-        *(matrix.mat + i) = (int*)malloc(sizeof(int) * matrix.col);
-    }
-
-    // get & print values from matrix
+    matrix.mat = (int*)malloc(sizeof(int) * (matrix.row * matrix.col));
     for (i = 0; i < matrix.row; i++)
     {
         for (j = 0; j < matrix.col; j++)
         {
-            fscanf(f, "%d", &matrix.mat[i][j]);
+            fscanf(f, "%d", &matrix.mat[i * matrix.row + j]);
         }
     }
 
@@ -126,7 +119,7 @@ void printMatrix(MatrixValues matrix)
     {
         for (j = 0; j < matrix.col; j++)
         {
-            printf("%d ", matrix.mat[i][j]);
+            printf("%d ", matrix.mat[i * matrix.row + j]);
         }
         printf("\n");
     }
@@ -134,9 +127,5 @@ void printMatrix(MatrixValues matrix)
 
 void freeMatrix(MatrixValues matrix)
 {
-    for (int i = 0; i < matrix.row; i++)
-    {
-        free(matrix.mat[i]);
-    }
     free(matrix.mat);
 }
