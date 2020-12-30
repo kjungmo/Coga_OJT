@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
             printMatrix(rearMatrix);
 
             resultMatrix = multiplyMatrix(frontMatrix, rearMatrix);
-            //if (resultMatrix.mat == NULL) exit(1);
+            if (resultMatrix.mat == NULL) exit(1);
             printMatrix(resultMatrix);
 
             freeMatrix(frontMatrix);
@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
         freeMatrix(resultMatrix);
     }
     return 0;
-}
+} 
 
 
 //multiplies two matrices and returns MatrixValues( includes row, col, **mat)
@@ -60,8 +60,8 @@ MatrixValues multiplyMatrix(MatrixValues matrixA, MatrixValues matrixB)
     if (matrixA.col != matrixB.row)
     {
         printf("Error\n");
-        exit(0);
-        //*matrixAB.mat = NULL;
+        matrixAB.mat = NULL;
+        return matrixAB;
     }
        
     matrixAB.row = matrixA.row;
@@ -76,9 +76,9 @@ MatrixValues multiplyMatrix(MatrixValues matrixA, MatrixValues matrixB)
             sum = 0;
             for (k = 0; k < matrixB.row; k++)
             {
-                sum += matrixA.mat[i * matrixA.row + k] * matrixB.mat[k + j * matrixB.col];
+                sum += matrixA.mat[i * matrixA.col + k] * matrixB.mat[k * matrixB.col + j];
             }
-            matrixAB.mat[i * matrixAB.row + j] = sum;
+            matrixAB.mat[i * matrixAB.col + j] = sum;
         }
     }
     return matrixAB;
@@ -102,7 +102,7 @@ MatrixValues createMatrix(char *file)
     {
         for (j = 0; j < matrix.col; j++)
         {
-            fscanf(f, "%d", &matrix.mat[i * matrix.row + j]);
+            fscanf(f, "%d", &matrix.mat[i * matrix.col + j]);
         }
     }
 
@@ -119,7 +119,7 @@ void printMatrix(MatrixValues matrix)
     {
         for (j = 0; j < matrix.col; j++)
         {
-            printf("%d ", matrix.mat[i * matrix.row + j]);
+            printf("%d ", matrix.mat[i * matrix.col + j]);
         }
         printf("\n");
     }
