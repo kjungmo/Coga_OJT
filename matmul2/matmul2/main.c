@@ -3,11 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-//typedef struct{
-//    int row;
-//    int col;
-//    int **mat;
-//}MatrixValues;
+typedef struct MatrixValues{
+    int row;
+    int col;
+    int **mat;
+}MatrixValues;
 //
 //typedef struct{
 //    MatrixValues data[100];
@@ -34,7 +34,7 @@ int **createMatrixMul(char *argv1[], char *argv2[])
 {
     int row1, col1, row2, col2, i, j, k;
     FILE *f1, *f2;
-
+    
     // first Matrix
     //FILE *f1 = fopen(argv1, "r");
     
@@ -61,6 +61,11 @@ int **createMatrixMul(char *argv1[], char *argv2[])
         }
         printf("\n");
     }
+
+    MatrixValues matrix1 = { row1, col1, mat1 };
+    printf("values of matrix[0][1] : %d\n", mat1[0][1]);
+    printf("sizeof struct MatrixValues : %d\n", sizeof(matrix1));
+    printf("memory address of matrix1 : %p\n", matrix1);
     printf("memory address &: %p\n", &mat1);// mat is located in stack 
     printf("memory address : %p\n", mat1); // but malloc is in heap
     fileClose(f1);
@@ -90,6 +95,10 @@ int **createMatrixMul(char *argv1[], char *argv2[])
         }
         printf("\n");
     }
+
+    MatrixValues matrix2 = {row2, col2, mat2};
+    printf("sizeof struct MatrixValues : %d\n", sizeof(matrix2));
+    printf("memory address : %p\n", matrix2);
     printf("memory address &: %p\n", &mat2);// mat is located in stack 
     printf("memory address : %p\n", mat2); // but malloc is in heap
     fclose(f2);
