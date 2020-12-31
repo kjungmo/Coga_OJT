@@ -15,7 +15,7 @@ double getRadian(int _num)
 
 
 
-int main()
+int main_()
 {
     // read image
     Mat img = imread("a.jpg");
