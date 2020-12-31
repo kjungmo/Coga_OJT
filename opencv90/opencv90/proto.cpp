@@ -6,7 +6,7 @@ using namespace cv;
 using namespace std;
 
 
-int maiwn()
+int main()
 {
     cout << "Hello OpenCV " << CV_VERSION << endl;
 
@@ -22,7 +22,7 @@ int maiwn()
     Mat imgROI1 = img(Rect(200, 250, 200, 250));
     imgROI1 = ~imgROI1;
     Mat imgROI2 = img(Rect(200, 250, 200, 250)).clone();
-    //Error
+    //Error ( because Rect( int _x, int _y, int _width, int _height) not Rect(int _rowrange1, int _rowrange2, int _colrange1, int _colrange2)) 
     //Mat imgROI2 = img(Rect(200, 320, 200, 320)).clone(); 
     imgROI2 = imgROI2;
 
@@ -39,8 +39,9 @@ int maiwn()
     }
 
     // diffenence between just 0 and Scalar(0)?
-    //Mat practice1(300, 300, CV_8UC1, 0);
-     Mat practice1(300, 300, CV_8UC1, Scalar(0));
+    // MUST use Scalar() / not int ( see document [ void* ])
+    Mat practice1(300, 300, CV_8UC1, 1);
+     //Mat practice1(300, 300, CV_8UC1, Scalar(0));
 
     Mat practice2 = practice1.clone();
     //cout << img.row << endl;

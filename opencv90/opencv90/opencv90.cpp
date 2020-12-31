@@ -6,10 +6,10 @@
 using namespace cv;
 
 
-int main()
+int mai-n(int argc, char *argv[])
 {
     // read image
-    Mat img = imread("a.jpg", IMREAD_GRAYSCALE);
+    Mat img = imread(argv[1], IMREAD_GRAYSCALE); // check release or debug
    
 
    //rotate 90 degrees clockwise
