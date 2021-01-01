@@ -1,70 +1,48 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <opencv2/opencv.hpp>
 #include <math.h>
 #include <stdio.h>
 
-#define PI 3.1415926535897
 
-using namespace std;
 using namespace cv;
 
-double getRadian(int _num)
-{
-    return _num * ( PI / 180);
-}
 
-
-
-int main()
+int mai-n(int argc, char *argv[])
 {
     // read image
-    Mat img = imread("a.jpg");
-    Mat gray;
+    Mat img = imread(argv[1], IMREAD_GRAYSCALE); // check release or debug
+   
 
-    cvtColor(img, gray, COLOR_BGR2GRAY);
-
-    namedWindow("display window", WINDOW_AUTOSIZE);
-    imshow("display window", img);
-
-    namedWindow("gray window", WINDOW_AUTOSIZE);
-    imshow("gray window", gray);
-
-    int W, H;
-    W = gray.rows;
-    H = gray.cols;
-    printf("image size : %d X %d \n", W, H);
+   //rotate 90 degrees clockwise
+    Mat rotateClockwise90(Size(img.cols, img.rows), CV_8UC1);
+    Mat rotateAntiCwise90(Size(img.cols, img.rows), CV_8UC1);
 
 
-    int row1, row2;
-    printf("rows of which pixel values >>");
-    scanf("%d %d", &row1, &row2);
-    printf("\n row%d to row%d pixel values >> \n", row1, row2);
-    for (int i = row1; i <= row2; i++)
+    // clockwise 90 degrees
+    for (int j = 0; j < img.rows; j++)
     {
-        printf("<row %d> \n", i);
-        for (int j = 0; j < H; j++)
+        for (int i = 0; i < img.cols; i++)
         {
-            printf("%d ", gray.at<uchar>(i,j));
+            rotateClockwise90.at<uchar>(i, img.rows - 1 - j) = img.at<uchar>(j, i);
+            
         }
-        printf("\n \n");
     }
-    double result1, result2, result3;
-
-    double num = getRadian(90);
-
-    result1 = sin(num);
-    result2 = cos(num);
-    result3 = tan(num);
-
-    printf("sin90 : %lf\n", result1);
-    printf("cos90 : %lf\n", result2);
-    printf("tan90 : %lf\n", result3);
-
-    //img.at<uchar>(x, y);
-
-    waitKey(0);
-
     
 
+    // anti-clockwise 90 degrees ( clockwise 270 degrees)
+    for (int j = 0; j < img.rows; j++)
+    {
+        for (int i = 0; i < img.cols; i++)
+        {
+            rotateAntiCwise90.at<uchar>(img.rows - 1 - i, j) = img.at<uchar>(j, i);
+
+        }
+    }
+
+
+    imshow("image", img);
+    imshow("clockwise 90", rotateClockwise90);
+    imshow("anti-clockwise 90", rotateAntiCwise90);
+
+    waitKey(0);
     return 0;
 } 
