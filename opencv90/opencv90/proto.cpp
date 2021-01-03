@@ -1,10 +1,35 @@
 #include "opencv2/opencv.hpp"
 #include <iostream>
-#include <stdio.h>
+#include <math.h>
+
+#define PI 3.1415926535897
 
 using namespace cv;
 using namespace std;
 
+class RotationMatrix
+{
+private:
+
+public:
+
+
+};
+
+double getRadian(int _num)
+{
+    return _num * (PI / 180);
+}
+
+double getRotatedMatrix(char *image, int degrees, float scale)
+{
+    int x, y, degrees;
+    double newX, newY;
+    sin = sin(getRadian(degrees));
+    cos = cos(getRadian(degrees));
+    newX = (cos * degrees * x) - (sin * degrees * y) // + centerX
+    newY = -(sin * degrees * x) + (cos * degrees * y) // + centerY
+}
 
 int main()
 {
@@ -34,7 +59,7 @@ int main()
         {
             rotated90.at<uchar>(i, img.rows - 1 - j) = img.at<uchar>(j, i);
             int val = img.at<uchar>(j, i);  
-            //printf("%d ", val);
+            cout << val << endl;//printf("%d ", val);
         }
     }
 

@@ -1,9 +1,10 @@
 #include <opencv2/opencv.hpp>
 #include <math.h>
-#include <stdio.h>
+#include <iostream>
 
 
 using namespace cv;
+using namespace std;
 
 
 int mai-n(int argc, char *argv[])
