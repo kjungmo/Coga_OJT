@@ -9,8 +9,8 @@ using namespace std;
 
 Mat getRotatedMatrix(Mat image, int degrees);
 double getRadian(int _num);
-int getNewX(int x, int y, int degrees);
-int getNewY(int x, int y, int degrees);
+int getNewX(Mat image, int x, int y, int degrees);
+int getNewY(Mat image, int x, int y, int degrees);
 
 int main(int argc, char *argv[])
 {
@@ -32,7 +32,9 @@ int main(int argc, char *argv[])
 
 Mat getRotatedMatrix(Mat image, int degrees)
 {
-
+    int centerX = image.rows / 2;
+    int centerY = image.cols / 2;
+    
     
     Mat targetImage(Size(image.rows, image.cols), CV_8UC1);
 
@@ -41,7 +43,16 @@ Mat getRotatedMatrix(Mat image, int degrees)
     {
         for (int j = 0; j < targetImage.cols; j++)
         {
-            targetImage.at<uchar>(i, j) = image.at<uchar>(getNewX(i, j, degrees), getNewY(i, j, degrees));
+            //targetImage.at<uchar>(i, j) = image.at<uchar>(getNewX(i, j, degrees), getNewY(i, j, degrees));
+            int newX = getNewX(image, i, j, degrees);
+            int newY = getNewY(image, i, j, degrees);
+            
+            if(newX < 0)            continue;
+            if(newX >= image.cols)  continue;
+            if(newY < 0)            continue;
+            if(newY >= image.rows)  continue;
+
+            targetImage.at<uchar>(newY,newX) = image.at<uchar>(i, j);
         }
     }
 
@@ -53,14 +64,18 @@ double getRadian(int _num)
     return _num * (PI / 180);
 }
 
-int getNewX(int x, int y, int degrees)
+int getNewX(Mat image, int x, int y, int degrees)
 {
-    int newX = (int)( (cos(getRadian(degrees)) * x) - (sin(getRadian(degrees)) * y) );
+    int centerX = image.cols / 2;
+    int centerY = image.rows / 2;
+    int newX = (int)(cos(getRadian(degrees)) * (x - centerX) - sin(getRadian(degrees)) * (y - centerY) + centerX );
     return newX;
 }
 
-int getNewY(int x, int y, int degrees)
+int getNewY(Mat image, int x, int y, int degrees)
 {
-    int newY = (int)( (sin(getRadian(degrees)) * x) + (cos(getRadian(degrees)) * y) );
+    int centerX = image.cols / 2;
+    int centerY = image.rows / 2;
+    int newY = (int)(sin(getRadian(degrees)) * (x - centerX) + cos(getRadian(degrees)) * (y - centerY) + centerY );
     return newY;
 }
