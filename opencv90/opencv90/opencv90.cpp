@@ -1,6 +1,7 @@
 #include "opencv2/opencv.hpp"
 #include <iostream>
 #include <math.h>
+#include <cmath>
 
 #define PI 3.1415926535897
 
@@ -11,6 +12,12 @@ Mat forward(Mat image, int degree);
 Mat backward(Mat image, int degree);
 Mat forwardFitted(Mat image, int degree);
 Mat backwardFitted(Mat image, int degree);
+
+struct Coords{
+    double x;
+    double y;
+};
+double Distance(const Coords& p1, const Coords& p2);
 
 int main(int argc, char *argv[])
 {
@@ -113,14 +120,20 @@ Mat forwardFitted(Mat image, int degree)
     W = image.cols;
     H = image.rows;
 
+    // detect diagonal
+    struct Coords A = { image.cols - image.cols, image.rows - image.rows };
+    struct Coords O = { image.cols, image.rows };
+
+    double diagonal = Distance(A, O);
+    printf("distance : %fl\n", diagonal);
+
     double theta = degree * (PI / 180);
-    double minusTheta = (90 - degree) * PI / 180;
 
     int centerX = W / 2;
     int centerY = H / 2;
 
-    int rotatedW = H * cos(minusTheta) + W * cos(theta);
-    int rotatedH = H * cos(theta) + W * cos(minusTheta);
+    int rotatedW = (int)diagonal;
+    int rotatedH = (int)diagonal;
     printf("rotated W X H = %d X %d\n", rotatedW, rotatedH);
 
     int rotatedCenterX = rotatedW / 2;
@@ -166,14 +179,20 @@ Mat backwardFitted(Mat image, int degree)
     W = image.cols;
     H = image.rows;
 
+    // detect diagonal line
+    struct Coords A = { image.cols - image.cols, image.rows - image.rows };
+    struct Coords O = { image.cols, image.rows };
+
+    double diagonal = Distance(A, O);
+    printf("distance : %fl\n", diagonal);
+
     double theta = -degree * (PI / 180);
-    double minusTheta = (90 - degree) * PI / 180;
 
     int centerX = W / 2;
     int centerY = H / 2;
 
-    int rotatedW = H * cos(minusTheta) + W * cos(theta);
-    int rotatedH = H * cos(theta) + W * cos(minusTheta);
+    int rotatedW = (int)diagonal;
+    int rotatedH = (int)diagonal;
     printf("rotated W X H = %d X %d\n", rotatedW, rotatedH);
 
     int rotatedCenterX = rotatedW / 2;
@@ -211,4 +230,15 @@ Mat backwardFitted(Mat image, int degree)
     }
 
     return targetImage;
+}
+
+
+double Distance(const Coords& p1, const Coords& p2)
+{
+
+    double distance;
+
+    distance = sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
+
+    return distance;
 }
