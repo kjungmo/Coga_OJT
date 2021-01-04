@@ -7,10 +7,7 @@
 using namespace cv;
 using namespace std;
 
-Mat getRotatedMatrix(Mat image, int degrees);
-double getRadian(int _num);
-int getNewX(Mat image, int x, int y, int degrees);
-int getNewY(Mat image, int x, int y, int degrees);
+Mat getRotatedImage(Mat image, int degrees);
 
 int main(int argc, char *argv[])
 {
@@ -21,7 +18,7 @@ int main(int argc, char *argv[])
    int degrees = atoi(argv[2]);
 
    // get rotated Image
-   Mat rotatedImage = getRotatedMatrix(sourceImage, degrees);
+   Mat rotatedImage = getRotatedImage(sourceImage, degrees);
 
    imshow("source Image", sourceImage);
    imshow("rotated Image", rotatedImage);
@@ -30,11 +27,16 @@ int main(int argc, char *argv[])
     return 0;
 } 
 
-Mat getRotatedMatrix(Mat image, int degrees)
+Mat getRotatedImage(Mat image, int degrees)
 {
-    int centerX = image.rows / 2;
-    int centerY = image.cols / 2;
-    
+    int W, H;
+    W = image.cols;
+    H = image.rows;
+    int centerX = W / 2;
+    int centerY = H / 2;
+    //int seta = degrees * (PI / 180); // 180 anticlockwise // 40 clockwise(one function) 
+    //int seta = (PI / 180) / degrees; // 90 clockwise
+    int seta = degrees / (PI / 180); // holes, 30 anticlockwise
     
     Mat targetImage(Size(image.rows, image.cols), CV_8UC1);
 
@@ -43,39 +45,19 @@ Mat getRotatedMatrix(Mat image, int degrees)
     {
         for (int j = 0; j < targetImage.cols; j++)
         {
+            
             //targetImage.at<uchar>(i, j) = image.at<uchar>(getNewX(i, j, degrees), getNewY(i, j, degrees));
-            int newX = getNewX(image, i, j, degrees);
-            int newY = getNewY(image, i, j, degrees);
+            int newX = (int)(cos(seta) * (i - centerX) + sin(seta) * (j - centerY) + centerX);
+            int newY = (int)(-sin(seta) * (i - centerX) + cos(seta) * (j - centerY) + centerY);
             
             if(newX < 0)            continue;
             if(newX >= image.cols)  continue;
             if(newY < 0)            continue;
             if(newY >= image.rows)  continue;
-
-            targetImage.at<uchar>(newY,newX) = image.at<uchar>(i, j);
+            
+            targetImage.at<uchar>(newX,newY) = image.at<uchar>(i, j);
         }
     }
 
     return targetImage;
-}
-
-double getRadian(int _num)
-{
-    return _num * (PI / 180);
-}
-
-int getNewX(Mat image, int x, int y, int degrees)
-{
-    int centerX = image.cols / 2;
-    int centerY = image.rows / 2;
-    int newX = (int)(cos(getRadian(degrees)) * (x - centerX) - sin(getRadian(degrees)) * (y - centerY) + centerX );
-    return newX;
-}
-
-int getNewY(Mat image, int x, int y, int degrees)
-{
-    int centerX = image.cols / 2;
-    int centerY = image.rows / 2;
-    int newY = (int)(sin(getRadian(degrees)) * (x - centerX) + cos(getRadian(degrees)) * (y - centerY) + centerY );
-    return newY;
 }
