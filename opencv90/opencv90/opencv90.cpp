@@ -8,6 +8,7 @@ using namespace cv;
 using namespace std;
 
 Mat forward(Mat image, int degree);
+Mat backward(Mat image, int degree);
 
 int main(int argc, char *argv[])
 {
@@ -20,14 +21,51 @@ int main(int argc, char *argv[])
    printf("\n");
 
    // get rotated Image
-   Mat rotated = forward(sourceImage, degree);
+   Mat rotatedForward = forward(sourceImage, degree);
+   Mat rotatedBackward = backward(sourceImage, degree);
+
 
    imshow("source Image", sourceImage);
-   imshow("rotated Image", rotated);
+   imshow("[FORWARD]rotated Image", rotatedForward);
+   imshow("[BACKWARD]rotated Image", rotatedBackward);
    
     waitKey(0);
     return 0;
 } 
+
+Mat backward(Mat image, int degree)
+{
+    int W, H;
+    W = image.cols;
+    H = image.rows;
+    int centerX = W / 2;
+    int centerY = H / 2;
+
+
+    double theta = -degree * (PI / 180);
+
+    Mat targetImage(Size(W, H), CV_8UC1);
+
+
+    for (int x = 0; x < targetImage.cols; x++)
+    {
+        for (int y = 0; y < targetImage.rows; y++)
+        {
+
+            int newX = (int)(cos(theta) * (x - centerX) + sin(theta) * (y - centerY) + centerX);
+            int newY = (int)(-sin(theta) * (x - centerX) + cos(theta) * (y - centerY) + centerY);
+
+            if (newX < 0)            continue;
+            if (newX >= image.cols)  continue;
+            if (newY < 0)            continue;
+            if (newY >= image.rows)  continue;
+
+            targetImage.at<uchar>(y, x) = image.at<uchar>(newY, newX);
+        }
+    }
+
+    return targetImage;
+}
 
 Mat forward(Mat image, int degree)
 {
