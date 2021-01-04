@@ -34,9 +34,9 @@ Mat getRotatedImage(Mat image, int degrees)
     H = image.rows;
     int centerX = W / 2;
     int centerY = H / 2;
-    //int seta = degrees * (PI / 180); // 180 anticlockwise // 40 clockwise(one function) 
-    //int seta = (PI / 180) / degrees; // 90 clockwise
-    int seta = degrees / (PI / 180); // holes, 30 anticlockwise
+    //int theta = degrees * (PI / 180); // 180 anticlockwise // 40 clockwise(one function) 
+    //int theta = (PI / 180) / degrees; // 90 clockwise
+    int theta = degrees / (PI / 180); // holes, 30 anticlockwise
     
     Mat targetImage(Size(image.rows, image.cols), CV_8UC1);
 
@@ -47,8 +47,8 @@ Mat getRotatedImage(Mat image, int degrees)
         {
             
             //targetImage.at<uchar>(i, j) = image.at<uchar>(getNewX(i, j, degrees), getNewY(i, j, degrees));
-            int newX = (int)(cos(seta) * (i - centerX) + sin(seta) * (j - centerY) + centerX);
-            int newY = (int)(-sin(seta) * (i - centerX) + cos(seta) * (j - centerY) + centerY);
+            int newX = (int)(cos(theta) * (i - centerX) + sin(theta) * (j - centerY) + centerX);
+            int newY = (int)(-sin(theta) * (i - centerX) + cos(theta) * (j - centerY) + centerY);
             
             if(newX < 0)            continue;
             if(newX >= image.cols)  continue;
