@@ -44,7 +44,8 @@ Mat backward(Mat image, int degree)
 
     double theta = -degree * (PI / 180);
 
-    Mat targetImage(Size(W, H), CV_8UC1);
+    Mat targetImage;
+    targetImage = Mat::zeros(image.rows, image.cols, CV_8UC1);
 
 
     for (int x = 0; x < targetImage.cols; x++)
@@ -78,7 +79,8 @@ Mat forward(Mat image, int degree)
     
     double theta = degree * (PI / 180);
 
-    Mat targetImage(Size(W, H), CV_8UC1);
+    Mat targetImage;
+    targetImage = Mat::zeros(image.rows, image.cols, CV_8UC1);
 
 
     for (int x = 0; x < targetImage.cols; x++)
