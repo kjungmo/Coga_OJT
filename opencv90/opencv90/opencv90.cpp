@@ -8,15 +8,15 @@
 using namespace cv;
 using namespace std;
 
-Mat forward(Mat image, int degree);
-Mat backward(Mat image, int degree);
-Mat forwardFitted(Mat image, int degree);
-Mat backwardFitted(Mat image, int degree);
-
 struct Coords{
     double x;
     double y;
 };
+
+Mat forward(Mat image, int degree);
+Mat backward(Mat image, int degree);
+Mat forwardFitted(Mat image, int degree);
+Mat backwardFitted(Mat image, int degree);
 double Distance(const Coords& p1, const Coords& p2);
 
 int main(int argc, char *argv[])
@@ -219,13 +219,15 @@ Mat backwardFitted(Mat image, int degree)
         for (int y = 0; y < targetImage.rows; y++)
         {
 
-            int newX = (int)(cos(theta) * (x - rotatedCenterX) + sin(theta) * (y - rotatedCenterY) + rotatedCenterX);
-            int newY = (int)(-sin(theta) * (x - rotatedCenterX) + cos(theta) * (y - rotatedCenterY) + rotatedCenterY);
+            double newX = (cos(theta) * (x - rotatedCenterX) + sin(theta) * (y - rotatedCenterY) + rotatedCenterX);
+            double newY = (-sin(theta) * (x - rotatedCenterX) + cos(theta) * (y - rotatedCenterY) + rotatedCenterY);
 
+            int interX = (int)newX;
+            int interY = (int)newY;
             if (newX < 0 || newX >= rotatedW)  continue;
             else if (newY < 0 || newY >= rotatedH)  continue;
 
-            targetImage.at<uchar>(y, x) = tempImage.at<uchar>(newY, newX);
+            targetImage.at<uchar>(y, x) = tempImage.at<uchar>((int)newY, (int)newX);
         }
     }
 
@@ -241,4 +243,37 @@ double Distance(const Coords& p1, const Coords& p2)
     distance = sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
 
     return distance;
+}
+
+double BilinearInterpo(const Coords& p)
+{
+    double rambda;
+    double mu;
+    rambda = p.x - abs(p.x);
+    mu = p.y - abs(p.y);
+    
+    Coords A;
+    A.x = p.x - rambda;
+    A.y = p.y - mu;
+    Coords B;
+    B.x = p.x - rambda;
+    B.y = p.y - mu + 1;
+    Coords C;
+    C.x = p.x - rambda + 1;
+    C.y = p.y - mu;
+    Coords D;
+    D.x = p.x - rambda + 1;
+    D.y = p.y - mu + 1;
+
+    double firstProcessE(const Coords& p1, const Coords& p2)
+    {
+        Coords E;
+        Coords.x = rambda * p1.x + (1 - rambda) * p2.x;
+        Coords.y = mu * p1.y + (1 - rambda) * p2.y
+
+        return Coords;
+    }
+    double secondProcessF;
+    double lastProcessN;
+
 }
