@@ -60,7 +60,7 @@ Mat forward(Mat image, int degree)
     int centerY = H / 2;
 
     double theta = degree * (PI / 180);
-
+    
     Mat targetImage;
     targetImage = Mat::zeros(image.rows, image.cols, CV_8UC1);
 
@@ -72,10 +72,8 @@ Mat forward(Mat image, int degree)
             int newX = (int)(cos(theta) * (x - centerX) + sin(theta) * (y - centerY) + centerX);
             int newY = (int)(-sin(theta) * (x - centerX) + cos(theta) * (y - centerY) + centerY);
 
-            if (newX < 0)            continue;
-            if (newX >= image.cols)  continue;
-            if (newY < 0)            continue;
-            if (newY >= image.rows)  continue;
+            if (newX < 0 || newX >= image.cols) continue;
+            if (newY < 0 || newY >= image.rows) continue;
 
             targetImage.at<uchar>(newY, newX) = image.at<uchar>(y, x);
         }
@@ -106,11 +104,9 @@ Mat backward(Mat image, int degree)
             int newX = (int)(cos(theta) * (x - centerX) + sin(theta) * (y - centerY) + centerX);
             int newY = (int)(-sin(theta) * (x - centerX) + cos(theta) * (y - centerY) + centerY);
 
-            if (newX < 0)            continue;
-            if (newX >= image.cols)  continue;
-            if (newY < 0)            continue;
-            if (newY >= image.rows)  continue;
-
+            if (newX < 0 || newX >= image.cols) continue;
+            if (newY < 0 || newY >= image.rows) continue;
+            
             targetImage.at<uchar>(y, x) = image.at<uchar>(newY, newX);
         }
     }
@@ -124,8 +120,8 @@ Mat forwardFitted(Mat image, int degree)
     W = image.cols;
     H = image.rows;
 
-    int centerX = W / 2-1;
-    int centerY = H / 2-1;
+    int centerX = W / 2;
+    int centerY = H / 2;
 
     double theta = degree * (PI / 180);
 
@@ -135,14 +131,14 @@ Mat forwardFitted(Mat image, int degree)
     int rotatedCenterX = rotated.w / 2;
     int rotatedCenterY = rotated.h / 2;
 
-    int movedCenterX = rotatedCenterX - centerX;
-    int movedCenterY = rotatedCenterY - centerY;
+    int movedCenterX = abs(rotatedCenterX - centerX);
+    int movedCenterY = abs(rotatedCenterY - centerY);
 
     Mat tempImage;
     tempImage = Mat::zeros(Size(rotated.w, rotated.h), CV_8UC1);
     Mat targetImage;
     targetImage = Mat::zeros(Size(rotated.w, rotated.h), CV_8UC1);
-
+    
     for (int i = 0; i < W; i++)
     {
         for (int j = 0; j < H; j++)
@@ -206,7 +202,7 @@ Mat backwardFitted(Mat image, int degree)
     {
         for (int y = 0; y < targetImage.rows; y++)
         {
-
+        
             double newX = (cos(theta) * (x - rotatedCenterX) + sin(theta) * (y - rotatedCenterY) + rotatedCenterX);
             double newY = (-sin(theta) * (x - rotatedCenterX) + cos(theta) * (y - rotatedCenterY) + rotatedCenterY);
 
@@ -231,28 +227,25 @@ double bilinearIntPol(const Coords& p, Mat image)
     A.x = (int)floor(p.x);
     A.y = (int)floor(p.y);
     Coords B;
-    B.x = A.x;
-    B.y = A.y + 1;
+    B.x = A.x + 1;
+    B.y = A.y;
     Coords C;
-    C.x = A.x + 1;
-    C.y = A.y;
+    C.x = A.x;
+    C.y = A.y + 1;
     Coords D;
     D.x = A.x + 1;
     D.y = A.y + 1;
-    if (B.x >= image.cols - 1 || C.y >= image.rows - 1)
-    {
-    printf(" here \n");
-    }
+
+    // lower right side( B, C, D out)
+    if (B.x >= image.cols - 1 && C.y >= image.rows - 1) return image.at<uchar>(A.y, A.x);
+    
     // right side ( B, D out)
-    // .y no prob but B.x out D.x out
+    // B.x out D.x out
     if ( B.x > image.cols - 1 ) return lambda * image.at<uchar>(C.y, C.x) + (1 - lambda) * image.at<uchar>(A.y, A.x);
     
     // lower side ( C, D out)
-    // .x no prob but C.y out D.y out
+    // C.y out D.y out
     if ( C.y > image.rows -1 ) return mu * image.at<uchar>(B.y, B.x) + (1 - mu) * image.at<uchar>(A.y, A.x);
-
-    // lower right side( B, C, D out)
-    if ( B.x > image.cols -1 && C.y > image.rows -1 ) return image.at<uchar>(A.y, A.x);
 
     int pixelA = image.at<uchar>(A.y, A.x);
     int pixelB = image.at<uchar>(B.y, B.x);
@@ -272,9 +265,9 @@ Length getImageSize(Mat image,int degree)
     int W, H;
     W = image.cols;
     H = image.rows;
-
-    int centerX = W / 2;
-    int centerY = H / 2;
+     
+    double centerX = W / 2;
+    double centerY = H / 2;
     
     Coords A;
     A.x = 0;
@@ -300,12 +293,23 @@ Length getImageSize(Mat image,int degree)
     double newDX = cos(theta) * (D.x - centerX) + sin(theta) * (D.y - centerY) + centerX;
     double newDY = -sin(theta) * (D.x - centerX) + cos(theta) * (D.y - centerY) + centerY;
 
-    int newWidth = abs(newBX - newCX);
-    int newHeight = abs(newAY - newDY);
+    double newWidth1 = abs(newBX - newDX);
+    double newHeight1 = abs(newAY - newCY);
+    double newWidth2 = abs(newAX - newCX);
+    double newHeight2 = abs(newBY - newDY);
 
-    Length newOne;
-    newOne.w = newWidth;
-    newOne.h = newHeight;
+    double newWidth3 = abs(newBX - newCX);
+    double newHeight3 = abs(newBY - newCY);
+    double newWidth4 = abs(newAX - newDX);
+    double newHeight4 = abs(newAY - newDY);
+
+    Length newOne; 
+    double tempW1 = MAX(newWidth1, newWidth2);
+    double tempH1 = MAX(newHeight1, newHeight2);
+    double tempW2 = MAX(newWidth3, newWidth4);
+    double tempH2 = MAX(newHeight3, newHeight4);
+    newOne.w = MAX(tempW1, tempW2);
+    newOne.h = MAX(tempH1, tempH2);
 
     return newOne;
 }
