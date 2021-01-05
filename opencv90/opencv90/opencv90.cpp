@@ -9,8 +9,8 @@ using namespace cv;
 using namespace std;
 
 struct Coords{
-    double x;
-    double y;
+    double x = 0.0;
+    double y = 0.0;
 };
 
 Mat forward(Mat image, int degree);
@@ -18,6 +18,8 @@ Mat backward(Mat image, int degree);
 Mat forwardFitted(Mat image, int degree);
 Mat backwardFitted(Mat image, int degree);
 double Distance(const Coords& p1, const Coords& p2);
+double bilinearIntPol(const Coords& p, Mat image);
+
 
 int main(int argc, char *argv[])
 {
@@ -28,6 +30,7 @@ int main(int argc, char *argv[])
    int degree = atoi(argv[2]);
    printf("Image has been %d degrees rotated", degree);
    printf("\n");
+
 
    // get rotated Image
    Mat rotatedForward = forward(sourceImage, degree);
@@ -222,12 +225,14 @@ Mat backwardFitted(Mat image, int degree)
             double newX = (cos(theta) * (x - rotatedCenterX) + sin(theta) * (y - rotatedCenterY) + rotatedCenterX);
             double newY = (-sin(theta) * (x - rotatedCenterX) + cos(theta) * (y - rotatedCenterY) + rotatedCenterY);
 
-            int interX = (int)newX;
-            int interY = (int)newY;
             if (newX < 0 || newX >= rotatedW)  continue;
             else if (newY < 0 || newY >= rotatedH)  continue;
-
-            targetImage.at<uchar>(y, x) = tempImage.at<uchar>((int)newY, (int)newX);
+            Coords newXY;
+            newXY.x = newX;
+            newXY.y = newY;
+            double cc = bilinearIntPol(newXY, tempImage);
+            targetImage.at<uchar>(y, x) = (int)bilinearIntPol(newXY, tempImage);
+            //targetImage.at<uchar>(y, x) = tempImage.at<uchar>((int)newY, (int)newX);
         }
     }
 
@@ -245,35 +250,38 @@ double Distance(const Coords& p1, const Coords& p2)
     return distance;
 }
 
-double BilinearInterpo(const Coords& p)
+double bilinearIntPol(const Coords& p, Mat image)
 {
-    double rambda;
-    double mu;
-    rambda = p.x - abs(p.x);
-    mu = p.y - abs(p.y);
+    double mu = p.x - floor(p.x);
+    double lambda = p.y - floor(p.y);
     
     Coords A;
-    A.x = p.x - rambda;
-    A.y = p.y - mu;
+    A.x = (int)floor(p.x);
+    if (A.x < 0) A.x = 0;
+    if (A.x >= image.cols - 1) A.x = image.cols - 2;
+    A.y = (int)floor(p.y);
+    if (A.y < 0) A.y = 0;
+    if (A.y >= image.rows - 1) A.y = image.rows - 2;
     Coords B;
-    B.x = p.x - rambda;
-    B.y = p.y - mu + 1;
+    B.x = A.x;
+    B.y = A.y + 1;
     Coords C;
-    C.x = p.x - rambda + 1;
-    C.y = p.y - mu;
+    C.x = A.x + 1;
+    C.y = A.y;
     Coords D;
-    D.x = p.x - rambda + 1;
-    D.y = p.y - mu + 1;
+    D.x = A.x + 1;
+    D.y = A.y + 1;
 
-    double firstProcessE(const Coords& p1, const Coords& p2)
-    {
-        Coords E;
-        Coords.x = rambda * p1.x + (1 - rambda) * p2.x;
-        Coords.y = mu * p1.y + (1 - rambda) * p2.y
+    int pixelA = image.at<uchar>(A.y, A.x);
+    int pixelB = image.at<uchar>(B.y, B.x);
+    int pixelC = image.at<uchar>(C.y, C.x);
+    int pixelD = image.at<uchar>(D.y, D.x);
 
-        return Coords;
-    }
-    double secondProcessF;
-    double lastProcessN;
+    double pixelE = mu * pixelB + (1 - mu) * pixelA;
+    double pixelF = mu * pixelD + (1 - mu) * pixelC;
 
+    double pixelN = lambda * pixelF + (1 - lambda) * pixelE;
+
+    return pixelN;
 }
+
