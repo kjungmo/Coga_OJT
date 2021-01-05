@@ -124,8 +124,8 @@ Mat forwardFitted(Mat image, int degree)
     W = image.cols;
     H = image.rows;
 
-    int centerX = W / 2;
-    int centerY = H / 2;
+    int centerX = W / 2-1;
+    int centerY = H / 2-1;
 
     double theta = degree * (PI / 180);
 
@@ -239,7 +239,10 @@ double bilinearIntPol(const Coords& p, Mat image)
     Coords D;
     D.x = A.x + 1;
     D.y = A.y + 1;
-
+    if (B.x >= image.cols - 1 || C.y >= image.rows - 1)
+    {
+    printf(" here \n");
+    }
     // right side ( B, D out)
     // .y no prob but B.x out D.x out
     if ( B.x > image.cols - 1 ) return lambda * image.at<uchar>(C.y, C.x) + (1 - lambda) * image.at<uchar>(A.y, A.x);
@@ -274,17 +277,17 @@ Length getImageSize(Mat image,int degree)
     int centerY = H / 2;
     
     Coords A;
-    A.x = image.cols - image.cols;
-    A.y = image.rows - image.rows;
+    A.x = 0;
+    A.y = 0;
     Coords B;
-    B.x = A.x;
-    B.y = A.y + image.rows;
+    B.x = 0;
+    B.y = image.rows - 1;
     Coords C;
-    C.x = A.x + image.cols;
-    C.y = A.y;
+    C.x = image.cols - 1;
+    C.y = 0;
     Coords D;
-    D.x = A.x + image.cols;
-    D.y = A.y + image.rows;
+    D.x = image.cols - 1;
+    D.y = image.rows - 1;
 
     double theta = degree * (PI / 180);
 
