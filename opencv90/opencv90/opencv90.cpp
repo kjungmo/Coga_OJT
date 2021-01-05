@@ -310,6 +310,11 @@ Length getImageSize(Mat image,int degree)
     double tempH2 = MAX(newHeight3, newHeight4);
     newOne.w = MAX(tempW1, tempW2);
     newOne.h = MAX(tempH1, tempH2);
+    if (degree % 90 == 0)
+    {
+        newOne.w ++;
+        newOne.h ++;
+    }
 
     return newOne;
 }
