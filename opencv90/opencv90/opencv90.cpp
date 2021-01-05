@@ -261,14 +261,14 @@ double bilinearIntPol(const Coords& p, Mat image)
 
     // right side ( B, D out)
     // .y no prob but B.x out D.x out
-    if ( B.x > image.cols - 1 && D.x > image.cols - 1) return image.at<uchar>(mu * C.y + (1 - mu) * A.y, mu * C.x + (1 - mu) * A.x);
+    if ( B.x > image.cols - 1 && D.x > image.cols - 1) return mu * image.at<uchar>(C.y, C.x) + (1 - mu) * image.at<uchar>(A.y, A.x);
     
     // upper side ( A, B out)
     // no prob
     
     // lower side ( C, D out)
     // .x no prob but C.y out D.y out
-    if ( C.y > image.rows -1 && D.y > image.rows - 1) return image.at<uchar>(mu * B.y + (1 - mu) * A.y, mu * B.x + (1 - mu) * A.x);
+    if ( C.y > image.rows -1 && D.y > image.rows - 1) return mu * image.at<uchar>(B.y, B.x) + (1 - mu) * image.at<char>(A.y, A.x);
 
     int pixelA = image.at<uchar>(A.y, A.x);
     int pixelB = image.at<uchar>(B.y, B.x);
