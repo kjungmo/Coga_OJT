@@ -17,7 +17,6 @@ Mat forward(Mat image, int degree);
 Mat backward(Mat image, int degree);
 Mat forwardFitted(Mat image, int degree);
 Mat backwardFitted(Mat image, int degree);
-double Distance(const Coords& p1, const Coords& p2);
 double bilinearIntPol(const Coords& p, Mat image);
 
 
@@ -30,7 +29,6 @@ int main(int argc, char *argv[])
    int degree = atoi(argv[2]);
    printf("Image has been %d degrees rotated", degree);
    printf("\n");
-
 
    // get rotated Image
    Mat rotatedForward = forward(sourceImage, degree);
@@ -122,21 +120,20 @@ Mat forwardFitted(Mat image, int degree)
     int H, W;
     W = image.cols;
     H = image.rows;
-
-    // detect diagonal
-    struct Coords A = { image.cols - image.cols, image.rows - image.rows };
-    struct Coords O = { image.cols, image.rows };
-
-    double diagonal = Distance(A, O);
-    printf("distance : %fl\n", diagonal);
-
-    double theta = degree * (PI / 180);
-
     int centerX = W / 2;
     int centerY = H / 2;
 
-    int rotatedW = (int)diagonal;
-    int rotatedH = (int)diagonal;
+    double theta = -degree * (PI / 180);
+
+    if (degree > 90 && degree <= 180) degree = 180 - degree;
+    if (degree > 180 && degree <= 270) degree = 270 - degree;
+    if (degree > 270 && degree <= 360) degree = 360 - degree;
+
+    double deltaFunc = degree * (PI / 180);
+    double minusDeltaFunc = (90 - degree) * PI / 180;
+
+    int rotatedW = H * cos(minusDeltaFunc) + W * cos(deltaFunc);
+    int rotatedH = H * cos(deltaFunc) + W * cos(minusDeltaFunc);
     printf("rotated W X H = %d X %d\n", rotatedW, rotatedH);
 
     int rotatedCenterX = rotatedW / 2;
@@ -182,20 +179,21 @@ Mat backwardFitted(Mat image, int degree)
     W = image.cols;
     H = image.rows;
 
-    // detect diagonal line
-    struct Coords A = { image.cols - image.cols, image.rows - image.rows };
-    struct Coords O = { image.cols, image.rows };
-
-    double diagonal = Distance(A, O);
-    printf("distance : %fl\n", diagonal);
-
-    double theta = -degree * (PI / 180);
 
     int centerX = W / 2;
     int centerY = H / 2;
 
-    int rotatedW = (int)diagonal;
-    int rotatedH = (int)diagonal;
+    double theta = -degree * (PI / 180);
+    
+    if ( degree > 90 && degree <= 180) degree = 180 - degree;
+    if ( degree > 180 && degree <= 270) degree = 270 - degree;
+    if ( degree > 270 && degree <= 360) degree = 360 - degree;
+
+    double deltaFunc = degree * (PI / 180);
+    double minusDeltaFunc = (90 - degree) * PI / 180;
+
+    int rotatedW = H * cos(minusDeltaFunc) + W * cos(deltaFunc);
+    int rotatedH = H * cos(deltaFunc) + W * cos(minusDeltaFunc);
     printf("rotated W X H = %d X %d\n", rotatedW, rotatedH);
 
     int rotatedCenterX = rotatedW / 2;
@@ -225,29 +223,17 @@ Mat backwardFitted(Mat image, int degree)
             double newX = (cos(theta) * (x - rotatedCenterX) + sin(theta) * (y - rotatedCenterY) + rotatedCenterX);
             double newY = (-sin(theta) * (x - rotatedCenterX) + cos(theta) * (y - rotatedCenterY) + rotatedCenterY);
 
-            if (newX < 0 || newX >= rotatedW)  continue;
-            else if (newY < 0 || newY >= rotatedH)  continue;
+            if (newX < 0 || newX >= rotatedW - 1)  continue;
+            else if (newY < 0 || newY >= rotatedH - 1)  continue;
             Coords newXY;
             newXY.x = newX;
             newXY.y = newY;
-            double cc = bilinearIntPol(newXY, tempImage);
-            targetImage.at<uchar>(y, x) = (int)bilinearIntPol(newXY, tempImage);
+            targetImage.at<uchar>(y, x) = bilinearIntPol(newXY, tempImage);
             //targetImage.at<uchar>(y, x) = tempImage.at<uchar>((int)newY, (int)newX);
         }
     }
 
     return targetImage;
-}
-
-
-double Distance(const Coords& p1, const Coords& p2)
-{
-
-    double distance;
-
-    distance = sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
-
-    return distance;
 }
 
 double bilinearIntPol(const Coords& p, Mat image)
@@ -257,11 +243,9 @@ double bilinearIntPol(const Coords& p, Mat image)
     
     Coords A;
     A.x = (int)floor(p.x);
-    if (A.x < 0) A.x = 0;
-    if (A.x >= image.cols - 1) A.x = image.cols - 2;
+    //if (A.x >= image.cols - 1) A.x = image.cols - 2;
     A.y = (int)floor(p.y);
-    if (A.y < 0) A.y = 0;
-    if (A.y >= image.rows - 1) A.y = image.rows - 2;
+    //if (A.y >= image.rows - 1) A.y = image.rows - 2;
     Coords B;
     B.x = A.x;
     B.y = A.y + 1;
@@ -271,6 +255,20 @@ double bilinearIntPol(const Coords& p, Mat image)
     Coords D;
     D.x = A.x + 1;
     D.y = A.y + 1;
+
+    // left side ( A, C out)
+    // no prob
+
+    // right side ( B, D out)
+    // .y no prob but B.x out D.x out
+    if ( B.x > image.cols - 1 && D.x > image.cols - 1) return image.at<uchar>(mu * C.y + (1 - mu) * A.y, mu * C.x + (1 - mu) * A.x);
+    
+    // upper side ( A, B out)
+    // no prob
+    
+    // lower side ( C, D out)
+    // .x no prob but C.y out D.y out
+    if ( C.y > image.rows -1 && D.y > image.rows - 1) return image.at<uchar>(mu * B.y + (1 - mu) * A.y, mu * B.x + (1 - mu) * A.x);
 
     int pixelA = image.at<uchar>(A.y, A.x);
     int pixelB = image.at<uchar>(B.y, B.x);
