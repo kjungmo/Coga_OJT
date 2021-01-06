@@ -9,13 +9,13 @@
 using namespace cv;
 using namespace std;
 
-// Global Variables
-const int rotationSliderMax = 360;
-double x, y;
-int sliderValue = 0;
-
-// Matrices to store images
-Mat srcImage, tgtImage;
+//// Global Variables
+//const int rotationSliderMax = 360;
+//double x, y;
+//int sliderValue = 0;
+//
+//// Matrices to store images
+//Mat srcImage, tgtImage;
 
 struct Coords{
     double x = 0.0;
@@ -31,7 +31,7 @@ Mat forwardFitted(Mat image, int degree);
 Mat backwardFitted(Mat image, int degree);
 double bilinearIntPol(const Coords& p, Mat image);
 Length getImageSize(Mat image, int degree);
-void onTrackbar(int, void*);
+//void onTrackbar(int, void*);
 
 int main(int argc, char *argv[])
 {
@@ -50,12 +50,12 @@ int main(int argc, char *argv[])
    Mat rotateBwdFit = backwardFitted(sourceImage, degree);
 
    imshow("source Image", sourceImage);
-   imshow("[FORWARD]rotated Image", rotatedForward);
+   //imshow("[FORWARD]rotated Image", rotatedForward);
    imshow("[BACKWARD]rotated Image", rotatedBackward);
-   imshow("[fwdFIT]rotated Image", rotateFwdFit);
+   //imshow("[fwdFIT]rotated Image", rotateFwdFit);
    imshow("[bwdFIT]rotated Image", rotateBwdFit);
    
-   srcImage = imread(argv[1], IMREAD_GRAYSCALE);
+   /*srcImage = imread(argv[1], IMREAD_GRAYSCALE);
    if (!srcImage.data)
    {
        printf("Error loading source Image \n");
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
    imshow("original", srcImage);
 
    createTrackbar("TbarRotation", "Rotated Image Trackbar", &sliderValue, rotationSliderMax, onTrackbar);
-   onTrackbar(sliderValue, 0);
+   onTrackbar(sliderValue, 0);*/
 
     waitKey(0);
     return 0;
@@ -92,8 +92,8 @@ Mat forward(Mat image, int degree)
         for (int y = 0; y < targetImage.rows; y++)
         {
 
-            int newX = (int)(cos(theta) * (x - centerX) + sin(theta) * (y - centerY) + centerX);
-            int newY = (int)(-sin(theta) * (x - centerX) + cos(theta) * (y - centerY) + centerY);
+            int newX = cos(theta) * (x - centerX) + sin(theta) * (y - centerY) + centerX;
+            int newY = -sin(theta) * (x - centerX) + cos(theta) * (y - centerY) + centerY;
 
             if (newX < 0 || newX >= image.cols) continue;
             if (newY < 0 || newY >= image.rows) continue;
@@ -124,8 +124,8 @@ Mat backward(Mat image, int degree)
         for (int y = 0; y < targetImage.rows; y++)
         {
 
-            int newX = (int)(cos(theta) * (x - centerX) + sin(theta) * (y - centerY) + centerX);
-            int newY = (int)(-sin(theta) * (x - centerX) + cos(theta) * (y - centerY) + centerY);
+            int newX = cos(theta) * (x - centerX) + sin(theta) * (y - centerY) + centerX;
+            int newY = -sin(theta) * (x - centerX) + cos(theta) * (y - centerY) + centerY;
 
             if (newX < 0 || newX >= image.cols) continue;
             if (newY < 0 || newY >= image.rows) continue;
@@ -175,8 +175,8 @@ Mat forwardFitted(Mat image, int degree)
         for (int y = 0; y < targetImage.rows; y++)
         {
             
-            int newX = (int)(cos(theta) * (x - rotatedCenterX) + sin(theta) * (y - rotatedCenterY) + rotatedCenterX);
-            int newY = (int)(-sin(theta) * (x - rotatedCenterX) + cos(theta) * (y - rotatedCenterY) + rotatedCenterY);
+            int newX = cos(theta) * (x - rotatedCenterX) + sin(theta) * (y - rotatedCenterY) + rotatedCenterX;
+            int newY = -sin(theta) * (x - rotatedCenterX) + cos(theta) * (y - rotatedCenterY) + rotatedCenterY;
             
             if(newX < 0 || newX > rotated.w - 1)  continue;
             else if(newY < 0 || newY > rotated.h - 1)  continue;
@@ -202,6 +202,7 @@ Mat backwardFitted(Mat image, int degree)
     Length rotated = getImageSize(image, degree);
     printf("rotated W X H = %d X %d\n", rotated.w, rotated.h);
 
+
     int rotatedCenterX = rotated.w / 2;
     int rotatedCenterY = rotated.h / 2;
 
@@ -226,8 +227,8 @@ Mat backwardFitted(Mat image, int degree)
         for (int y = 0; y < targetImage.rows; y++)
         {
         
-            double newX = (cos(theta) * (x - rotatedCenterX) + sin(theta) * (y - rotatedCenterY) + rotatedCenterX);
-            double newY = (-sin(theta) * (x - rotatedCenterX) + cos(theta) * (y - rotatedCenterY) + rotatedCenterY);
+            double newX = cos(theta) * (x - rotatedCenterX) + sin(theta) * (y - rotatedCenterY) + rotatedCenterX;
+            double newY = -sin(theta) * (x - rotatedCenterX) + cos(theta) * (y - rotatedCenterY) + rotatedCenterY;
 
             if (newX < 0 || newX > rotated.w - 1)  continue;
             else if (newY < 0 || newY > rotated.h - 1)  continue;
@@ -264,11 +265,11 @@ double bilinearIntPol(const Coords& p, Mat image)
     
     // right side ( B, D out)
     // B.x out D.x out
-    if ( B.x > image.cols - 1 ) return (int)lambda * image.at<uchar>(C.y, C.x) + (int)(1 - lambda) * image.at<uchar>(A.y, A.x);
+    if ( B.x > image.cols - 1 ) return lambda * image.at<uchar>(C.y, C.x) + (1 - lambda) * image.at<uchar>(A.y, A.x);
     
     // lower side ( C, D out)
     // C.y out D.y out
-    if ( C.y > image.rows -1 ) return (int)mu * image.at<uchar>(B.y, B.x) + (int)(1 - mu) * image.at<uchar>(A.y, A.x);
+    if ( C.y > image.rows -1 ) return mu * image.at<uchar>(B.y, B.x) + (1 - mu) * image.at<uchar>(A.y, A.x);
 
     int pixelA = image.at<uchar>(A.y, A.x);
     int pixelB = image.at<uchar>(B.y, B.x);
@@ -278,82 +279,46 @@ double bilinearIntPol(const Coords& p, Mat image)
     double pixelE = mu * pixelB + (1 - mu) * pixelA;
     double pixelF = mu * pixelD + (1 - mu) * pixelC;
 
-    int pixelN = lambda * pixelF + (1 - lambda) * pixelE;
+    double pixelN = lambda * pixelF + (1 - lambda) * pixelE;
 
     return pixelN;
 }
 
-Length getImageSize(Mat image,int degree)
+Length getImageSize(Mat image, int degree)
 {
-    int W, H;
-    W = image.cols;
-    H = image.rows;
-     
-    double centerX = W / 2;
-    double centerY = H / 2;
-    
-    Coords A;
-    A.x = 0;
-    A.y = 0;
-    Coords B;
-    B.x = 0;
-    B.y = image.rows - 1;
-    Coords C;
-    C.x = image.cols - 1;
-    C.y = 0;
-    Coords D;
-    D.x = image.cols - 1;
-    D.y = image.rows - 1;
+    int height = image.rows;
+    int width = image.cols;
 
-    double theta = degree * (PI / 180);
+    double absCos = abs(cos(degree * PI / 180));
+    double absSin = abs(sin(degree * PI / 180));
 
-    int newAX = cos(theta) * (A.x - centerX) + sin(theta) * (A.y - centerY) + centerX;
-    int newAY = -sin(theta) * (A.x - centerX) + cos(theta) * (A.y - centerY) + centerY;
-    int newBX = cos(theta) * (B.x - centerX) + sin(theta) * (B.y - centerY) + centerX;
-    int newBY = -sin(theta) * (B.x - centerX) + cos(theta) * (B.y - centerY) + centerY;
-    int newCX = cos(theta) * (C.x - centerX) + sin(theta) * (C.y - centerY) + centerX;
-    int newCY = -sin(theta) * (C.x - centerX) + cos(theta) * (C.y - centerY) + centerY;
-    int newDX = cos(theta) * (D.x - centerX) + sin(theta) * (D.y - centerY) + centerX;
-    int newDY = -sin(theta) * (D.x - centerX) + cos(theta) * (D.y - centerY) + centerY;
+    int boundW = int(height * absSin + width * absCos);
+    int boundH = int(height * absCos + width * absSin);
 
-
-    int maxX = MAX(MAX(newAX, newBX), MAX(newCX, newDX));
-    int minX = MIN(MIN(newAX, newBX), MIN(newCX, newDX));
-    int maxY = MAX(MAX(newAY, newBY), MAX(newCY, newDY));
-    int minY = MIN(MIN(newAY, newBY), MIN(newCY, newDY));
-
-    double newWidth = maxX - minX;
-    double newHeight = maxY - minY;
     Length newOne;
-    newOne.w = newWidth + 1;
-    newOne.h = newHeight + 1;
-    
-    if (degree % 90 == 0)
-    {
-        newOne.w ++;
-        newOne.h ++;
-    }
-
+    newOne.w = boundW;
+    newOne.h = boundH;
     return newOne;
+    
 }
 
-void onTrackbar(int value, void* param)
-{
-    tgtImage = Mat::zeros(srcImage.rows, srcImage.cols, CV_8UC1);
-    for (double i = 0; i < srcImage.cols; i++)
-    {
-        for (double j = 0; j < srcImage.rows; j++)
-        {
-            x = ((i - srcImage.cols / 2) * cos(sliderValue * PI / 180) - (j - srcImage.rows / 2)*sin(sliderValue*PI / 180) + srcImage.cols / 2);
-            y = ((i - srcImage.cols / 2) * sin(sliderValue * PI / 180) + (j - srcImage.rows / 2)*cos(sliderValue*PI / 180) + srcImage.rows / 2);
-            if ((x >= 0 && x < srcImage.cols) && (y >= 0 && y < srcImage.rows))
-            {
-                uchar color1 = srcImage.at<uchar>(Point(i, j));
-                uchar color2 = tgtImage.at<uchar>(Point(i, j));
-                color2 = color1;
-                tgtImage.at<uchar>(Point(x,y)) = color2;
-            }
-        }
-    }
-    imshow("rotated IMAGE", tgtImage);
-}
+//void onTrackbar(int value, void* param)
+//{
+//    tgtImage = Mat::zeros(srcImage.rows, srcImage.cols, CV_8UC1);
+//    for (double i = 0; i < srcImage.cols; i++)
+//    {
+//        for (double j = 0; j < srcImage.rows; j++)
+//        {
+//            x = ((i - srcImage.cols / 2) * cos(sliderValue * PI / 180) - (j - srcImage.rows / 2)*sin(sliderValue*PI / 180) + srcImage.cols / 2);
+//            y = ((i - srcImage.cols / 2) * sin(sliderValue * PI / 180) + (j - srcImage.rows / 2)*cos(sliderValue*PI / 180) + srcImage.rows / 2);
+//            if ((x >= 0 && x < srcImage.cols) && (y >= 0 && y < srcImage.rows))
+//            {
+//                uchar color1 = srcImage.at<uchar>(Point(i, j));
+//                uchar color2 = tgtImage.at<uchar>(Point(i, j));
+//                color2 = color1;
+//                tgtImage.at<uchar>(Point(x,y)) = color2;
+//            }
+//        }
+//    }
+//    imshow("rotated IMAGE", tgtImage);
+//}
