@@ -1,21 +1,14 @@
 #include "opencv2/opencv.hpp"
 #include <iostream>
-#include <math.h>
 #include <cmath>
-#include <opencv2/highgui/highgui.hpp>
+
 
 #define PI 3.1415926535897
 
+
+
 using namespace cv;
 using namespace std;
-
-//// Global Variables
-//const int rotationSliderMax = 360;
-//double x, y;
-//int sliderValue = 0;
-//
-//// Matrices to store images
-//Mat srcImage, tgtImage;
 
 struct Coords{
     double x = 0.0;
@@ -25,49 +18,54 @@ struct Length {
     int w;
     int h;
 };
+
 Mat forward(Mat image, int degree);
 Mat backward(Mat image, int degree);
 Mat forwardFitted(Mat image, int degree);
 Mat backwardFitted(Mat image, int degree);
+Mat rotated90(Mat image);
+Mat rotated180(Mat image);
+Mat rotated270(Mat image);
+
+
 double bilinearIntPol(const Coords& p, Mat image);
 Length getImageSize(Mat image, int degree);
-//void onTrackbar(int, void*);
+
+
 
 int main(int argc, char *argv[])
 {
     // read image
-    Mat sourceImage = imread(argv[1], IMREAD_GRAYSCALE); // check release or debug
-   
-   // get degrees
-   int degree = atoi(argv[2]);
-   printf("Image has been %d degrees rotated", degree);
-   printf("\n");
+    Mat sourceImage = imread(argv[1], IMREAD_GRAYSCALE);
+    if (!sourceImage.data) 
+    {
+        printf("No Image Error\n");
+        return -1;
+    }
 
-   // get rotated Image
-   Mat rotatedForward = forward(sourceImage, degree);
-   Mat rotatedBackward = backward(sourceImage, degree);
-   Mat rotateFwdFit = forwardFitted(sourceImage, degree);
-   Mat rotateBwdFit = backwardFitted(sourceImage, degree);
+    // get degrees
+    if (!argv[2])
+    {
+        printf("No degrees typed in\n");
+        return -1;
+    }
+    int degree = atoi(argv[2]);
+    
+    printf("Image has been %d degrees rotated", degree);
+    printf("\n");
 
-   imshow("source Image", sourceImage);
-   //imshow("[FORWARD]rotated Image", rotatedForward);
-   imshow("[BACKWARD]rotated Image", rotatedBackward);
-   //imshow("[fwdFIT]rotated Image", rotateFwdFit);
-   imshow("[bwdFIT]rotated Image", rotateBwdFit);
-   
-   /*srcImage = imread(argv[1], IMREAD_GRAYSCALE);
-   if (!srcImage.data)
-   {
-       printf("Error loading source Image \n");
-       return -1;
-   }
+    // get rotated Image
+    Mat rotatedForward = forward(sourceImage, degree);
+    Mat rotatedBackward = backward(sourceImage, degree);
+    Mat rotateFwdFit = forwardFitted(sourceImage, degree);
+    Mat rotateBwdFit = backwardFitted(sourceImage, degree);
 
-   namedWindow("Rotated Image Trackbar", WINDOW_AUTOSIZE);
-   namedWindow("Original Image Trackbar", WINDOW_AUTOSIZE);
-   imshow("original", srcImage);
+    imshow("source Image", sourceImage);
+    imshow("[FORWARD]rotated Image", rotatedForward);
+    imshow("[BACKWARD]rotated Image", rotatedBackward);
+    imshow("[fwdFIT]rotated Image", rotateFwdFit);
+    imshow("[bwdFIT]rotated Image", rotateBwdFit);
 
-   createTrackbar("TbarRotation", "Rotated Image Trackbar", &sliderValue, rotationSliderMax, onTrackbar);
-   onTrackbar(sliderValue, 0);*/
 
     waitKey(0);
     return 0;
@@ -83,7 +81,26 @@ Mat forward(Mat image, int degree)
     int centerY = H / 2;
 
     double theta = degree * (PI / 180);
-    
+    if (degree % 90 == 0)
+    {
+        if (degree == 360)
+        {
+            theta = 0;
+        }
+        else if (degree == 90)
+        {
+            return rotated90(image);
+        }
+        else if (degree == 270)
+        {
+            return rotated270(image);
+        }
+        else
+        {
+            return rotated180(image);
+        }
+    }
+
     Mat targetImage;
     targetImage = Mat::zeros(image.rows, image.cols, CV_8UC1);
 
@@ -115,6 +132,25 @@ Mat backward(Mat image, int degree)
     int centerY = H / 2;
 
     double theta = -degree * (PI / 180);
+    if (degree % 90 == 0)
+    {
+        if (degree == 360)
+        {
+            theta = 0;
+        }
+        else if (degree == 90)
+        {
+            return rotated90(image);
+        }
+        else if (degree == 270)
+        {
+            return rotated270(image);
+        }
+        else
+        {
+            return rotated180(image);
+        }
+    }
 
     Mat targetImage;
     targetImage = Mat::zeros(image.rows, image.cols, CV_8UC1);
@@ -147,6 +183,25 @@ Mat forwardFitted(Mat image, int degree)
     int centerY = H / 2;
 
     double theta = degree * (PI / 180);
+    if (degree % 90 == 0)
+    {
+        if (degree == 360)
+        {
+            theta = 0;
+        }
+        else if (degree == 90)
+        {
+            return rotated90(image);
+        }
+        else if (degree == 270)
+        {
+            return rotated270(image);
+        }
+        else
+        {
+            return rotated180(image);
+        }
+    }
 
     Length rotated = getImageSize(image, degree);
     printf("rotated W X H = %d X %d\n", rotated.w, rotated.h);
@@ -166,7 +221,7 @@ Mat forwardFitted(Mat image, int degree)
     {
         for (int j = 0; j < H; j++)
         {
-            tempImage.at<char>(j + movedCenterX, i + movedCenterY) = image.at<uchar>(j, i);
+            tempImage.at<char>(j + movedCenterY, i + movedCenterX) = image.at<uchar>(j, i);
         }
     }
     
@@ -198,7 +253,26 @@ Mat backwardFitted(Mat image, int degree)
     int centerY = H / 2;
     
     double theta = -degree * (PI / 180);
-   
+    if (degree % 90 == 0)
+    {
+        if (degree == 360)
+        {
+            theta = 0;
+        }
+        else if (degree == 90)
+        {
+            return rotated90(image);
+        }
+        else if (degree == 270)
+        {
+            return rotated270(image);
+        }
+        else
+        {
+            return rotated180(image);
+        }
+    }
+
     Length rotated = getImageSize(image, degree);
     printf("rotated W X H = %d X %d\n", rotated.w, rotated.h);
 
@@ -218,7 +292,7 @@ Mat backwardFitted(Mat image, int degree)
     {
         for (int j = 0; j < H; j++)
         {
-            tempImage.at<char>(j + movedCenterX, i + movedCenterY) = image.at<uchar>(j, i);
+            tempImage.at<char>(j + movedCenterY, i + movedCenterX) = image.at<uchar>(j, i);
         }
     }
 
@@ -240,6 +314,54 @@ Mat backwardFitted(Mat image, int degree)
     }
 
     return targetImage;
+}
+
+Mat rotated90(Mat image) 
+{
+    Mat rotated90(Size(image.cols, image.rows), CV_8UC1);
+
+    for (int j = 0; j < image.rows; j++)
+    {
+        for (int i = 0; i < image.cols; i++)
+        {
+            rotated90.at<uchar>(i, image.rows - 1 - j) = image.at<uchar>(j, i);
+
+
+        }
+    }
+    return rotated90;
+}
+
+Mat rotated180(Mat image)
+{
+    Mat rotated180(Size(image.cols, image.rows), CV_8UC1);
+
+    for (int j = 0; j < image.rows; j++)
+    {
+        for (int i = 0; i < image.cols; i++)
+        {
+            rotated180.at<uchar>(image.rows - 1 - j, image.cols - 1 - i) = image.at<uchar>(j, i);
+
+
+        }
+    }
+    return rotated180;
+}
+
+Mat rotated270(Mat image)
+{
+    Mat rotated270(Size(image.cols, image.rows), CV_8UC1);
+
+    for (int j = 0; j < image.rows; j++)
+    {
+        for (int i = 0; i < image.cols; i++)
+        {
+            rotated270.at<uchar>(image.rows - 1 - i, j) = image.at<uchar>(j, i);
+
+
+        }
+    }
+    return rotated270;
 }
 
 double bilinearIntPol(const Coords& p, Mat image)
@@ -298,27 +420,7 @@ Length getImageSize(Mat image, int degree)
     Length newOne;
     newOne.w = boundW;
     newOne.h = boundH;
-    return newOne;
     
+    return newOne;
 }
 
-//void onTrackbar(int value, void* param)
-//{
-//    tgtImage = Mat::zeros(srcImage.rows, srcImage.cols, CV_8UC1);
-//    for (double i = 0; i < srcImage.cols; i++)
-//    {
-//        for (double j = 0; j < srcImage.rows; j++)
-//        {
-//            x = ((i - srcImage.cols / 2) * cos(sliderValue * PI / 180) - (j - srcImage.rows / 2)*sin(sliderValue*PI / 180) + srcImage.cols / 2);
-//            y = ((i - srcImage.cols / 2) * sin(sliderValue * PI / 180) + (j - srcImage.rows / 2)*cos(sliderValue*PI / 180) + srcImage.rows / 2);
-//            if ((x >= 0 && x < srcImage.cols) && (y >= 0 && y < srcImage.rows))
-//            {
-//                uchar color1 = srcImage.at<uchar>(Point(i, j));
-//                uchar color2 = tgtImage.at<uchar>(Point(i, j));
-//                color2 = color1;
-//                tgtImage.at<uchar>(Point(x,y)) = color2;
-//            }
-//        }
-//    }
-//    imshow("rotated IMAGE", tgtImage);
-//}
