@@ -26,11 +26,8 @@ Mat backwardFitted(Mat image, int degree);
 Mat rotated90(Mat image);
 Mat rotated180(Mat image);
 Mat rotated270(Mat image);
-
-
 double bilinearIntPol(const Coords& p, Mat image);
 Length getImageSize(Mat image, int degree);
-
 
 
 int main(int argc, char *argv[])
