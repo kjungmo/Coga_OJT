@@ -114,8 +114,8 @@ Mat multiplyConv(Mat image, Mat paddedImage, MatrixValues kernel, int strides, c
         convImage = Mat::zeros(Size(image.cols - kernel.col - 1, image.rows - kernel.col - 1), CV_8UC1);
         
         argv = _strupr(argv);
-        //printf("valid rows X cols : %d X %d\n", convImage.rows, convImage.cols);
-        //printf("%s\n", argv);
+        printf("valid rows x cols : %d x %d\n", convImage.rows, convImage.cols);
+        //printf("%s\n", argv);d
         for (int i = 0; i < convImage.cols; i += strides)
         {
             for (int j = 0; j < convImage.rows; j += strides)
