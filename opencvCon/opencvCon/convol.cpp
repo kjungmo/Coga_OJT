@@ -11,18 +11,18 @@ typedef struct MatrixValues {
     int *mat;
 }MatrixValues;
 
-enum paddingMode
+typedef enum PaddingMode
 {
-    same = 5,
-    valid = 7
-};
+    same = 100,
+    valid = 200
+} PaddingMode;
 
 using namespace cv;
 using namespace std;
 
 MatrixValues createKernel(char *file);
-Mat applyPadding(Mat srcimage, char *padding, MatrixValues kernel);
-Mat multiplyConv(Mat image, Mat paddedImage, MatrixValues kernel, int strides, char *argv);
+Mat applyPadding(Mat srcimage, int padding, MatrixValues kernel);
+Mat multiplyConv(Mat image, Mat paddedImage, MatrixValues kernel, int strides, int padding);
 
 
 int main(int argc, char *argv[])
@@ -34,16 +34,28 @@ int main(int argc, char *argv[])
         printf("Image read ERROR\n");
         exit(0);
     }
+
+    PaddingMode padding;
+    if ((_stricmp(argv[4], "VALID") == 0))
+    {
+        padding = valid;
+    }
+    else if ((_stricmp(argv[4], "SAME") == 0))
+    {
+        padding = same;
+    }
+    printf("padding : %d\n", padding);
+
     // create kernel
     MatrixValues kernel;
     kernel = createKernel(argv[2]);
 
     // padding applyment
-    Mat padded = applyPadding(srcImage, argv[4], kernel);
+    Mat padded = applyPadding(srcImage, padding, kernel);
     
     // convolution multiplication
     int strides = atoi(argv[3]);
-    Mat conved = multiplyConv(srcImage, padded, kernel, strides, argv[4]);
+    Mat conved = multiplyConv(srcImage, padded, kernel, strides, padding);
 
     imshow("conved", conved);
     waitKey();
@@ -76,10 +88,10 @@ MatrixValues createKernel(char *file)
     return kernel;
 }
 
-Mat applyPadding(Mat image, char *argv, MatrixValues kernel)
+Mat applyPadding(Mat image, int padding, MatrixValues kernel)
 {
 
-    if ((_stricmp(argv, "VALID")) == 0)
+    if (padding == 200)
     {
         return image;
     }
@@ -90,7 +102,7 @@ Mat applyPadding(Mat image, char *argv, MatrixValues kernel)
         int paddCol = kernel.col / 2;
         paddedImage.rows = image.rows + kernel.row - 1;
         paddedImage.cols = image.cols + kernel.col - 1;
-        printf("padded rows X cols : %d X %d\n", paddedImage.rows, paddedImage.cols);
+        //printf("padded rows X cols : %d X %d\n", paddedImage.rows, paddedImage.cols);
         paddedImage = Mat::zeros(paddedImage.rows, paddedImage.cols, CV_8UC1);
         for (int i = 0; i < image.rows; i++)
         {
@@ -100,29 +112,25 @@ Mat applyPadding(Mat image, char *argv, MatrixValues kernel)
             }
         }
 
-        argv = _strupr(argv);
-        printf("%s\n", argv);
-
-
         return paddedImage;
     }
 
 }
 
-Mat multiplyConv(Mat image, Mat paddedImage, MatrixValues kernel, int strides, char *argv)
+Mat multiplyConv(Mat image, Mat paddedImage, MatrixValues kernel, int strides, int padding)
 {
     Mat convImage;
     Mat paddOrNot;
 
-    if ((_stricmp(argv, "VALID")) == 0)
+    if (padding == 200)
     {
         convImage = Mat::zeros(Size(image.cols - (kernel.col - 1), image.rows - (kernel.col - 1)), CV_8UC1);
-        paddOrNot = applyPadding(image, argv,kernel);
+        paddOrNot = applyPadding(image, padding, kernel);
     }
     else // same
     {
         convImage = Mat::zeros(Size(image.cols, image.rows), CV_8UC1);
-        paddOrNot = applyPadding(image, argv, kernel);
+        paddOrNot = applyPadding(image, padding, kernel);
     }
 
     // convolution multiplication
