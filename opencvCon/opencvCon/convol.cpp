@@ -150,11 +150,9 @@ Mat multiplyConv(Mat image, MatrixValues kernel, int strides, PaddingMode paddin
                 }
             }
 
-            if (convValue < 0)
-            {
-                convValue = abs(convValue);
-            }
-            else if ( convValue > 255) convValue -= 255;
+            if (convValue < 0) convValue = abs(convValue);
+ 
+            else if ( convValue > 255) convValue = 255;
 
             convImage.at<uchar>(i, j) = convValue;
         }
