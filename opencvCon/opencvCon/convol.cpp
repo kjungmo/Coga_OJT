@@ -38,8 +38,6 @@ int main(int argc, char *argv[])
     imshow("conved", conved);
     waitKey();
     return 0;
-
-
 }
 
 
@@ -80,11 +78,11 @@ Mat applyPadding(Mat image, char *argv, MatrixValues kernel)
         paddedImage.cols = image.cols + kernel.col - 1;
         printf("padd rows X cols : %d X %d\n", paddedImage.rows, paddedImage.cols);
         paddedImage = Mat::zeros(paddedImage.rows, paddedImage.cols, CV_8UC1);
-        for (int i = 0; i < image.cols; i++)
+        for (int i = 0; i < image.rows; i++)
         {
-            for (int j = 0; j < image.rows; j++)
+            for (int j = 0; j < image.cols; j++)
             {
-                paddedImage.at<uchar>(j + paddRow, i + paddCol) = image.at<uchar>(j, i);
+                paddedImage.at<uchar>(i + paddRow, j + paddCol) = image.at<uchar>(i, j);
             }
         }
 
@@ -97,8 +95,6 @@ Mat applyPadding(Mat image, char *argv, MatrixValues kernel)
     if ((_stricmp(argv, "VALID")) == 0)
     {
         argv = _strupr(argv);
-        //printf("valid rows X cols : %d X %d\n", image.rows, image.cols);
-        //printf("%s\n", argv);
         return image;
     }
 }
@@ -116,42 +112,40 @@ Mat multiplyConv(Mat image, Mat paddedImage, MatrixValues kernel, int strides, c
         argv = _strupr(argv);
         printf("valid rows x cols : %d x %d\n", convImage.rows, convImage.cols);
         //printf("%s\n", argv);d
-        for (int i = 0; i < convImage.cols; i += strides)
+        for (int i = 0; i < convImage.rows; i += strides)
         {
-            for (int j = 0; j < convImage.rows; j += strides)
+            for (int j = 0; j < convImage.cols; j += strides)
             {
                 int convValue = 0;
-                for (int k = 0; k < kernel.col; k++)
+                for (int k = 0; k < kernel.row; k++)
                 {
-                    for (int l = 0; l < kernel.row; l++)
+                    for (int l = 0; l < kernel.col; l++)
                     {
-                        convValue += image.at<uchar>(j + l, i + k) * (kernel.mat[l + k * kernel.col]);
+                        convValue += image.at<uchar>(i + k, j + l) * (kernel.mat[k + l * kernel.row]);
                     }
                 }
-                convImage.at<uchar>(j, i) = convValue;
+                convImage.at<uchar>(i, j) = convValue;
             }
         }
-
-
 
         return convImage;
     }
 
 
     convImage = Mat::zeros(Size(paddedImage.cols, paddedImage.rows), CV_8UC1);
-    for (int i = 0; i < image.cols; i += strides)
+    for (int i = 0; i < image.rows; i += strides)
     {
-        for (int j = 0; j < image.rows; j+= strides)
+        for (int j = 0; j < image.cols; j+= strides)
         {
             int convValue = 0;
-            for (int k = 0; k < kernel.col; k++)
+            for (int k = 0; k < kernel.row; k++)
             {
-                for (int l = 0; l < kernel.row; l++)
+                for (int l = 0; l < kernel.col; l++)
                 {
-                    convValue += paddedImage.at<uchar>(j + l, i + k) * (kernel.mat[l + k * kernel.col]);
+                    convValue += paddedImage.at<uchar>(i + k, j + l) * (kernel.mat[k + l * kernel.row]);
                 }
             }
-            convImage.at<uchar>(j, i) = convValue;
+            convImage.at<uchar>(i, j) = convValue;
         }
     }
 
