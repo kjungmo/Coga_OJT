@@ -2,19 +2,19 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// 어셈블리에 대한 일반 정보는 다음 특성 집합을 통해 제어됩니다. 
-// 어셈블리와 연결된 정보를 수정하려면
-// 이러한 특성 값을 변경하십시오.
-[assembly: AssemblyTitle("Save the Humans.Windows")]
+// 어셈블리의 일반 정보는 다음 특성 집합을 통해 
+// 제어됩니다. 어셈블리와 관련된 정보를 수정하려면
+// 이 특성 값을 변경하십시오.
+[assembly: AssemblyTitle("Save the Humans")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Save the Humans.Windows")]
+[assembly: AssemblyProduct("Save the Humans")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// 어셈블리에 대한 버전 정보는 다음 네 개의 값으로 구성됩니다.
+// 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
 //
 //      주 버전
 //      부 버전 

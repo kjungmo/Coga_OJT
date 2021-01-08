@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
 
-  <Identity Name="ef85f3d4-08fb-445d-adcf-ae60c6a17684"
+  <Identity Name="e83187c0-ac9a-4f62-8602-9f812ed46171"
             Publisher="CN=kangj"
             Version="1.0.0.0" />
 
   <Properties>
-    <DisplayName>Save the Humans.Windows</DisplayName>
+    <DisplayName>Save the Humans</DisplayName>
     <PublisherDisplayName>kangj</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -23,12 +23,12 @@
   <Applications>
     <Application Id="App"
         Executable="$targetnametoken$.exe"
-        EntryPoint="Save_the_Humans.Windows.App">
+        EntryPoint="Save_the_Humans.App">
         <m2:VisualElements
-            DisplayName="Save the Humans.Windows"
+            DisplayName="Save the Humans"
             Square150x150Logo="Assets\Logo.png"
             Square30x30Logo="Assets\SmallLogo.png"
-            Description="Save the Humans.Windows"
+            Description="Save the Humans"
             ForegroundText="light"
             BackgroundColor="#464646">
             <m2:SplashScreen Image="Assets\SplashScreen.png" />
