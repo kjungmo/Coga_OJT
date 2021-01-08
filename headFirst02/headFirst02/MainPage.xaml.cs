@@ -48,7 +48,7 @@ namespace headFirst02
             result = "";
 
             bool yesNo = false;
-            bool anotherBool = VisualTreeHelper;
+            bool anotherBool = true;
             yesNo = !anotherBool;
         }
     }
