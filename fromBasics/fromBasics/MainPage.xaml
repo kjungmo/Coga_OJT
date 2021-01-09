@@ -9,19 +9,19 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="673*"/>
-            <ColumnDefinition Width="693*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="button1" Content="Show a message" HorizontalAlignment="Left" Margin="310,133,0,0" VerticalAlignment="Top" Click="button1_Click"/>
-        <Button x:Name="button2" Content="If/else" Grid.Column="1" HorizontalAlignment="Left" Margin="312,136,0,0" VerticalAlignment="Top" Click="button2_Click"/>
-        <Button x:Name="button3" Content="Another conditional test" HorizontalAlignment="Left" Margin="310,111,0,0" Grid.Row="1" VerticalAlignment="Top" Click="button3_Click"/>
-        <Button x:Name="button4" Content="A loop" Grid.Column="1" HorizontalAlignment="Left" Margin="312,133,0,0" Grid.Row="1" VerticalAlignment="Top" Click="Button_Click"/>
-        <TextBlock x:Name="myLabel" HorizontalAlignment="Left" Margin="663,106,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Style="{StaticResource BodyTextBlockStyle}"/>
+        <Button x:Name="button1" Content="Show a message" HorizontalAlignment="Center" Margin="157,114,154,104" Click="button1_Click"/>
+        <Button x:Name="button2" Content="If/else" Grid.Column="1" HorizontalAlignment="Center" Margin="312,124,295,94" Click="button2_Click"/>
+        <Button x:Name="button3" Content="Another conditional test" HorizontalAlignment="Center" Margin="219,116,268,102" Grid.Row="1"  Click="button3_Click"/>
+        <Button x:Name="button4" Content="A loop" Grid.Column="1" HorizontalAlignment="Center" Margin="331,126,273,92" Grid.Row="1"  Click="Button_Click"/>
+        <TextBlock x:Name="myLabel" HorizontalAlignment="Center" Margin="650,138,658,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Page>
