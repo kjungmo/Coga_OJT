@@ -29,9 +29,12 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Button changeText;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.enableCheckbox = new System.Windows.Forms.CheckBox();
             this.labelToChange = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             changeText = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // changeText
@@ -66,16 +69,27 @@
             this.labelToChange.Text = "Press the button to change my text";
             this.labelToChange.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(202, 1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 91);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.labelToChange);
             this.Controls.Add(this.enableCheckbox);
             this.Controls.Add(changeText);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -85,6 +99,7 @@
 
         private System.Windows.Forms.CheckBox enableCheckbox;
         private System.Windows.Forms.Label labelToChange;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
