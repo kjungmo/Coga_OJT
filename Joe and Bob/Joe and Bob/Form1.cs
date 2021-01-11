@@ -51,13 +51,13 @@ namespace Joe_and_Bob
 
         private void joeGivesToBob_Click(object sender, EventArgs e)
         {
-            joe.Cash -= bob.ReceiveCash(10);// bob.ReceiveCash(joe.GiveCash(10))
+            bob.ReceiveCash(joe.GiveCash(10)); // joe.Cash -= bob.ReceiveCash(10); created error, cash returns below zero
             UpdateForm();
         }
 
         private void bobGivesToJoe_Click(object sender, EventArgs e)
         {
-            bob.Cash -= joe.ReceiveCash(5); // joe.ReceiveCash(bob.GiveCash(5));
+            joe.ReceiveCash(bob.GiveCash(5)); // bob.Cash -= joe.ReceiveCash(5); created error, cash returns below zero
             UpdateForm();
         }
     }
