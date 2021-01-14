@@ -18,7 +18,7 @@ namespace WorkTheBee
 
         public bool assignWork(string job, int numberOfShifts)
         {
-            for (int i = 1; i < workers.Length; i++)
+            for (int i = 0; i < workers.Length; i++)
             {
                 if (workers[i].doThisJob(job, numberOfShifts))
                     return true;
