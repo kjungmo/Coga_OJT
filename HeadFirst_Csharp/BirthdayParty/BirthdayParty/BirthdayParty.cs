@@ -72,14 +72,28 @@ namespace BirthdayParty
         {
             get
             {
-                decimal totalCost = calculateCostOfDecorations();
-                totalCost += costOfFoodPerPerson * NumberOfPeople;
-                decimal cakeCost;
-                if (cakeSize() == 8)
-                    cakeCost = 40.00M + actualLength * .25M;
+                if (NumberOfPeople > 12 )
+                {
+                    decimal totalCost = calculateCostOfDecorations();
+                    totalCost += costOfFoodPerPerson * NumberOfPeople;
+                    decimal cakeCost;
+                    if (cakeSize() == 8)
+                        cakeCost = 40.00M + actualLength * .25M;
+                    else
+                        cakeCost = 75.00M + actualLength * .25M;
+                    return totalCost + cakeCost + 100.00M;
+                }
                 else
-                    cakeCost = 75.00M + actualLength * .25M;
-                return totalCost + cakeCost;
+                {
+                    decimal totalCost = calculateCostOfDecorations();
+                    totalCost += costOfFoodPerPerson * NumberOfPeople;
+                    decimal cakeCost;
+                    if (cakeSize() == 8)
+                        cakeCost = 40.00M + actualLength * .25M;
+                    else
+                        cakeCost = 75.00M + actualLength * .25M;
+                    return totalCost + cakeCost;
+                }
             }
 
         }

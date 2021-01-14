@@ -46,8 +46,8 @@ namespace BirthdayParty
 
         private void DisplayDinnerPartyCost()
         {
-            decimal Cost = dinnerParty.Cost;
-            costLabel.Text = Cost.ToString("f2");
+            decimal cost = dinnerParty.Cost;
+            costLabel.Text = "$" + cost.ToString("f2");
         }
 
         private void numberBirthday_ValueChanged(object sender, EventArgs e)
@@ -73,7 +73,7 @@ namespace BirthdayParty
         {
             tooLongLabel.Visible = birthdayParty.CakeWritingTooLong;
             decimal cost = birthdayParty.Cost;
-            birthdayCost.Text = cost.ToString("f2");
+            birthdayCost.Text = "$" + cost.ToString("f2");
         }
     }
 }

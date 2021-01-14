@@ -52,12 +52,25 @@ namespace BirthdayParty
         {
             get
             {
-                decimal totalCost = calculateCostOfDecorations() + ((costOfFoodPerPerson + calculateCostOfBeveragesPerPerson()) * NumberOfPeople);
-                if (HealthyOption)
+                if (NumberOfPeople > 12)
                 {
-                    totalCost = totalCost * .95M;
+                    decimal totalCost = calculateCostOfDecorations() + ((costOfFoodPerPerson + calculateCostOfBeveragesPerPerson()) * NumberOfPeople);
+                    if (HealthyOption)
+                    {
+                        totalCost = totalCost * .95M;
+                    }
+                    return totalCost + 100.00M;
                 }
-                return totalCost;
+                else
+                {
+                    decimal totalCost = calculateCostOfDecorations() + ((costOfFoodPerPerson + calculateCostOfBeveragesPerPerson()) * NumberOfPeople);
+                    if (HealthyOption)
+                    {
+                        totalCost = totalCost * .95M;
+                    }
+                    return totalCost;
+                }
+                
             }
         }
     }
