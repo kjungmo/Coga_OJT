@@ -12,6 +12,7 @@ namespace InterfaceTallGuy
 	{
             this.funnyThingIHave = funnyThingIHave;
 	}
+        protected string funnyThingIHave;
         public string FunnyThingIHave
         {
             get { return "Hi kids! I have " + funnyThingIHave; }
@@ -19,9 +20,8 @@ namespace InterfaceTallGuy
 
         public void honk()
         {
-            Console.WriteLine(this.funnyThingIHave); ;
+            Console.WriteLine(this.FunnyThingIHave); ;
         }
 
-        private string funnyThingIHave;
     }
 }

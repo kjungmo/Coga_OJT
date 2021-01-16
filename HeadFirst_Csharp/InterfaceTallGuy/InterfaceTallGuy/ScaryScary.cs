@@ -21,7 +21,7 @@ namespace InterfaceTallGuy
 
         public void scareLittleChildren()
         {
-            Console.WriteLine("Boo! Gotcha!");
+            Console.WriteLine("You can't have my " + base.funnyThingIHave);
         }
     }
 }
