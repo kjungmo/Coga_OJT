@@ -8,7 +8,13 @@ namespace HouseInterior
 {
     class RoomWithDoor : Room, IHasExteriorDoor
     {
-        // DoorLocation property
-        // read-only DoorDescription
+        public RoomWithDoor(string name, string decoration, string doorDescription) : base(name, decoration)
+        {
+            DoorDescription = doorDescription;
+        }
+
+        public Location DoorLocation { get; set; }
+        public string DoorDescription { get; private set; }
+
     }
 }

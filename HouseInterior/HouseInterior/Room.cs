@@ -19,7 +19,7 @@ namespace HouseInterior
         { 
             get
             {
-                return base.Description + " You see " + Decoration + ".";
+                return base.Description + " You see " + Decoration + " here.";
             }
         }
     }

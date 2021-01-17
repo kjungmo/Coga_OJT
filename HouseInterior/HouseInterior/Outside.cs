@@ -21,7 +21,7 @@ namespace HouseInterior
             {
                 string newDescription = base.Description;
                 if(hot)
-                    newDescription += " It's very hot";
+                    newDescription += " It's very hot.";
                 return newDescription;
             }
         }
