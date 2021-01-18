@@ -35,7 +35,6 @@ namespace ListDynamicSize
             shoeCloset.Add(thirdShoe);
             if(shoeCloset.Contains(firstShoe))
                 Console.WriteLine("That's surprising.");
-            
         }
     }
 }
