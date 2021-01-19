@@ -111,6 +111,7 @@
             0,
             0,
             0});
+            this.layers.ValueChanged += new System.EventHandler(this.layers_ValueChanged);
             // 
             // Form1
             // 

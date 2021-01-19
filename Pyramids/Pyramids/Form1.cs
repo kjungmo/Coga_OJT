@@ -27,18 +27,23 @@ namespace Pyramids
             printStars.Text = "";
             if ( shapes.Text == Shape.Rightsided.ToString())
             {
-                printStars.Text = pyramid.createPyramidRight((int)layers.Value);
+                printStars.Text = pyramid.createPyramidRight();
             }
 
             else if (shapes.Text == Shape.Centered.ToString())
             {
-                printStars.Text = pyramid.createPyramidCenter((int)layers.Value);
+                printStars.Text = pyramid.createPyramidCenter();
             }
 
             else
             {
-                printStars.Text = pyramid.createPyramidReverse((int)layers.Value);
+                printStars.Text = pyramid.createPyramidReverse();
             }
+        }
+
+        private void layers_ValueChanged(object sender, EventArgs e)
+        {
+            pyramid.LayersOfPyramid = (int)layers.Value;
         }
     }
 }

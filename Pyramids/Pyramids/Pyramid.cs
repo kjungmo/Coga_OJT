@@ -8,7 +8,7 @@ namespace Pyramids
 {
     class Pyramid
     {
-        public int LayersOfPyramid { get; private set; }
+        public int LayersOfPyramid { get; set; }
         public string ShapeOfPyramid { get; private set; }
 
         public Pyramid(int layersOfPyramid, string shapeOfPyramid)
@@ -17,11 +17,10 @@ namespace Pyramids
             ShapeOfPyramid = shapeOfPyramid;
         }
 
-        public string createPyramidRight(int layers)
+        public string createPyramidRight()
         {
             string answerPyramid = "";
-            int layersOfPyramid = layers;
-            for (int i = 0; i < layersOfPyramid; i++)
+            for (int i = 0; i < LayersOfPyramid; i++)
             {
                 for (int j = 0; j < i + 1; j++)
                 {
@@ -32,13 +31,12 @@ namespace Pyramids
             return answerPyramid;
         }
 
-        public string createPyramidCenter(int layers)
+        public string createPyramidCenter()
         {
             string answerPyramid = "";
-            int layersOfPyramid = layers;
-            for (int i = 0; i < layersOfPyramid; i++)
+            for (int i = 0; i < LayersOfPyramid; i++)
             {
-                for (int j = layersOfPyramid - 1; j > i; j--)
+                for (int j = LayersOfPyramid - 1; j > i; j--)
                 {
                     answerPyramid += " ";
                 }
@@ -52,18 +50,17 @@ namespace Pyramids
             return answerPyramid;
         }
 
-        public string createPyramidReverse(int layers)
+        public string createPyramidReverse()
         {
             string answerPyramid = "";
-            int layersOfPyramid = layers;
-            for (int i = 0; i < layersOfPyramid; i++)
+            for (int i = 0; i < LayersOfPyramid; i++)
             {
                 for (int j = 0; j < i; j++)
                 {
                     answerPyramid += " ";
                 }
 
-                for (int j = 2 * layersOfPyramid - 1; j > 2 * i; j--)
+                for (int j = 2 * LayersOfPyramid - 1; j > 2 * i; j--)
                 {
                     answerPyramid += "*";
                 }
