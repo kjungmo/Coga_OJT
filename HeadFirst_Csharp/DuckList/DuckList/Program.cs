@@ -46,7 +46,7 @@ namespace DuckList
         {
             foreach (Duck duck in ducks)
             {
-                Console.WriteLine(duck.size.ToString() + "-inch " + duck.kind.ToString());
+                Console.WriteLine(duck);
             }
             Console.WriteLine("End of Ducks!");
         }
