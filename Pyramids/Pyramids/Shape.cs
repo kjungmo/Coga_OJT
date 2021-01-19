@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pyramids
 {
-    enum Shape
+    public enum PyramidShape
     {
+        shapes,
         Rightsided,
         Centered,
         Reversed

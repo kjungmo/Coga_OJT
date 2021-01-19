@@ -63,14 +63,11 @@
             // 
             this.shapes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shapes.FormattingEnabled = true;
-            this.shapes.Items.AddRange(new object[] {
-            "Rightsided",
-            "Centered",
-            "Reversed"});
             this.shapes.Location = new System.Drawing.Point(269, 187);
             this.shapes.Name = "shapes";
             this.shapes.Size = new System.Drawing.Size(99, 20);
             this.shapes.TabIndex = 2;
+            this.shapes.SelectedIndexChanged += new System.EventHandler(this.shapes_SelectedIndexChanged);
             // 
             // label1
             // 

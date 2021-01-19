@@ -9,7 +9,7 @@ namespace Pyramids
     class Pyramid
     {
         public int LayersOfPyramid { get; set; }
-        public string ShapeOfPyramid { get; private set; }
+        public string ShapeOfPyramid { get; set; }
 
         public Pyramid(int layersOfPyramid, string shapeOfPyramid)
         {
@@ -17,7 +17,26 @@ namespace Pyramids
             ShapeOfPyramid = shapeOfPyramid;
         }
 
-        public string createPyramidRight()
+        public string CreateStarPyramid()
+        {
+
+            if (ShapeOfPyramid == PyramidShape.Rightsided.ToString())
+            {
+                return CreatePyramidRight();
+            }
+            else if (ShapeOfPyramid == PyramidShape.Centered.ToString())
+            {
+                return CreatePyramidCenter();
+            }
+            else if (ShapeOfPyramid == PyramidShape.Reversed.ToString())
+            {
+                return CreatePyramidReverse();
+            }
+            else
+                return " ";
+        }
+
+        public string CreatePyramidRight()
         {
             string answerPyramid = "";
             for (int i = 0; i < LayersOfPyramid; i++)
@@ -31,7 +50,7 @@ namespace Pyramids
             return answerPyramid;
         }
 
-        public string createPyramidCenter()
+        public string CreatePyramidCenter()
         {
             string answerPyramid = "";
             for (int i = 0; i < LayersOfPyramid; i++)
@@ -50,7 +69,7 @@ namespace Pyramids
             return answerPyramid;
         }
 
-        public string createPyramidReverse()
+        public string CreatePyramidReverse()
         {
             string answerPyramid = "";
             for (int i = 0; i < LayersOfPyramid; i++)
