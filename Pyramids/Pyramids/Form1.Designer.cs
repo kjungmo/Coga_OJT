@@ -64,7 +64,7 @@
             this.shapes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shapes.FormattingEnabled = true;
             this.shapes.Items.AddRange(new object[] {
-            "Right-sided",
+            "Rightsided",
             "Centered",
             "Reversed"});
             this.shapes.Location = new System.Drawing.Point(269, 187);

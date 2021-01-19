@@ -25,12 +25,12 @@ namespace Pyramids
         {
 
             printStars.Text = "";
-            if (shapes.Text == "Right-sided")
+            if ( shapes.Text == Shape.Rightsided.ToString())
             {
                 printStars.Text = pyramid.createPyramidRight((int)layers.Value);
             }
 
-            else if (shapes.Text == "Centered")
+            else if (shapes.Text == Shape.Centered.ToString())
             {
                 printStars.Text = pyramid.createPyramidCenter((int)layers.Value);
             }
