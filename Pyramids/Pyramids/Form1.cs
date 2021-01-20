@@ -14,12 +14,12 @@ namespace Pyramids
     {
         Pyramid pyramid;
 
-
         public Form1()
         {
             InitializeComponent();
-            pyramid = new Pyramid((int)layers.Value, shapes.Text);
-            this.shapes.DataSource = Enum.GetNames(typeof(PyramidShape));
+            pyramid = new Pyramid();
+            shapes.DataSource = Enum.GetNames(typeof(PyramidShape));
+
 
         }
 
@@ -38,7 +38,7 @@ namespace Pyramids
 
         private void shapes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pyramid.ShapeOfPyramid = shapes.Text;
+            pyramid.ShapeOfPyramid = (PyramidShape)Enum.Parse(typeof(PyramidShape), shapes.SelectedItem.ToString());
         }
     }
 }

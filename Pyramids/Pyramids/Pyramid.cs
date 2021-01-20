@@ -3,37 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Pyramids
 {
     class Pyramid
     {
         public int LayersOfPyramid { get; set; }
-        public string ShapeOfPyramid { get; set; }
+        public PyramidShape ShapeOfPyramid { get; set; }
 
-        public Pyramid(int layersOfPyramid, string shapeOfPyramid)
+        public Pyramid(int layersOfPyramid, PyramidShape shapeOfPyramid)
         {
             LayersOfPyramid = layersOfPyramid;
             ShapeOfPyramid = shapeOfPyramid;
         }
 
+        public Pyramid()
+        {
+
+        }
+
         public string CreateStarPyramid()
         {
 
-            if (ShapeOfPyramid == PyramidShape.Rightsided.ToString())
+            if (ShapeOfPyramid == PyramidShape.Rightsided)
             {
                 return CreatePyramidRight();
             }
-            else if (ShapeOfPyramid == PyramidShape.Centered.ToString())
+            else if (ShapeOfPyramid == PyramidShape.Centered)
             {
                 return CreatePyramidCenter();
             }
-            else if (ShapeOfPyramid == PyramidShape.Reversed.ToString())
+            else if (ShapeOfPyramid == PyramidShape.Reversed)
             {
                 return CreatePyramidReverse();
             }
             else
-                return " ";
+                return CreatePyramidShape();
         }
 
         public string CreatePyramidRight()
@@ -86,6 +92,13 @@ namespace Pyramids
 
                 answerPyramid += "\r\n";
             }
+            return answerPyramid;
+        }
+
+        public string CreatePyramidShape()
+        {
+            string answerPyramid = "";
+            MessageBox.Show("Choose the shape!");
             return answerPyramid;
         }
     }
