@@ -48,6 +48,7 @@
             this.listHand.Name = "listHand";
             this.listHand.Size = new System.Drawing.Size(192, 436);
             this.listHand.TabIndex = 0;
+            this.listHand.DoubleClick += new System.EventHandler(this.buttonAsk_Click);
             // 
             // textProgress
             // 
@@ -64,6 +65,7 @@
             this.textBooks.Multiline = true;
             this.textBooks.Name = "textBooks";
             this.textBooks.ReadOnly = true;
+            this.textBooks.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBooks.Size = new System.Drawing.Size(325, 125);
             this.textBooks.TabIndex = 2;
             // 
@@ -81,12 +83,10 @@
             // 
             // textName
             // 
-            this.textName.Enabled = false;
             this.textName.Location = new System.Drawing.Point(8, 26);
             this.textName.Name = "textName";
             this.textName.Size = new System.Drawing.Size(154, 21);
             this.textName.TabIndex = 4;
-            this.textName.Text = "Ed";
             // 
             // label1
             // 
@@ -126,7 +126,6 @@
             // 
             // buttonStart
             // 
-            this.buttonStart.Enabled = false;
             this.buttonStart.Location = new System.Drawing.Point(169, 25);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(162, 23);

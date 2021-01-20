@@ -70,7 +70,7 @@ namespace GoFish
             return CardNames;
         }
 
-        public void Sort()
+        public void SortByValue()
         {
             cards.Sort(new CardComparerByValue());
         }
@@ -98,7 +98,7 @@ namespace GoFish
         public Deck PullOutValues(Value value)
         {
             Deck deckToReturn = new Deck(new Card[] { });
-            for (int i = cards.Count; i >= 0; i--)
+            for (int i = cards.Count - 1; i >= 0; i--)
             {
                 if (cards[i].Values == value)
                     deckToReturn.Add(Deal(i));
@@ -119,6 +119,5 @@ namespace GoFish
             else
                 return false;
         }
-
     }
 }

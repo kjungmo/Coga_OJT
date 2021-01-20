@@ -29,6 +29,7 @@ namespace GoFish
             buttonStart.Enabled = false;
             textName.Enabled = false;
             buttonAsk.Enabled = true;
+            listHand.Enabled = true;
             UpdateForm();
         }
 
@@ -58,6 +59,7 @@ namespace GoFish
                 textProgress.Text += "The winner is ... " + game.GetWinnerName();
                 textBooks.Text = game.DescribeBooks();
                 buttonAsk.Enabled = false;
+                listHand.Enabled = false;
             }
             else
             {
