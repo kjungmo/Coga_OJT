@@ -20,5 +20,11 @@ namespace Sorting
             sortingMachine = new SortingMachine();
             algorithm.DataSource = Enum.GetNames(typeof(Sorts));
         }
+
+        private void sortButton_Click(object sender, EventArgs e)
+        {
+            outputText.Text = sortingMachine.SortInputToOutput(inputText.Text);
+
+        }
     }
 }

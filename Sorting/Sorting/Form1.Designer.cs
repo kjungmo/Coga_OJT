@@ -79,9 +79,11 @@
             this.sortButton.TabIndex = 4;
             this.sortButton.Text = "Sort!";
             this.sortButton.UseVisualStyleBackColor = true;
+            this.sortButton.Click += new System.EventHandler(this.sortButton_Click);
             // 
             // algorithm
             // 
+            this.algorithm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.algorithm.FormattingEnabled = true;
             this.algorithm.Location = new System.Drawing.Point(214, 57);
             this.algorithm.Name = "algorithm";

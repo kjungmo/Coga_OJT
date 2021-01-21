@@ -8,14 +8,24 @@ namespace Sorting
 {
     class SortingMachine
     {
-        public string InputText { get; private set; }
-        public List<string> InputTextSplitted { get; set; }
-        public List<int> InputTextToInt { get; private set; }
+        public string InputText { get; set; }
+        List<string> InputTextSplitted = new List<string>();
+        List<int> InputTextToInt = new List<int>();
         char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
 
         public SortingMachine()
         {
             return;
+        }
+
+        public string SortInputToOutput(string inputText)
+        {
+            string outputs = "";
+            InputTextToInt = ConvertTextToInt(inputText);
+            List<int> sortedText = new List<int>();
+            sortedText = Sorted(InputTextToInt);
+            outputs = InputToOutput(sortedText);
+            return outputs;
         }
 
         public List<int> ConvertTextToInt(string inputText)
@@ -24,17 +34,20 @@ namespace Sorting
             string[] inputTextToSplit = InputText.Split(delimiterChars);
             foreach (var word in inputTextToSplit)
             {
+                if (word == "")
+                    continue;
                 InputTextSplitted.Add(word);
             }
      
             for (int i = 0; i < InputTextSplitted.Count; i++)
             {
+                
                 InputTextToInt.Add(int.Parse(InputTextSplitted[i]));
             }
             return InputTextToInt;
         }
 
-        public List<int> Sorted()
+        public List<int> Sorted(List<int> textToInt)
         {
             List<int> sortedText = InputTextToInt.ToList();
             int count = 0;
@@ -56,11 +69,21 @@ namespace Sorting
                         count++;
                     }
                 }
+                if (count == InputTextToInt.Count - 1)
+                    return InputTextToInt;
             }
-            if (count == InputTextToInt.Count - 1)
-                return InputTextToInt;
-            else 
-                return sortedText;
+            return sortedText;
+        }
+
+        public string InputToOutput(List<int> sortedText)
+        {
+            string outputText = "";
+            foreach (int number in sortedText)
+            {
+                outputText += number;
+                outputText += " ";
+            }
+            return outputText;
         }
 
     }
