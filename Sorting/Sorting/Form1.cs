@@ -23,7 +23,8 @@ namespace Sorting
 
         private void sortButton_Click(object sender, EventArgs e)
         {
-            outputText.Text = sortingMachine.SortInputToOutput(inputText.Text);
+            outputText.Text = "";
+            outputText.Text += sortingMachine.SortInputToOutput(inputText.Text);
 
         }
     }

@@ -9,8 +9,8 @@ namespace Sorting
     class SortingMachine
     {
         public string InputText { get; set; }
-        List<string> InputTextSplitted = new List<string>();
-        List<int> InputTextToInt = new List<int>();
+        List<string> InputTextSplitted;
+        List<int> InputTextToInt;
         char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
 
         public SortingMachine()
@@ -32,6 +32,9 @@ namespace Sorting
         {
             InputText = inputText;
             string[] inputTextToSplit = InputText.Split(delimiterChars);
+            InputTextSplitted = new List<string>();
+            InputTextToInt = new List<int>();
+
             foreach (var word in inputTextToSplit)
             {
                 if (word == "")
@@ -52,15 +55,15 @@ namespace Sorting
             List<int> sortedText = InputTextToInt.ToList();
             int count = 0;
             int temp = 0;
-            for (int i = 0; i < InputTextToInt.Count - 1; i++)
+            for (int j = 0; j < InputTextToInt.Count - 1; j++)
             {
-                for (int j = 0; j < InputTextToInt.Count - 1; j++)
+                for (int i = 0; i < InputTextToInt.Count - 1; i++)
                 {
                     if (InputTextToInt[i] > InputTextToInt[i + 1])
                     {
-                        temp = InputTextToInt[i];
-                        InputTextToInt[i] = InputTextToInt[i + 1];
-                        InputTextToInt[i + 1] = temp;
+                        temp = InputTextToInt[i + 1];
+                        InputTextToInt[i + 1] = InputTextToInt[i];
+                        InputTextToInt[i] = temp;
                         sortedText[i] = InputTextToInt[i];
                         sortedText[i + 1] = InputTextToInt[i + 1];
                     }
