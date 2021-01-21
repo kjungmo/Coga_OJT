@@ -65,8 +65,7 @@ namespace Sorting
 
         public List<int> SortBubble(List<int> textToInt)
         {
-            List<int> sortedText = InputTextToInt.ToList();
-            int count = 0;
+            bool count = false;
             int temp = 0;
             for (int j = 0; j < InputTextToInt.Count - 1; j++)
             {
@@ -77,18 +76,13 @@ namespace Sorting
                         temp = InputTextToInt[i + 1];
                         InputTextToInt[i + 1] = InputTextToInt[i];
                         InputTextToInt[i] = temp;
-                        sortedText[i] = InputTextToInt[i];
-                        sortedText[i + 1] = InputTextToInt[i + 1];
-                    }
-                    else
-                    {
-                        count++;
+                        count = true;
                     }
                 }
-                if (count == InputTextToInt.Count - 1)
+                if (!count)
                     return InputTextToInt;
             }
-            return sortedText;
+            return InputTextToInt;
         }
 
         public string InputToOutput(List<int> sortedText)
