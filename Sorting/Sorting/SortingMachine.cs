@@ -67,7 +67,7 @@ namespace Sorting
         {
             bool count = false;
             int temp = 0;
-            for (int j = 0; j < InputTextToInt.Count - 1; j++)
+            for (int j = 0; j < InputTextToInt.Count; j++)
             {
                 for (int i = 0; i < InputTextToInt.Count - 1; i++)
                 {
