@@ -67,9 +67,9 @@ namespace Sorting
         {
             bool count = false;
             int temp = 0;
-            for (int j = 0; j < InputTextToInt.Count; j++)
+            for (int j = 0; j < InputTextToInt.Count - 1; j++)
             {
-                for (int i = 0; i < InputTextToInt.Count - 1; i++)
+                for (int i = 0; i < InputTextToInt.Count - j - 1; i++)
                 {
                     if (InputTextToInt[i] > InputTextToInt[i + 1])
                     {
@@ -80,7 +80,7 @@ namespace Sorting
                     }
                 }
                 if (!count)
-                    return InputTextToInt;
+                    break;
             }
             return InputTextToInt;
         }
