@@ -42,11 +42,11 @@
             this.createValue = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.stack = new System.Windows.Forms.ListBox();
+            this.showStack = new System.Windows.Forms.ListBox();
             this.push = new System.Windows.Forms.Button();
             this.pop = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.stackValue = new System.Windows.Forms.TextBox();
+            this.pushValue = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.deleteIndex = new System.Windows.Forms.TextBox();
             this.updateIndex = new System.Windows.Forms.TextBox();
@@ -60,6 +60,7 @@
             this.enqueue = new System.Windows.Forms.Button();
             this.dequeue = new System.Windows.Forms.Button();
             this.showDequeue = new System.Windows.Forms.TextBox();
+            this.showPop = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -188,12 +189,13 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.showPop);
             this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.stackValue);
+            this.tabPage2.Controls.Add(this.pushValue);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.pop);
             this.tabPage2.Controls.Add(this.push);
-            this.tabPage2.Controls.Add(this.stack);
+            this.tabPage2.Controls.Add(this.showStack);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -219,14 +221,14 @@
             this.tabPage3.Text = "Queue";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // stack
+            // showStack
             // 
-            this.stack.FormattingEnabled = true;
-            this.stack.ItemHeight = 12;
-            this.stack.Location = new System.Drawing.Point(80, 27);
-            this.stack.Name = "stack";
-            this.stack.Size = new System.Drawing.Size(121, 292);
-            this.stack.TabIndex = 0;
+            this.showStack.FormattingEnabled = true;
+            this.showStack.ItemHeight = 12;
+            this.showStack.Location = new System.Drawing.Point(80, 27);
+            this.showStack.Name = "showStack";
+            this.showStack.Size = new System.Drawing.Size(121, 292);
+            this.showStack.TabIndex = 0;
             // 
             // push
             // 
@@ -255,17 +257,17 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Stack";
             // 
-            // stackValue
+            // pushValue
             // 
-            this.stackValue.Location = new System.Drawing.Point(247, 187);
-            this.stackValue.Name = "stackValue";
-            this.stackValue.Size = new System.Drawing.Size(100, 21);
-            this.stackValue.TabIndex = 4;
+            this.pushValue.Location = new System.Drawing.Point(255, 165);
+            this.pushValue.Name = "pushValue";
+            this.pushValue.Size = new System.Drawing.Size(100, 21);
+            this.pushValue.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(247, 169);
+            this.label3.Location = new System.Drawing.Point(255, 147);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 12);
             this.label3.TabIndex = 5;
@@ -369,6 +371,14 @@
             this.showDequeue.Size = new System.Drawing.Size(100, 21);
             this.showDequeue.TabIndex = 6;
             // 
+            // showPop
+            // 
+            this.showPop.Location = new System.Drawing.Point(257, 213);
+            this.showPop.Name = "showPop";
+            this.showPop.ReadOnly = true;
+            this.showPop.Size = new System.Drawing.Size(100, 21);
+            this.showPop.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -410,11 +420,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox createIndex;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox stackValue;
+        private System.Windows.Forms.TextBox pushValue;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button pop;
         private System.Windows.Forms.Button push;
-        private System.Windows.Forms.ListBox stack;
+        private System.Windows.Forms.ListBox showStack;
         private System.Windows.Forms.Button dequeue;
         private System.Windows.Forms.Button enqueue;
         private System.Windows.Forms.TextBox valueQueue;
@@ -422,6 +432,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox showQueue;
         private System.Windows.Forms.TextBox showDequeue;
+        private System.Windows.Forms.TextBox showPop;
     }
 }
 

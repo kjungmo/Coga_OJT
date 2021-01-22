@@ -13,10 +13,13 @@ namespace DataStructure
     public partial class Form1 : Form
     {
         Queue queue;
+        Stack stack;
+
         public Form1()
         {
             InitializeComponent();
             queue = new Queue();
+            stack = new Stack();
         }
 
         private void enqueue_Click(object sender, EventArgs e)

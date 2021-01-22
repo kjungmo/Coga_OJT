@@ -6,7 +6,23 @@ using System.Threading.Tasks;
 
 namespace DataStructure
 {
-    class Stack
+    public class Stack
     {
+        public List<string> MyStack = new List<string>();
+
+        public Stack()
+        {
+            return;
+        }
+
+        public List<string> Push(string value)
+        {
+
+        }
+
+        public string Pop()
+        {
+            
+        }
     }
 }

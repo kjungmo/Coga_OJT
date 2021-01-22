@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataStructure
 {
-    class Queue
+    public class Queue
     {
         public List<string> MyQueue = new List<string>();
 
