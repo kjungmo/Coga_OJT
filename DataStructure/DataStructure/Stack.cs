@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataStructure
 {
-    public class LinkedList
+    class Stack
     {
-
     }
 }
