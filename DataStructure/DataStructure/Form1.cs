@@ -61,14 +61,15 @@ namespace DataStructure
 
         private void push_Click(object sender, EventArgs e)
         {
-            string input = pushValue.Text;
+            string input = valuePush.Text;
             if (string.IsNullOrEmpty(input))
             {
                 MessageBox.Show("Input value to push!");
                 return;
             }
             stack.Push(input);
-            pushValue.Text = "";
+            valuePush.Text = "";
+            displayMyStack();
         }
 
         private void pop_Click(object sender, EventArgs e)
@@ -78,11 +79,20 @@ namespace DataStructure
             string popped = "";
             List<string> toPop = stack.MyStack;
             popped += stack.Pop();
-            popValue.Text = popped;
+            showPop.Text = popped;
+            displayMyStack();
+        }
 
-
-
-
+        private void displayMyStack()
+        {
+            List<string> stackToDisplay = stack.MyStack;
+            showStack.Items.Clear();
+            showStack.Items.Add("Top");
+            for (int i = stackToDisplay.Count - 1; i >= 0; i--)
+            {
+                showStack.Items.Add(stackToDisplay[i]);
+            }
+            showStack.Items.Add("Bottom");
         }
     }
 }

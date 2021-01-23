@@ -46,9 +46,9 @@
             this.createButton = new System.Windows.Forms.Button();
             this.createValue = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.popValue = new System.Windows.Forms.TextBox();
+            this.showPop = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.pushValue = new System.Windows.Forms.TextBox();
+            this.valuePush = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.pop = new System.Windows.Forms.Button();
             this.push = new System.Windows.Forms.Button();
@@ -226,9 +226,9 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.popValue);
+            this.tabPage2.Controls.Add(this.showPop);
             this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.pushValue);
+            this.tabPage2.Controls.Add(this.valuePush);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.pop);
             this.tabPage2.Controls.Add(this.push);
@@ -241,13 +241,13 @@
             this.tabPage2.Text = "Stack";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // popValue
+            // showPop
             // 
-            this.popValue.Location = new System.Drawing.Point(257, 213);
-            this.popValue.Name = "popValue";
-            this.popValue.ReadOnly = true;
-            this.popValue.Size = new System.Drawing.Size(100, 21);
-            this.popValue.TabIndex = 6;
+            this.showPop.Location = new System.Drawing.Point(257, 213);
+            this.showPop.Name = "showPop";
+            this.showPop.ReadOnly = true;
+            this.showPop.Size = new System.Drawing.Size(100, 21);
+            this.showPop.TabIndex = 6;
             // 
             // label3
             // 
@@ -258,12 +258,12 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Value";
             // 
-            // pushValue
+            // valuePush
             // 
-            this.pushValue.Location = new System.Drawing.Point(255, 165);
-            this.pushValue.Name = "pushValue";
-            this.pushValue.Size = new System.Drawing.Size(100, 21);
-            this.pushValue.TabIndex = 4;
+            this.valuePush.Location = new System.Drawing.Point(255, 165);
+            this.valuePush.Name = "valuePush";
+            this.valuePush.Size = new System.Drawing.Size(100, 21);
+            this.valuePush.TabIndex = 4;
             // 
             // label2
             // 
@@ -422,7 +422,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox createIndex;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox pushValue;
+        private System.Windows.Forms.TextBox valuePush;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button pop;
         private System.Windows.Forms.Button push;
@@ -434,7 +434,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox showQueue;
         private System.Windows.Forms.TextBox showDequeue;
-        private System.Windows.Forms.TextBox popValue;
+        private System.Windows.Forms.TextBox showPop;
     }
 }
 
