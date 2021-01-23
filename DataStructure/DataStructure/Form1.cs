@@ -39,13 +39,18 @@ namespace DataStructure
 
         private void dequeue_Click(object sender, EventArgs e)
         {
+            if (queue.MyQueue.Count == 0)
+                MessageBox.Show("Cannot dequeue, the Queue is empty!");
             string dequeued = "";
             List<string> toDequeue = queue.MyQueue;
             dequeued += queue.Dequeue(toDequeue);
             showDequeue.Text = dequeued;
             displayMyQueue();
-            if (string.IsNullOrEmpty(showDequeue.Text))
-                MessageBox.Show("No value to dequeue!");
+            //if (string.IsNullOrEmpty(showDequeue.Text))
+            //{
+            //    MessageBox.Show("No value to dequeue!");
+            //    return;
+            //}
         }
 
         private void displayMyQueue()
