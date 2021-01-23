@@ -30,6 +30,11 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.deleteIndex = new System.Windows.Forms.TextBox();
+            this.updateIndex = new System.Windows.Forms.TextBox();
+            this.readIndex = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.createIndex = new System.Windows.Forms.TextBox();
             this.deleteValue = new System.Windows.Forms.TextBox();
             this.updateValue = new System.Windows.Forms.TextBox();
             this.readValue = new System.Windows.Forms.TextBox();
@@ -41,26 +46,21 @@
             this.createButton = new System.Windows.Forms.Button();
             this.createValue = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.showStack = new System.Windows.Forms.ListBox();
-            this.push = new System.Windows.Forms.Button();
-            this.pop = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pushValue = new System.Windows.Forms.TextBox();
+            this.popValue = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.deleteIndex = new System.Windows.Forms.TextBox();
-            this.updateIndex = new System.Windows.Forms.TextBox();
-            this.readIndex = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.createIndex = new System.Windows.Forms.TextBox();
-            this.showQueue = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.valueQueue = new System.Windows.Forms.TextBox();
-            this.enqueue = new System.Windows.Forms.Button();
-            this.dequeue = new System.Windows.Forms.Button();
+            this.pushValue = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pop = new System.Windows.Forms.Button();
+            this.push = new System.Windows.Forms.Button();
+            this.showStack = new System.Windows.Forms.ListBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.showDequeue = new System.Windows.Forms.TextBox();
-            this.showPop = new System.Windows.Forms.TextBox();
+            this.dequeue = new System.Windows.Forms.Button();
+            this.enqueue = new System.Windows.Forms.Button();
+            this.valueQueue = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.showQueue = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -102,6 +102,43 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Linked List";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // deleteIndex
+            // 
+            this.deleteIndex.Location = new System.Drawing.Point(299, 299);
+            this.deleteIndex.Name = "deleteIndex";
+            this.deleteIndex.Size = new System.Drawing.Size(59, 21);
+            this.deleteIndex.TabIndex = 20;
+            // 
+            // updateIndex
+            // 
+            this.updateIndex.Location = new System.Drawing.Point(298, 259);
+            this.updateIndex.Name = "updateIndex";
+            this.updateIndex.Size = new System.Drawing.Size(59, 21);
+            this.updateIndex.TabIndex = 19;
+            // 
+            // readIndex
+            // 
+            this.readIndex.Location = new System.Drawing.Point(299, 217);
+            this.readIndex.Name = "readIndex";
+            this.readIndex.Size = new System.Drawing.Size(58, 21);
+            this.readIndex.TabIndex = 18;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(307, 157);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(36, 12);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "Index";
+            // 
+            // createIndex
+            // 
+            this.createIndex.Location = new System.Drawing.Point(298, 172);
+            this.createIndex.Name = "createIndex";
+            this.createIndex.Size = new System.Drawing.Size(59, 21);
+            this.createIndex.TabIndex = 16;
             // 
             // deleteValue
             // 
@@ -189,7 +226,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.showPop);
+            this.tabPage2.Controls.Add(this.popValue);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.pushValue);
             this.tabPage2.Controls.Add(this.label2);
@@ -203,6 +240,68 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Stack";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // popValue
+            // 
+            this.popValue.Location = new System.Drawing.Point(257, 213);
+            this.popValue.Name = "popValue";
+            this.popValue.ReadOnly = true;
+            this.popValue.Size = new System.Drawing.Size(100, 21);
+            this.popValue.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(255, 147);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 12);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Value";
+            // 
+            // pushValue
+            // 
+            this.pushValue.Location = new System.Drawing.Point(255, 165);
+            this.pushValue.Name = "pushValue";
+            this.pushValue.Size = new System.Drawing.Size(100, 21);
+            this.pushValue.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(80, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(36, 12);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Stack";
+            // 
+            // pop
+            // 
+            this.pop.Location = new System.Drawing.Point(367, 213);
+            this.pop.Name = "pop";
+            this.pop.Size = new System.Drawing.Size(75, 23);
+            this.pop.TabIndex = 2;
+            this.pop.Text = "pop";
+            this.pop.UseVisualStyleBackColor = true;
+            this.pop.Click += new System.EventHandler(this.pop_Click);
+            // 
+            // push
+            // 
+            this.push.Location = new System.Drawing.Point(367, 164);
+            this.push.Name = "push";
+            this.push.Size = new System.Drawing.Size(75, 23);
+            this.push.TabIndex = 1;
+            this.push.Text = "push";
+            this.push.UseVisualStyleBackColor = true;
+            this.push.Click += new System.EventHandler(this.push_Click);
+            // 
+            // showStack
+            // 
+            this.showStack.FormattingEnabled = true;
+            this.showStack.ItemHeight = 12;
+            this.showStack.Location = new System.Drawing.Point(80, 27);
+            this.showStack.Name = "showStack";
+            this.showStack.Size = new System.Drawing.Size(121, 292);
+            this.showStack.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -221,137 +320,13 @@
             this.tabPage3.Text = "Queue";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // showStack
+            // showDequeue
             // 
-            this.showStack.FormattingEnabled = true;
-            this.showStack.ItemHeight = 12;
-            this.showStack.Location = new System.Drawing.Point(80, 27);
-            this.showStack.Name = "showStack";
-            this.showStack.Size = new System.Drawing.Size(121, 292);
-            this.showStack.TabIndex = 0;
-            // 
-            // push
-            // 
-            this.push.Location = new System.Drawing.Point(367, 164);
-            this.push.Name = "push";
-            this.push.Size = new System.Drawing.Size(75, 23);
-            this.push.TabIndex = 1;
-            this.push.Text = "push";
-            this.push.UseVisualStyleBackColor = true;
-            // 
-            // pop
-            // 
-            this.pop.Location = new System.Drawing.Point(367, 213);
-            this.pop.Name = "pop";
-            this.pop.Size = new System.Drawing.Size(75, 23);
-            this.pop.TabIndex = 2;
-            this.pop.Text = "pop";
-            this.pop.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(80, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 12);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Stack";
-            // 
-            // pushValue
-            // 
-            this.pushValue.Location = new System.Drawing.Point(255, 165);
-            this.pushValue.Name = "pushValue";
-            this.pushValue.Size = new System.Drawing.Size(100, 21);
-            this.pushValue.TabIndex = 4;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(255, 147);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 12);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Value";
-            // 
-            // deleteIndex
-            // 
-            this.deleteIndex.Location = new System.Drawing.Point(299, 299);
-            this.deleteIndex.Name = "deleteIndex";
-            this.deleteIndex.Size = new System.Drawing.Size(59, 21);
-            this.deleteIndex.TabIndex = 20;
-            // 
-            // updateIndex
-            // 
-            this.updateIndex.Location = new System.Drawing.Point(298, 259);
-            this.updateIndex.Name = "updateIndex";
-            this.updateIndex.Size = new System.Drawing.Size(59, 21);
-            this.updateIndex.TabIndex = 19;
-            // 
-            // readIndex
-            // 
-            this.readIndex.Location = new System.Drawing.Point(299, 217);
-            this.readIndex.Name = "readIndex";
-            this.readIndex.Size = new System.Drawing.Size(58, 21);
-            this.readIndex.TabIndex = 18;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(307, 157);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 12);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "Index";
-            // 
-            // createIndex
-            // 
-            this.createIndex.Location = new System.Drawing.Point(298, 172);
-            this.createIndex.Name = "createIndex";
-            this.createIndex.Size = new System.Drawing.Size(59, 21);
-            this.createIndex.TabIndex = 16;
-            // 
-            // showQueue
-            // 
-            this.showQueue.Location = new System.Drawing.Point(36, 69);
-            this.showQueue.Name = "showQueue";
-            this.showQueue.ReadOnly = true;
-            this.showQueue.Size = new System.Drawing.Size(489, 21);
-            this.showQueue.TabIndex = 0;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(34, 45);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 12);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Queue";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(249, 149);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(37, 12);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Value";
-            // 
-            // valueQueue
-            // 
-            this.valueQueue.Location = new System.Drawing.Point(251, 164);
-            this.valueQueue.Name = "valueQueue";
-            this.valueQueue.Size = new System.Drawing.Size(100, 21);
-            this.valueQueue.TabIndex = 3;
-            // 
-            // enqueue
-            // 
-            this.enqueue.Location = new System.Drawing.Point(366, 162);
-            this.enqueue.Name = "enqueue";
-            this.enqueue.Size = new System.Drawing.Size(75, 23);
-            this.enqueue.TabIndex = 4;
-            this.enqueue.Text = "Enqueue";
-            this.enqueue.UseVisualStyleBackColor = true;
-            this.enqueue.Click += new System.EventHandler(this.enqueue_Click);
+            this.showDequeue.Location = new System.Drawing.Point(251, 217);
+            this.showDequeue.Name = "showDequeue";
+            this.showDequeue.ReadOnly = true;
+            this.showDequeue.Size = new System.Drawing.Size(100, 21);
+            this.showDequeue.TabIndex = 6;
             // 
             // dequeue
             // 
@@ -363,21 +338,48 @@
             this.dequeue.UseVisualStyleBackColor = true;
             this.dequeue.Click += new System.EventHandler(this.dequeue_Click);
             // 
-            // showDequeue
+            // enqueue
             // 
-            this.showDequeue.Location = new System.Drawing.Point(251, 217);
-            this.showDequeue.Name = "showDequeue";
-            this.showDequeue.ReadOnly = true;
-            this.showDequeue.Size = new System.Drawing.Size(100, 21);
-            this.showDequeue.TabIndex = 6;
+            this.enqueue.Location = new System.Drawing.Point(366, 162);
+            this.enqueue.Name = "enqueue";
+            this.enqueue.Size = new System.Drawing.Size(75, 23);
+            this.enqueue.TabIndex = 4;
+            this.enqueue.Text = "Enqueue";
+            this.enqueue.UseVisualStyleBackColor = true;
+            this.enqueue.Click += new System.EventHandler(this.enqueue_Click);
             // 
-            // showPop
+            // valueQueue
             // 
-            this.showPop.Location = new System.Drawing.Point(257, 213);
-            this.showPop.Name = "showPop";
-            this.showPop.ReadOnly = true;
-            this.showPop.Size = new System.Drawing.Size(100, 21);
-            this.showPop.TabIndex = 6;
+            this.valueQueue.Location = new System.Drawing.Point(251, 164);
+            this.valueQueue.Name = "valueQueue";
+            this.valueQueue.Size = new System.Drawing.Size(100, 21);
+            this.valueQueue.TabIndex = 3;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(249, 149);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(37, 12);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Value";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(34, 45);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 12);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Queue";
+            // 
+            // showQueue
+            // 
+            this.showQueue.Location = new System.Drawing.Point(36, 69);
+            this.showQueue.Name = "showQueue";
+            this.showQueue.ReadOnly = true;
+            this.showQueue.Size = new System.Drawing.Size(489, 21);
+            this.showQueue.TabIndex = 0;
             // 
             // Form1
             // 
@@ -432,7 +434,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox showQueue;
         private System.Windows.Forms.TextBox showDequeue;
-        private System.Windows.Forms.TextBox showPop;
+        private System.Windows.Forms.TextBox popValue;
     }
 }
 

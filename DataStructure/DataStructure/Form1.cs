@@ -21,7 +21,6 @@ namespace DataStructure
         private Queue queue = new Queue();
         private Stack stack = new Stack();
 
-
         private void enqueue_Click(object sender, EventArgs e)
         {
             string input = valueQueue.Text;
@@ -57,6 +56,32 @@ namespace DataStructure
                 showQueue.Text += value + " ";
                 showQueue.Text += " < - ";
             }
+
+        }
+
+        private void push_Click(object sender, EventArgs e)
+        {
+            string input = pushValue.Text;
+            if (string.IsNullOrEmpty(input))
+            {
+                MessageBox.Show("Input value to push!");
+                return;
+            }
+            stack.Push(input);
+            pushValue.Text = "";
+        }
+
+        private void pop_Click(object sender, EventArgs e)
+        {
+            if (stack.MyStack.Count == 0)
+                MessageBox.Show("Cannot pop, the Stack is empty!");
+            string popped = "";
+            List<string> toPop = stack.MyStack;
+            popped += stack.Pop();
+            popValue.Text = popped;
+
+
+
 
         }
     }
