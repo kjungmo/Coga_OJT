@@ -25,7 +25,7 @@ namespace DataStructure
         private void enqueue_Click(object sender, EventArgs e)
         {
             string input = valueQueue.Text;
-            if (input == "")
+            if (string.IsNullOrEmpty(input))
             {
                 MessageBox.Show("Value none. And spacebar not allowed");
             }
@@ -44,7 +44,7 @@ namespace DataStructure
             dequeued += queue.Dequeue(toDequeue);
             showDequeue.Text = dequeued;
             displayMyQueue();
-            if (showDequeue.Text == "")
+            if (string.IsNullOrEmpty(showDequeue.Text))
                 MessageBox.Show("No value to dequeue!");
         }
 

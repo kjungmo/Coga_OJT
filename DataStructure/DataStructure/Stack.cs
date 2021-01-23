@@ -15,14 +15,14 @@ namespace DataStructure
             return;
         }
 
-        public List<string> Push(string value)
-        {
+        //public List<string> Push(string value)
+        //{
+        //    return;
+        //}
 
-        }
-
-        public string Pop()
-        {
+        //public string Pop()
+        //{
             
-        }
+        //}
     }
 }
