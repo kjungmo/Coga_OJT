@@ -12,15 +12,15 @@ namespace DataStructure
 {
     public partial class Form1 : Form
     {
-        Queue queue;
-        Stack stack;
 
         public Form1()
         {
             InitializeComponent();
-            queue = new Queue();
-            stack = new Stack();
         }
+
+        private Queue queue = new Queue();
+        private Stack stack = new Stack();
+
 
         private void enqueue_Click(object sender, EventArgs e)
         {
@@ -46,11 +46,6 @@ namespace DataStructure
             dequeued += queue.Dequeue(toDequeue);
             showDequeue.Text = dequeued;
             displayMyQueue();
-            //if (string.IsNullOrEmpty(showDequeue.Text))
-            //{
-            //    MessageBox.Show("No value to dequeue!");
-            //    return;
-            //}
         }
 
         private void displayMyQueue()
