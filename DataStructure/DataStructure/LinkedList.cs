@@ -8,6 +8,9 @@ namespace DataStructure
 {
     public class LinkedList
     {
+        string data = "";
+        Node node = new Node(data);
+        Node.nex
 
     }
 }
