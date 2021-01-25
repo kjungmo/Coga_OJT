@@ -8,8 +8,35 @@ namespace DataStructure
 {
     public class LinkedList
     {
+        Node head;
+        int count; 
 
+        public LinkedList()
+        {
+            head = null;
+            count = 0;
+        }
 
+        public void AddInFront(string inputData)
+        {
+            Node node = new Node(inputData);
+            node.next = head;
+            head = node;
+            count++;
+        }
+
+        public void PrintList()
+        {
+            Node runner = head; // equal to front of my list
+            while (runner != null)
+            {
+                string dodo = runner.data;
+                runner = runner.next;
+
+            }
+        }
+
+        
 
         //public List<Node> MyLinkedList = new List<Node>();
         //public LinkedList()

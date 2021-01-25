@@ -20,7 +20,7 @@ namespace DataStructure
 
         private Queue queue = new Queue();
         private Stack stack = new Stack();
-        private LinkedList linkedList = new LinkedList();
+        private LinkedListNode linkedList = new LinkedListNode();
 
         private void enqueue_Click(object sender, EventArgs e)
         {
@@ -118,7 +118,7 @@ namespace DataStructure
 
         private void displayMyLinkedList()
         {
-
+            Node toDisplay = 
         }
     }
 }
