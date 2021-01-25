@@ -20,7 +20,7 @@ namespace DataStructure
 
         private Queue queue = new Queue();
         private Stack stack = new Stack();
-        private LinkedListNode linkedList = new LinkedListNode();
+        //private LinkedListNode linkedList = new LinkedListNode();
 
         private void enqueue_Click(object sender, EventArgs e)
         {
@@ -28,6 +28,7 @@ namespace DataStructure
             if (string.IsNullOrEmpty(input))
             {
                 MessageBox.Show("Value none. And spacebar not allowed");
+                return;
             }
             else
             {
@@ -39,11 +40,14 @@ namespace DataStructure
 
         private void dequeue_Click(object sender, EventArgs e)
         {
-            if (queue.MyQueue.Count == 0)
-                MessageBox.Show("Cannot dequeue, the Queue is empty!");
             string dequeued = "";
-            List<string> toDequeue = queue.MyQueue;
-            dequeued += queue.Dequeue(toDequeue);
+            if (queue.MyQueue.Count == 0)
+            {
+                MessageBox.Show("Cannot dequeue, the Queue is empty!");
+                showDequeue.Text = "";
+                return;
+            }
+            dequeued += queue.Dequeue();
             showDequeue.Text = dequeued;
             displayMyQueue();
         }
@@ -68,17 +72,23 @@ namespace DataStructure
                 MessageBox.Show("Input value to push!");
                 return;
             }
-            stack.Push(input);
-            valuePush.Text = "";
-            displayMyStack();
+            else
+            {
+                stack.Push(input);
+                valuePush.Text = "";
+                displayMyStack();
+            }
         }
 
         private void pop_Click(object sender, EventArgs e)
         {
-            if (stack.MyStack.Count == 0)
-                MessageBox.Show("Cannot pop, the Stack is empty!");
             string popped = "";
-            List<string> toPop = stack.MyStack;
+            if (stack.MyStack.Count == 0)
+            {
+                MessageBox.Show("Cannot pop, the Stack is empty!");
+                showPop.Text = "";
+                return;
+            }
             popped += stack.Pop();
             showPop.Text = popped;
             displayMyStack();
@@ -118,7 +128,7 @@ namespace DataStructure
 
         private void displayMyLinkedList()
         {
-            Node toDisplay = 
+
         }
     }
 }

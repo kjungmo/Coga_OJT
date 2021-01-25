@@ -8,37 +8,30 @@ namespace DataStructure
 {
     public class Queue
     {
-        public List<string> MyQueue = new List<string>();
-
+        public List<string> MyQueue { get; private set; }
         public Queue()
         {
-            return;
+            MyQueue = null;
         }
 
-        public List<string> Enqueue(string value)
+        public void Enqueue(string value)
         {
-            if (MyQueue.Count == 0)
+            if (MyQueue == null)
             {
                 MyQueue = new List<string>();
-                MyQueue.Add(value);
-                return MyQueue;
             }
             MyQueue.Add(value);
-            return MyQueue;
         }
 
-        public string Dequeue(List<string> myQueue)
+        public string Dequeue()
         {
-            MyQueue = myQueue;
-            if (MyQueue.Count == 0)
+            if (this.MyQueue.Count == 0)
             {
-                MyQueue = new List<string>();
-                return null; 
+                this.MyQueue = new List<string>();
             }
-            string toDequeue = myQueue[0];
-            MyQueue.RemoveAt(0);
+            string toDequeue = MyQueue[0];
+            this.MyQueue.RemoveAt(0);
             return toDequeue;
-            
         }
 
     }

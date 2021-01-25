@@ -8,22 +8,22 @@ namespace DataStructure
 {
     public class Stack
     {
-        public List<string> MyStack = new List<string>();
-
+        public List<string> MyStack { get; private set; }
         public Stack()
         {
-            return;
+            MyStack = null;
         }
-
-        public List<string> Push(string value)
+        public void Push(string value)
         {
+            if (MyStack == null)
+            {
+                MyStack = new List<string>();
+            }
             MyStack.Add(value);
-            return MyStack;
         }
 
         public string Pop()
         {
-            // when poping a stack, you get the value from the last index of the stack, and delete the last index stack
             string popValue = "";
             if (MyStack.Count >= 1)
             {
