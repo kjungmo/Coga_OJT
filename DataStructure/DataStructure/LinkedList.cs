@@ -31,18 +31,18 @@ namespace DataStructure
             List<Node> rightList = new List<Node>();
             List<Node> newMyLinkedList = new List<Node>();
 
-            Node indexNode = new Node(index, input);
+            Node indexNode = new Node(input);
 
             for (int i = 0; i < index; i++)
             {
-                leftList.Add(MyLinkedList[i]);
+                leftList.Add(linkedlist[i]);
             }
 
             leftList.Add(indexNode);
 
-            for (int i = index + 1; i < MyLinkedList.Count; i++)
+            for (int i = index + 1; i < linkedlist.Count; i++)
             {
-                rightList.Add(MyLinkedList[i]);
+                rightList.Add(linkedlist[i]);
             }
 
             return MergeLists(leftList, rightList);
@@ -50,52 +50,60 @@ namespace DataStructure
 
         public List<Node> MergeLists(List<Node> left, List<Node> right)
         {
-            for (int i = 0; i < right.Count; i++)
+            if (right != null)
             {
-                left.Add(right[i]);
+                for (int i = 0; i < right.Count; i++)
+                {
+                    left.Add(right[i]);
+                }
             }
             return left;
         }
 
-        public List<Node> CreateLinkedList(int index, string input)
+        public List<Node> CreateLinkedList(string indexText, string input)
         {
-            if (index - 1 >= 0)
+            int index = Convert.ToInt32(indexText);
+            if (MyLinkedList == null)
             {
-                if (MyLinkedList == null)
-                {
-                    Node head = new Node(input);
-                    MyLinkedList.Add(head); // mylinkedlist[0] is head node
-                    return MyLinkedList;
-                }
-
-                else if (MyLinkedList[index - 1] != null)
-                {
-                    //Node temp = new Node(index, input);
-                    //MyLinkedList.Add(temp);
-                    //temp.next = MyLinkedList[0];
-                    //MyLinkedList[0] = temp;
-                    //return MyLinkedList;
-                    Node temp = new Node(index - 1, input);
-                    //MyLinkedList[index - 1];
-                    Node toSwap = new Node();
-                    MyLinkedList.Add(toSwap);
-                    for (int i = MyLinkedList.Count - 2; i > index - 1; i--)
-                    {
-                        
-                        Node swapHelper = new Node();
-                        swapHelper = toSwap;
-                        toSwap = MyLinkedList[i];
-                        MyLinkedList[i] = swapHelper;
-                    }
-
-                }
-                else
-                {
-
-                }
+                Node head = new Node();
+                MyLinkedList.Add(head); // mylinkedlist[0] is head node
+                Node inputNode = new Node(input);
+                MyLinkedList.Add(inputNode);
+                return MyLinkedList; // mylinkedlist[1] exists, and that becomes the first Linked Node 
             }
-            return MyLinkedList;
 
+            else if (MyLinkedList[index] != null)
+            {
+
+                MyLinkedList = ChangeIndex(MyLinkedList, index, input);
+                return MyLinkedList;
+            }
+
+            else
+                return MyLinkedList;
+
+        }
+
+        public string ReadLinkedList(string indexText)
+        {
+            int index = Convert.ToInt32(indexText);
+            return MyLinkedList[index].data;
+        }
+
+        public List<Node> UpdateLinkedList(string indexText, string input)
+        {
+            int index = Convert.ToInt32(indexText);
+            string newInput = input;
+            MyLinkedList[index].data = newInput;
+            return MyLinkedList;
+        }
+
+        public string DeleteLinkedList(string indexText)
+        {
+            int index = Convert.ToInt32(indexText);
+            string deleteNode = MyLinkedList[index].data;
+            MyLinkedList.RemoveAt(index);
+            return deleteNode;
         }
     }
 }

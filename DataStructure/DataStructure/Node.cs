@@ -8,16 +8,8 @@ namespace DataStructure
 {
     public class Node
     {
-        public int index;
         public string data;
         public Node next;
-
-        public Node(int indexInput, string dataInput)
-        {
-            index = indexInput;
-            data = dataInput;
-            next = null;
-        }
 
         public Node(string dataInput)
         {
@@ -45,40 +37,32 @@ namespace DataStructure
             return data;
         }
 
-        // reads specific Node in orders
-        public string ReadNode(int index)
-        {
-            // only when the next node exists
-            if (this.next != null)
-            {
-                int count = 0;
-                for (int i = 0; i < index; i++)
-                {
-                    if (count == index - 1)
-                        GetNodeData();
-                    else
-                }
-                Node read = this.next;
-                for (int i = 0; i < index; i++)
-                {
+        //// reads specific Node in orders
+        //public string ReadNode(int index)
+        //{
+        //    // only when the next node exists
+        //    if (this.next != null)
+        //    {
+        //        int count = 0;
+        //        for (int i = 0; i < index; i++)
+        //        {
+        //            if (count == index - 1)
+        //                GetNodeData();
+        //            else
+        //        }
+        //        Node read = this.next;
+        //        for (int i = 0; i < index; i++)
+        //        {
                     
-                }
-            }
+        //        }
+        //    }
             
-            else
-            {
-                return this.data;
-            }
-            //for loop to that index of user's input
-        }
-
-        // adds(updates) a Node in specific index
-        public Node UpdateNode(int index, string input)
-        {
-
-        }
-
-        // deletes where user wants, and gets the value of the deleted index
-        public Node DeleteNode()
+        //    else
+        //    {
+        //        return this.data;
+        //    }
+        //    //for loop to that index of user's input
+        //}
+        
     }
 }

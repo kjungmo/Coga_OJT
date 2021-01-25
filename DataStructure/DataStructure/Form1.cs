@@ -20,6 +20,7 @@ namespace DataStructure
 
         private Queue queue = new Queue();
         private Stack stack = new Stack();
+        private LinkedList linkedList = new LinkedList();
 
         private void enqueue_Click(object sender, EventArgs e)
         {
@@ -93,6 +94,30 @@ namespace DataStructure
                 showStack.Items.Add(stackToDisplay[i]);
             }
             showStack.Items.Add("Bottom");
+        }
+
+        private void createButton_Click(object sender, EventArgs e)
+        {
+            int indexValue = Convert.ToInt32(createIndex.Text);
+            if (indexValue >= 0)
+            {
+                linkedList.CreateLinkedList(createIndex.Text, createValue.Text);
+            }
+        }
+
+        private void readButton_Click(object sender, EventArgs e)
+        {
+            readValue.Text = linkedList.ReadLinkedList(readIndex.Text);
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            linkedList.UpdateLinkedList(updateIndex.Text, updateValue.Text);
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            deleteValue.Text = linkedList.DeleteLinkedList(deleteIndex.Text);
         }
     }
 }
