@@ -98,26 +98,27 @@ namespace DataStructure
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            int indexValue = Convert.ToInt32(createIndex.Text);
-            if (indexValue >= 0)
-            {
-                linkedList.CreateLinkedList(createIndex.Text, createValue.Text);
-            }
+
         }
 
         private void readButton_Click(object sender, EventArgs e)
-        {
-            readValue.Text = linkedList.ReadLinkedList(readIndex.Text);
+        { 
+
         }
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            linkedList.UpdateLinkedList(updateIndex.Text, updateValue.Text);
+
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            deleteValue.Text = linkedList.DeleteLinkedList(deleteIndex.Text);
+
+        }
+
+        private void displayMyLinkedList()
+        {
+
         }
     }
 }

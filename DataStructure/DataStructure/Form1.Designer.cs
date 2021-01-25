@@ -38,7 +38,7 @@
             this.deleteValue = new System.Windows.Forms.TextBox();
             this.updateValue = new System.Windows.Forms.TextBox();
             this.readValue = new System.Windows.Forms.TextBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.showLinkedList = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
@@ -88,7 +88,7 @@
             this.tabPage1.Controls.Add(this.deleteValue);
             this.tabPage1.Controls.Add(this.updateValue);
             this.tabPage1.Controls.Add(this.readValue);
-            this.tabPage1.Controls.Add(this.listBox1);
+            this.tabPage1.Controls.Add(this.showLinkedList);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.DeleteButton);
             this.tabPage1.Controls.Add(this.updateButton);
@@ -163,14 +163,14 @@
             this.readValue.Size = new System.Drawing.Size(58, 21);
             this.readValue.TabIndex = 8;
             // 
-            // listBox1
+            // showLinkedList
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(24, 26);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(238, 304);
-            this.listBox1.TabIndex = 6;
+            this.showLinkedList.FormattingEnabled = true;
+            this.showLinkedList.ItemHeight = 12;
+            this.showLinkedList.Location = new System.Drawing.Point(24, 26);
+            this.showLinkedList.Name = "showLinkedList";
+            this.showLinkedList.Size = new System.Drawing.Size(238, 304);
+            this.showLinkedList.TabIndex = 6;
             // 
             // label1
             // 
@@ -409,7 +409,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox showLinkedList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button updateButton;
