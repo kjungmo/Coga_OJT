@@ -28,7 +28,6 @@ namespace DataStructure
             if (string.IsNullOrEmpty(input))
             {
                 MessageBox.Show("Value none. And spacebar not allowed");
-                return;
             }
             else
             {
@@ -41,13 +40,13 @@ namespace DataStructure
         private void dequeue_Click(object sender, EventArgs e)
         {
             string dequeued = "";
-            if (queue.MyQueue.Count == 0)
+            dequeued += queue.Dequeue();
+            if (queue.ifNullFlag)
             {
                 MessageBox.Show("Cannot dequeue, the Queue is empty!");
                 showDequeue.Text = "";
                 return;
             }
-            dequeued += queue.Dequeue();
             showDequeue.Text = dequeued;
             displayMyQueue();
         }
@@ -83,13 +82,13 @@ namespace DataStructure
         private void pop_Click(object sender, EventArgs e)
         {
             string popped = "";
-            if (stack.MyStack.Count == 0)
+            popped += stack.Pop();
+            if (stack.ifNullFlag)
             {
                 MessageBox.Show("Cannot pop, the Stack is empty!");
                 showPop.Text = "";
                 return;
             }
-            popped += stack.Pop();
             showPop.Text = popped;
             displayMyStack();
         }

@@ -9,29 +9,28 @@ namespace DataStructure
     public class Stack
     {
         public List<string> MyStack { get; private set; }
+        public bool ifNullFlag = false;
 
         public Stack()
         {
-
+            MyStack = new List<string>();
         }
 
         public void Push(string value)
         {
-            if (MyStack == null)
-            {
-                MyStack = new List<string>();
-            }
             MyStack.Add(value);
         }
 
         public string Pop()
         {
             string popValue = "";
-            if (MyStack.Count >= 1)
+            if (MyStack.Count == 0)
             {
-                popValue = MyStack[MyStack.Count - 1];
-                MyStack.RemoveAt(MyStack.Count - 1);
+                ifNullFlag = true;
+                return "";
             }
+            popValue = MyStack[MyStack.Count - 1];
+            MyStack.RemoveAt(MyStack.Count - 1);
             return popValue;
         }
     }
