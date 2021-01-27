@@ -9,10 +9,12 @@ namespace DataStructure
     public class Stack
     {
         public List<string> MyStack { get; private set; }
+
         public Stack()
         {
-            MyStack = null;
+
         }
+
         public void Push(string value)
         {
             if (MyStack == null)

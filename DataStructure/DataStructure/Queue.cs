@@ -9,9 +9,9 @@ namespace DataStructure
     public class Queue
     {
         public List<string> MyQueue { get; private set; }
+
         public Queue()
         {
-            MyQueue = null;
         }
 
         public void Enqueue(string value)
