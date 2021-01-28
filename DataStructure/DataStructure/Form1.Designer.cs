@@ -35,7 +35,6 @@
             this.readIndex = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.createIndex = new System.Windows.Forms.TextBox();
-            this.deleteValue = new System.Windows.Forms.TextBox();
             this.updateValue = new System.Windows.Forms.TextBox();
             this.readValue = new System.Windows.Forms.TextBox();
             this.showLinkedList = new System.Windows.Forms.ListBox();
@@ -85,7 +84,6 @@
             this.tabPage1.Controls.Add(this.readIndex);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.createIndex);
-            this.tabPage1.Controls.Add(this.deleteValue);
             this.tabPage1.Controls.Add(this.updateValue);
             this.tabPage1.Controls.Add(this.readValue);
             this.tabPage1.Controls.Add(this.showLinkedList);
@@ -139,14 +137,6 @@
             this.createIndex.Name = "createIndex";
             this.createIndex.Size = new System.Drawing.Size(59, 21);
             this.createIndex.TabIndex = 16;
-            // 
-            // deleteValue
-            // 
-            this.deleteValue.Location = new System.Drawing.Point(396, 299);
-            this.deleteValue.Name = "deleteValue";
-            this.deleteValue.ReadOnly = true;
-            this.deleteValue.Size = new System.Drawing.Size(59, 21);
-            this.deleteValue.TabIndex = 15;
             // 
             // updateValue
             // 
@@ -417,7 +407,6 @@
         private System.Windows.Forms.Button createButton;
         private System.Windows.Forms.TextBox createValue;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TextBox deleteValue;
         private System.Windows.Forms.TextBox updateValue;
         private System.Windows.Forms.TextBox readValue;
         private System.Windows.Forms.TextBox deleteIndex;

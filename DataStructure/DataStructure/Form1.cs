@@ -113,6 +113,15 @@ namespace DataStructure
 
         private void createButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(createIndex.Text) || string.IsNullOrEmpty(createValue.Text))
+            {
+                if (string.IsNullOrEmpty(createIndex.Text))
+                    MessageBox.Show("Index Needed!");
+                else if (string.IsNullOrEmpty(createValue.Text))
+                    MessageBox.Show("Value Needed!");
+                displayMyLinkedList();
+                return;
+            }
             int index = Convert.ToInt32(createIndex.Text);
             string created = "";
             created += createValue.Text;
@@ -120,26 +129,76 @@ namespace DataStructure
             Console.WriteLine(created);
             Console.WriteLine(index);
             displayMyLinkedList();
+            createValue.Text = "";
+            createIndex.Text = "";
+
         }
 
         private void readButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(readIndex.Text))
+            {
+                MessageBox.Show("Index NEEDED!");
+                displayMyLinkedList();
+                return;
+            }
             int index = Convert.ToInt32(readIndex.Text);
             string read = "";
             readValue.Text = linkedList.ReadNode(index);
             read += readValue.Text;
-            Console.WriteLine(read);
+            if (string.IsNullOrEmpty(read))
+                MessageBox.Show("Nothing to read, either Node is none or index is too large!");
             displayMyLinkedList();
+            readIndex.Text = "";
         }
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-
+            if (string.IsNullOrEmpty(updateIndex.Text) || string.IsNullOrEmpty(updateValue.Text))
+            {
+                if (string.IsNullOrEmpty(updateIndex.Text))
+                    MessageBox.Show("Index NEEDED!");
+                else if (string.IsNullOrEmpty(updateValue.Text))
+                    MessageBox.Show("Value NEEDED!");
+                displayMyLinkedList();
+                return;
+            }
+            // if both values are input to the textbox
+            string updated = updateValue.Text;
+            int index = Convert.ToInt32(updateIndex.Text);
+            if (linkedList.NumberOfNodes == 0 || index > linkedList.NumberOfNodes)
+            {
+                if (linkedList.NumberOfNodes == 0)
+                    MessageBox.Show("There is no node!");
+                else if (index > linkedList.NumberOfNodes)
+                    MessageBox.Show("Index inappropriate!");
+                updateValue.Text = "";
+                updateIndex.Text = "";
+                return;
+            }
+            linkedList.UpdateNode(updated, index);
+            displayMyLinkedList();
+            updateValue.Text = "";
+            updateIndex.Text = "";
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-
+            if (linkedList.NumberOfNodes == 0 || string.IsNullOrEmpty(deleteIndex.Text))
+            {
+                if (linkedList.NumberOfNodes == 0)
+                    MessageBox.Show("No Nodes to delete!");
+                else if (string.IsNullOrEmpty(deleteIndex.Text))
+                    MessageBox.Show("Index NEEDED!");
+                deleteIndex.Text = "";
+                displayMyLinkedList();
+                return;
+            }
+            
+            int index = Convert.ToInt32(deleteIndex.Text);
+            linkedList.DeleteLinkedList(index);
+            deleteIndex.Text = "";
+            displayMyLinkedList();
         }
 
         private void displayMyLinkedList()
@@ -147,11 +206,12 @@ namespace DataStructure
             Node myNode = linkedList.HeadNode;
             showLinkedList.Items.Clear();
             showLinkedList.Items.Add("Head");
-
-            while (myNode.NextNode != null)
+            int counter = linkedList.NumberOfNodes;
+            while (counter > 0)
             {
                 showLinkedList.Items.Add(myNode.NodeData);
                 myNode = myNode.NextNode;
+                counter--;
             }
             showLinkedList.Items.Add("Tail");
         }

@@ -20,9 +20,7 @@ namespace DataStructure
 
         public void CreateLinkedList(string dataInput, int index)
         {
-            if (NumberOfNodes == 0)
-                HeadNode = new Node(dataInput);
-            if (index == 1)
+            if (NumberOfNodes == 0 || index == 1)
                 AddToHead(dataInput);
             else if (NumberOfNodes < index)
                 AddToTail(dataInput);
@@ -57,6 +55,12 @@ namespace DataStructure
         }
         public void AddToHead(string inputData)
         {
+            if (HeadNode == null)
+            {
+                HeadNode = new Node(inputData);
+                NumberOfNodes++;
+                return;
+            }
             Node temp = new Node(inputData);
             temp.NextNode = HeadNode;
             HeadNode = temp;
@@ -93,10 +97,8 @@ namespace DataStructure
         public void UpdateNode(string dataInput, int index)
         {
             Node temp = HeadNode;
-            int counter = 1;
-            if (NumberOfNodes == 0 || NumberOfNodes < index)
-                return;
-            while (counter <= index)
+            int counter = 0;
+            while (counter < index - 1)
             {
                 temp = temp.NextNode;
                 counter++;
@@ -122,6 +124,20 @@ namespace DataStructure
             return deleteNodeData;
         }
 
+        public void DeleteLinkedList(int index)
+        {
+            if (NumberOfNodes == 0)
+                HeadNode = null;
+            else if (index == 1)
+                DeleteAtHead();
+            else if (NumberOfNodes < index)
+                DeleteAtTail();
+            else
+            {
+                DeleteInBetween(index);
+            }
+        }
+
         public void DeleteAtHead()
         {
             Node changedByDeletion = HeadNode.NextNode;
@@ -133,6 +149,7 @@ namespace DataStructure
         public void DeleteAtTail()
         {
             Node changedByDeletion = HeadNode;
+
             while (changedByDeletion.NextNode.NextNode != null)
             {
                 changedByDeletion = changedByDeletion.NextNode;
