@@ -16,5 +16,9 @@ namespace DataStructure
             data = dataInput;
             next = null;
         }
+
+        public Node()
+        {
+        }
     }
 }

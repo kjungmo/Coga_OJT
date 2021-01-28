@@ -41,15 +41,16 @@ namespace DataStructure
         {
             string dequeued = "";
             dequeued += queue.Dequeue();
-            if (queue.NullChecker)
+            if (string.IsNullOrEmpty(dequeued))
             {
                 MessageBox.Show("Cannot dequeue, the Queue is empty!");
                 showDequeue.Text = "";
-                return;
             }
-            showDequeue.Text = dequeued;
-            displayMyQueue();
-
+            else
+            {
+                showDequeue.Text = dequeued;
+                displayMyQueue();
+            }
         }
 
         private void displayMyQueue()
@@ -84,14 +85,18 @@ namespace DataStructure
         {
             string popped = "";
             popped += stack.Pop();
-            if (stack.NullChecker)
+            if (string.IsNullOrEmpty(popped))
             {
                 MessageBox.Show("Cannot pop, the Stack is empty!");
                 showPop.Text = "";
                 return;
             }
-            showPop.Text = popped;
-            displayMyStack();
+            else
+            {
+                showPop.Text = popped;
+                displayMyStack();
+            }
+
         }
 
         private void displayMyStack()

@@ -17,6 +17,22 @@ namespace DataStructure
             count = 0;
         }
 
+        public void AddInBetween(string inputData, int location)
+        {
+            Node node = new Node(inputData);
+            int toPlace = location;
+            Node temp = head;
+            int counter = 0;
+            Node linkTheTail = new Node();
+            Node linkTheHead = new Node();
+            while (counter < toPlace)
+            {
+                temp = head.next;
+            }
+            
+
+        }
+
         public void AddAtTail(string inputData)
         {
             Node node = new Node(inputData);
@@ -25,10 +41,9 @@ namespace DataStructure
                 if (head.next.next == null)
                 {
                     head.next.next = node;
-                    break;
+                    return;
                 }
                 head = head.next;
-
             }
         }
         public void AddAtHead(string inputData)

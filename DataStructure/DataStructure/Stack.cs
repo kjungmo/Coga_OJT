@@ -9,7 +9,6 @@ namespace DataStructure
     public class Stack
     {
         public List<string> MyStack { get; private set; }
-        public bool NullChecker { get; private set; }
 
         public Stack()
         {
@@ -28,11 +27,8 @@ namespace DataStructure
                 string popValue = "";
                 popValue = MyStack[MyStack.Count - 1];
                 MyStack.RemoveAt(MyStack.Count - 1);
-                NullChecker = false;
                 return popValue;
             }
-
-            NullChecker = true;
             return "";
         }
     }
