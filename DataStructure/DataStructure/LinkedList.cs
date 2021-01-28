@@ -150,7 +150,7 @@ namespace DataStructure
         public void DeleteAtTail()
         {
             Node changedByDeletion = HeadNode;
-            if (NumberOfNodes < 3)
+            if (NumberOfNodes < 3) // because the while loop needs at least 3 nodes, had to manually delete nodes
             {
                 if (NumberOfNodes == 2)
                     changedByDeletion.NextNode = null;
