@@ -9,7 +9,7 @@ namespace DataStructure
     public class Queue
     {
         public List<string> MyQueue { get; private set; }
-        public bool ifNullFlag = false;
+        public bool NullChecker { get; private set; }
 
         public Queue()
         {
@@ -23,14 +23,17 @@ namespace DataStructure
 
         public string Dequeue()
         {
-            if (MyQueue.Count == 0)
+            if (MyQueue.Count > 0)
             {
-                ifNullFlag = true;
-                return "";
+                string toDequeue = "";
+                toDequeue = MyQueue[0];
+                MyQueue.RemoveAt(0);
+                NullChecker = false;
+                return toDequeue;
             }
-            string toDequeue = MyQueue[0];
-            MyQueue.RemoveAt(0);
-            return toDequeue;
+
+            NullChecker = true;
+            return "";
         }
 
     }

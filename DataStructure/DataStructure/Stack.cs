@@ -9,7 +9,7 @@ namespace DataStructure
     public class Stack
     {
         public List<string> MyStack { get; private set; }
-        public bool ifNullFlag = false;
+        public bool NullChecker { get; private set; }
 
         public Stack()
         {
@@ -23,15 +23,17 @@ namespace DataStructure
 
         public string Pop()
         {
-            string popValue = "";
-            if (MyStack.Count == 0)
+            if (MyStack.Count > 0)
             {
-                ifNullFlag = true;
-                return "";
+                string popValue = "";
+                popValue = MyStack[MyStack.Count - 1];
+                MyStack.RemoveAt(MyStack.Count - 1);
+                NullChecker = false;
+                return popValue;
             }
-            popValue = MyStack[MyStack.Count - 1];
-            MyStack.RemoveAt(MyStack.Count - 1);
-            return popValue;
+
+            NullChecker = true;
+            return "";
         }
     }
 }

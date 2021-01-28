@@ -17,7 +17,21 @@ namespace DataStructure
             count = 0;
         }
 
-        public void AddInFront(string inputData)
+        public void AddAtTail(string inputData)
+        {
+            Node node = new Node(inputData);
+            while(head.next != null)
+            {
+                if (head.next.next == null)
+                {
+                    head.next.next = node;
+                    break;
+                }
+                head = head.next;
+
+            }
+        }
+        public void AddAtHead(string inputData)
         {
             Node node = new Node(inputData);
             node.next = head;

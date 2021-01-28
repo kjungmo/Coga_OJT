@@ -41,7 +41,7 @@ namespace DataStructure
         {
             string dequeued = "";
             dequeued += queue.Dequeue();
-            if (queue.ifNullFlag)
+            if (queue.NullChecker)
             {
                 MessageBox.Show("Cannot dequeue, the Queue is empty!");
                 showDequeue.Text = "";
@@ -49,6 +49,7 @@ namespace DataStructure
             }
             showDequeue.Text = dequeued;
             displayMyQueue();
+
         }
 
         private void displayMyQueue()
@@ -83,7 +84,7 @@ namespace DataStructure
         {
             string popped = "";
             popped += stack.Pop();
-            if (stack.ifNullFlag)
+            if (stack.NullChecker)
             {
                 MessageBox.Show("Cannot pop, the Stack is empty!");
                 showPop.Text = "";
