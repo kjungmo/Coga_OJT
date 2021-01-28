@@ -8,160 +8,155 @@ namespace DataStructure
 {
     public class LinkedList
     {
-        Node head;
-        int count; 
+        public Node HeadNode { get; private set; }
+        public int NumberOfNodes { get; private set; } // indicates how many nodes exists and count + 1 is the number of total nodes
+        public string ValueReturned { get; private set; }
 
         public LinkedList()
         {
-            head = null;
-            count = 0;
+            HeadNode = null;
+            NumberOfNodes = 0;
         }
 
-        public void AddInBetween(string inputData, int location)
+        public void CreateLinkedList(string dataInput, int index)
         {
-            Node node = new Node(inputData);
-            int toPlace = location;
-            Node temp = head;
-            int counter = 0;
-            Node linkTheTail = new Node();
-            Node linkTheHead = new Node();
-            while (counter < toPlace)
+            if (NumberOfNodes == 0)
+                HeadNode = new Node(dataInput);
+            if (index == 1)
+                AddToHead(dataInput);
+            else if (NumberOfNodes < index)
+                AddToTail(dataInput);
+            else
             {
-                temp = head.next;
+                AddInBetween(dataInput, index);
             }
-            
-
         }
 
-        public void AddAtTail(string inputData)
+        public void AddInBetween(string inputData, int index)
         {
-            Node node = new Node(inputData);
-            while(head.next != null)
+            Node newNode = new Node(inputData);
+            Node temp = HeadNode;
+            int counter = 0;
+            while (counter < index)
             {
-                if (head.next.next == null)
+                if (counter == index - 2)
                 {
-                    head.next.next = node;
+                    newNode.NextNode = temp.NextNode;
+                    temp.NextNode = newNode;
                     return;
                 }
-                head = head.next;
+                temp = temp.NextNode;
+                counter++;
             }
+            NumberOfNodes++;
         }
-        public void AddAtHead(string inputData)
+        public void AddToTail(string inputData)
         {
-            Node node = new Node(inputData);
-            node.next = head;
-            head = node;
-            count++;
+            HeadNode.AddToTail(inputData);
+            NumberOfNodes++;
+        }
+        public void AddToHead(string inputData)
+        {
+            Node temp = new Node(inputData);
+            temp.NextNode = HeadNode;
+            HeadNode = temp;
+            NumberOfNodes++;
         }
 
         public void PrintList()
         {
-            Node runner = head; // equal to front of my list
+            Node runner = HeadNode; // equal to front of my list
             while (runner != null)
             {
-                string dodo = runner.data;
-                runner = runner.next;
+                string dodo = runner.NodeData;
+                runner = runner.NextNode;
 
             }
         }
 
-        
+        public string ReadNode(int index) // where > 0
+        {
+            Node readTarget = HeadNode;
+            int counter = 1;
+            string readNodeData = "";
 
-        //public List<Node> MyLinkedList = new List<Node>();
-        //public LinkedList()
-        //{
-        //    MyLinkedList = null;
-        //}
-        ////public void CreateLinkedNode(string input)
-        ////{
-        ////    if (MyLinkedListNode == null)
-        ////        MyLinkedListNode = new Node(input);
-        ////    else
-        ////        MyLinkedListNode.CreateNode(input);
-        ////}
+            if (NumberOfNodes == 0 || NumberOfNodes < index) // if user-targeted value index is out of range
+                return readNodeData;
+            while (counter != index)
+            {
+                readTarget = readTarget.NextNode;
+                counter++;
+            }
+            return readTarget.NodeData;
+        }
 
-        //public List<Node> ChangeIndex(List<Node> linkedlist, int index, string input)
-        //{
-        //    List<Node> leftList = new List<Node>();
-        //    List<Node> rightList = new List<Node>();
-        //    List<Node> newMyLinkedList = new List<Node>();
+        public void UpdateNode(string dataInput, int index)
+        {
+            Node temp = HeadNode;
+            int counter = 1;
+            if (NumberOfNodes == 0 || NumberOfNodes < index)
+                return;
+            while (counter <= index)
+            {
+                temp = temp.NextNode;
+                counter++;
+            }
+            temp.NodeData = dataInput;
+        }
 
-        //    Node indexNode = new Node(input);
+        public string DeleteNode(int index)
+        {
+            Node deleteTarget = HeadNode;
+            int counter = 1;
+            string deleteNodeData = "";
 
-        //    for (int i = 0; i < index; i++)
-        //    {
-        //        leftList.Add(linkedlist[i]);
-        //    }
+            if (NumberOfNodes == 0 || NumberOfNodes < index) // if user-targeted value index is out of range
+                return deleteNodeData; // must chech isNullorEmpty at form.cs
+            while (counter != index)
+            {
+                deleteTarget = deleteTarget.NextNode;
+                counter++;
+            }
+            deleteNodeData += deleteTarget.NodeData;
 
-        //    leftList.Add(indexNode);
+            return deleteNodeData;
+        }
 
-        //    for (int i = index + 1; i < linkedlist.Count; i++)
-        //    {
-        //        rightList.Add(linkedlist[i]);
-        //    }
+        public void DeleteAtHead()
+        {
+            Node changedByDeletion = HeadNode.NextNode;
+            HeadNode.NextNode = null;
+            HeadNode = changedByDeletion;
+            NumberOfNodes--;
+        }
 
-        //    return MergeLists(leftList, rightList);
-        //}
+        public void DeleteAtTail()
+        {
+            Node changedByDeletion = HeadNode;
+            while (changedByDeletion.NextNode.NextNode != null)
+            {
+                changedByDeletion = changedByDeletion.NextNode;
+            }
+            changedByDeletion.NextNode = null;
+            NumberOfNodes--;
+        }
 
-        //public List<Node> MergeLists(List<Node> left, List<Node> right)
-        //{
-        //    if (right != null)
-        //    {
-        //        for (int i = 0; i < right.Count; i++)
-        //        {
-        //            left.Add(right[i]);
-        //        }
-        //    }
-        //    return left;
-        //}
+        public void DeleteInBetween(int index)
+        {
+            Node toDelete = new Node();
+            Node temp = HeadNode;
+            int counter = 1;
+            while (counter < index)
+            {
+                temp = temp.NextNode;
+                counter++;
+            }
+            toDelete = temp.NextNode.NextNode;
+            temp.NextNode.NextNode = null;
+            temp.NextNode = toDelete;
+            NumberOfNodes--;
+        }
 
-        //public List<Node> CreateLinkedList(string indexText, string input)
-        //{
-        //    int index = Convert.ToInt32(indexText);
-        //    if (MyLinkedList == null)
-        //    {
-        //        Node head = new Node("head");
-        //        MyLinkedList = new List<Node>();
-        //        MyLinkedList.Add(head); // mylinkedlist[0] is head node
-        //        Node inputNode = new Node(input);
-        //        MyLinkedList.Add(inputNode);
-        //        return MyLinkedList; // mylinkedlist[1] exists, and that becomes the first Linked Node 
-        //    }
 
-        //    else if (MyLinkedList != null)
-        //    {
-        //        if(index > MyLinkedList.Count - 1)
-        //        Node addNode = new Node(input);
-        //        MyLinkedList.Add(addNode);
-        //        MyLinkedList = ChangeIndex(MyLinkedList, index, input);
-        //        return MyLinkedList;
-        //    }
-
-        //    else
-        //        return MyLinkedList;
-
-        //}
-
-        //public string ReadLinkedList(string indexText)
-        //{
-        //    int index = Convert.ToInt32(indexText);
-        //    return MyLinkedList[index].data;
-        //}
-
-        //public List<Node> UpdateLinkedList(string indexText, string input)
-        //{
-        //    int index = Convert.ToInt32(indexText);
-        //    string newInput = input;
-        //    MyLinkedList[index].data = newInput;
-        //    return MyLinkedList;
-        //}
-
-        //public string DeleteLinkedList(string indexText)
-        //{
-        //    int index = Convert.ToInt32(indexText);
-        //    string deleteNode = MyLinkedList[index].data;
-        //    MyLinkedList.RemoveAt(index);
-        //    return deleteNode;
-        //}
     }
 }

@@ -8,17 +8,27 @@ namespace DataStructure
 {
     public class Node
     {
-        public string data;
-        public Node next;
+        public string NodeData { get; set; }
+        public Node NextNode { get; set; }
 
         public Node(string dataInput)
         {
-            data = dataInput;
-            next = null;
+            NodeData = dataInput;
+            NextNode = null;
         }
 
         public Node()
         {
         }
+
+        public void AddToTail(string input)
+        {
+            if (NextNode == null)
+                NextNode = new Node(input);
+            else
+                NextNode.AddToTail(input);
+        }
+
+
     }
 }
