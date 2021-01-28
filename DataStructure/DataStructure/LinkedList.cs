@@ -18,13 +18,14 @@ namespace DataStructure
             NumberOfNodes = 0;
         }
 
-        public void CreateLinkedList(string dataInput, int index)
+        // 3 types of adding ( in front, at the back, in the middle ) 
+        public void CreateLinkedList(string dataInput, int index) 
         {
-            if (NumberOfNodes == 0 || index == 1)
+            if (NumberOfNodes == 0 || index == 1) // when there are no nodes + index = 1 meaning in the front
                 AddToHead(dataInput);
-            else if (NumberOfNodes < index)
+            else if (NumberOfNodes < index) // when index is out of range add at the back of the list
                 AddToTail(dataInput);
-            else
+            else 
             {
                 AddInBetween(dataInput, index);
             }
@@ -149,7 +150,15 @@ namespace DataStructure
         public void DeleteAtTail()
         {
             Node changedByDeletion = HeadNode;
-
+            if (NumberOfNodes < 3)
+            {
+                if (NumberOfNodes == 2)
+                    changedByDeletion.NextNode = null;
+                else if (NumberOfNodes == 1)
+                    changedByDeletion = null;
+                NumberOfNodes--;
+                return;
+            }
             while (changedByDeletion.NextNode.NextNode != null)
             {
                 changedByDeletion = changedByDeletion.NextNode;
