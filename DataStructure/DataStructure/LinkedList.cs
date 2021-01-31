@@ -35,18 +35,14 @@ namespace DataStructure
         {
             Node newNode = new Node(inputData);
             Node temp = HeadNode;
-            int counter = 0;
-            while (counter < index)
+            int counter = 1;
+            while (counter < index - 1)
             {
-                if (counter == index - 2)
-                {
-                    newNode.NextNode = temp.NextNode;
-                    temp.NextNode = newNode;
-                    return;
-                }
                 temp = temp.NextNode;
                 counter++;
             }
+            newNode.NextNode = temp.NextNode;
+            temp.NextNode = newNode;
             NumberOfNodes++;
         }
         public void AddToTail(string inputData)

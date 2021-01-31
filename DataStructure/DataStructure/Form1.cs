@@ -166,12 +166,14 @@ namespace DataStructure
             // if both values are input to the textbox
             string updated = updateValue.Text;
             int index = Convert.ToInt32(updateIndex.Text);
-            if (linkedList.NumberOfNodes == 0 || index > linkedList.NumberOfNodes)
+            if (linkedList.NumberOfNodes == 0 || index > linkedList.NumberOfNodes || index == 0)
             {
                 if (linkedList.NumberOfNodes == 0)
                     MessageBox.Show("There is no node!");
                 else if (index > linkedList.NumberOfNodes)
                     MessageBox.Show("Index inappropriate!");
+                else if (index == 0)
+                    MessageBox.Show("Index ZERO not allowed!");
                 updateValue.Text = "";
                 updateIndex.Text = "";
                 return;
