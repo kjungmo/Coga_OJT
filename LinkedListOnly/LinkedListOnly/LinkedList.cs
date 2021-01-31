@@ -31,12 +31,13 @@ namespace LinkedListOnly
             }
         }
 
+        // to add a node between two existing nodes
         public void AddInBetween(string inputData, int index)
         {
-            Node newNode = new Node(inputData);
+            Node newNode = new Node(inputData); 
             Node temp = HeadNode;
             int counter = 1;
-            while (counter < index - 1)
+            while (counter < index - 1)  
             {
                 temp = temp.NextNode;
                 counter++;
@@ -45,11 +46,15 @@ namespace LinkedListOnly
             temp.NextNode = newNode;
             NumberOfNodes++;
         }
+        
+        // to add a node at the tail of the linked list
         public void AddToTail(string inputData)
         {
             HeadNode.AddToTail(inputData);
             NumberOfNodes++;
         }
+
+        // to add a node in front of the linked list
         public void AddToHead(string inputData)
         {
             if (HeadNode == null)
@@ -64,17 +69,7 @@ namespace LinkedListOnly
             NumberOfNodes++;
         }
 
-        public void PrintList()
-        {
-            Node runner = HeadNode; // equal to front of my list
-            while (runner != null)
-            {
-                string dodo = runner.NodeData;
-                runner = runner.NextNode;
-
-            }
-        }
-
+        // to read a node according to the index input 
         public string ReadNode(int index) // where > 0
         {
             Node readTarget = HeadNode;
@@ -105,24 +100,6 @@ namespace LinkedListOnly
             temp.NodeData = dataInput;
         }
 
-        public string DeleteNode(int index)
-        {
-            Node deleteTarget = HeadNode;
-            int counter = 1;
-            string deleteNodeData = "";
-
-            if (NumberOfNodes == 0 || NumberOfNodes < index) // if user-targeted value index is out of range
-                return deleteNodeData; // must chech isNullorEmpty at form.cs
-            while (counter != index)
-            {
-                deleteTarget = deleteTarget.NextNode;
-                counter++;
-            }
-            deleteNodeData += deleteTarget.NodeData;
-
-            return deleteNodeData;
-        }
-
         public void DeleteLinkedList(int index)
         {
             if (NumberOfNodes == 0)
@@ -148,15 +125,6 @@ namespace LinkedListOnly
         public void DeleteAtTail()
         {
             Node changedByDeletion = HeadNode;
-            if (NumberOfNodes < 3) // because the while loop needs at least 3 nodes, had to manually delete nodes
-            {
-                if (NumberOfNodes == 2)
-                    changedByDeletion.NextNode = null;
-                else if (NumberOfNodes == 1)
-                    changedByDeletion = null;
-                NumberOfNodes--;
-                return;
-            }
             while (changedByDeletion.NextNode.NextNode != null)
             {
                 changedByDeletion = changedByDeletion.NextNode;

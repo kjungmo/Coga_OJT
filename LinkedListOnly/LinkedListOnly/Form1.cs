@@ -45,8 +45,6 @@ namespace LinkedListOnly
             }
             created += createValue.Text;
             linkedList.CreateLinkedList(created, index);
-            Console.WriteLine(created);
-            Console.WriteLine(index);
             displayMyLinkedList();
             createValue.Text = "";
             createIndex.Text = "";
