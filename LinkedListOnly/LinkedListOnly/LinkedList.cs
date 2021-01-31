@@ -82,7 +82,9 @@ namespace LinkedListOnly
             string readNodeData = "";
 
             if (NumberOfNodes == 0 || NumberOfNodes < index) // if user-targeted value index is out of range
+            {
                 return readNodeData;
+            }
             while (counter != index)
             {
                 readTarget = readTarget.NextNode;
@@ -138,7 +140,7 @@ namespace LinkedListOnly
         public void DeleteAtHead()
         {
             Node changedByDeletion = HeadNode.NextNode;
-            HeadNode.NextNode = null;
+            HeadNode = null;
             HeadNode = changedByDeletion;
             NumberOfNodes--;
         }
@@ -165,17 +167,17 @@ namespace LinkedListOnly
 
         public void DeleteInBetween(int index)
         {
-            Node toDelete = new Node();
+            Node nodeToBeLinked = new Node();
             Node temp = HeadNode;
             int counter = 1;
-            while (counter < index)
+            while (counter < index - 1)
             {
                 temp = temp.NextNode;
                 counter++;
             }
-            toDelete = temp.NextNode.NextNode;
-            temp.NextNode.NextNode = null;
-            temp.NextNode = toDelete;
+            nodeToBeLinked = temp.NextNode.NextNode;
+            temp.NextNode = null;
+            temp.NextNode = nodeToBeLinked;
             NumberOfNodes--;
         }
 

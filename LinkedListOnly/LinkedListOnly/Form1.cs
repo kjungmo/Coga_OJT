@@ -22,17 +22,27 @@ namespace LinkedListOnly
 
         private void createButton_Click(object sender, EventArgs e)
         {
+
             if (string.IsNullOrEmpty(createIndex.Text) || string.IsNullOrEmpty(createValue.Text))
             {
                 if (string.IsNullOrEmpty(createIndex.Text))
                     MessageBox.Show("Index Needed!");
-                else if (string.IsNullOrEmpty(createValue.Text))
+                else
+
                     MessageBox.Show("Value Needed!");
                 displayMyLinkedList();
+                createIndex.Text = "";
+                createIndex.Text = "";
                 return;
             }
             int index = Convert.ToInt32(createIndex.Text);
             string created = "";
+            if (index == 0)
+            {
+                MessageBox.Show("Index ZERO not allowed!");
+                displayMyLinkedList();
+                return;
+            }
             created += createValue.Text;
             linkedList.CreateLinkedList(created, index);
             Console.WriteLine(created);
@@ -45,18 +55,36 @@ namespace LinkedListOnly
 
         private void readButton_Click(object sender, EventArgs e)
         {
+
             if (string.IsNullOrEmpty(readIndex.Text))
             {
                 MessageBox.Show("Index NEEDED!");
                 displayMyLinkedList();
                 return;
             }
+
             int index = Convert.ToInt32(readIndex.Text);
             string read = "";
+
+            if (index == 0)
+            {
+                MessageBox.Show("Index ZERO not allowed!");
+                displayMyLinkedList();
+                readIndex.Text = "";
+                return;
+
+            }
             readValue.Text = linkedList.ReadNode(index);
             read += readValue.Text;
+
             if (string.IsNullOrEmpty(read))
+            {
                 MessageBox.Show("Nothing to read, either Node is none or index is too large!");
+                displayMyLinkedList();
+                readValue.Text = "";
+                readIndex.Text = "";
+                return;
+            }
             displayMyLinkedList();
             readIndex.Text = "";
         }
@@ -67,9 +95,11 @@ namespace LinkedListOnly
             {
                 if (string.IsNullOrEmpty(updateIndex.Text))
                     MessageBox.Show("Index NEEDED!");
-                else if (string.IsNullOrEmpty(updateValue.Text))
+                else
                     MessageBox.Show("Value NEEDED!");
                 displayMyLinkedList();
+                updateIndex.Text = "";
+                updateValue.Text = "";
                 return;
             }
             // if both values are input to the textbox
@@ -81,7 +111,7 @@ namespace LinkedListOnly
                     MessageBox.Show("There is no node!");
                 else if (index > linkedList.NumberOfNodes)
                     MessageBox.Show("Index inappropriate!");
-                else if (index == 0)
+                else
                     MessageBox.Show("Index ZERO not allowed!");
                 updateValue.Text = "";
                 updateIndex.Text = "";
@@ -95,18 +125,26 @@ namespace LinkedListOnly
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            if (linkedList.NumberOfNodes == 0 || string.IsNullOrEmpty(deleteIndex.Text))
+            if (string.IsNullOrEmpty(deleteIndex.Text))
             {
-                if (linkedList.NumberOfNodes == 0)
-                    MessageBox.Show("No Nodes to delete!");
-                else if (string.IsNullOrEmpty(deleteIndex.Text))
-                    MessageBox.Show("Index NEEDED!");
-                deleteIndex.Text = "";
+                MessageBox.Show("Index NEEDED!");
                 displayMyLinkedList();
                 return;
             }
 
             int index = Convert.ToInt32(deleteIndex.Text);
+            if (linkedList.NumberOfNodes == 0 || string.IsNullOrEmpty(deleteIndex.Text) || index == 0)
+            {
+                if (linkedList.NumberOfNodes == 0)
+                    MessageBox.Show("No Nodes to delete!");
+                else if (string.IsNullOrEmpty(deleteIndex.Text))
+                    MessageBox.Show("Index NEEDED!");
+                else
+                    MessageBox.Show("Index ZERO not allowed!");
+                deleteIndex.Text = "";
+                displayMyLinkedList();
+                return;
+            }
             linkedList.DeleteLinkedList(index);
             deleteIndex.Text = "";
             displayMyLinkedList();
@@ -126,6 +164,5 @@ namespace LinkedListOnly
             }
             showLinkedList.Items.Add("Tail");
         }
-
     }
 }

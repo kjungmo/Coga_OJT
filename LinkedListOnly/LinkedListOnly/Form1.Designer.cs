@@ -122,6 +122,7 @@
             this.DeleteButton.TabIndex = 25;
             this.DeleteButton.Text = "Delete";
             this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // updateButton
             // 
@@ -131,6 +132,7 @@
             this.updateButton.TabIndex = 24;
             this.updateButton.Text = "Update";
             this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // readButton
             // 
@@ -140,6 +142,7 @@
             this.readButton.TabIndex = 23;
             this.readButton.Text = "Read";
             this.readButton.UseVisualStyleBackColor = true;
+            this.readButton.Click += new System.EventHandler(this.readButton_Click);
             // 
             // createButton
             // 
@@ -149,6 +152,7 @@
             this.createButton.TabIndex = 22;
             this.createButton.Text = "Create";
             this.createButton.UseVisualStyleBackColor = true;
+            this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
             // createValue
             // 
