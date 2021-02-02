@@ -114,7 +114,7 @@ namespace LinkedListOnly
             }
 
             int index = Convert.ToInt32(deleteIndex.Text);
-            if (linkedList.NumberOfNodes == 0 || string.IsNullOrEmpty(deleteIndex.Text) || index == 0)
+            if (linkedList.NumberOfNodes == 0 || string.IsNullOrEmpty(deleteIndex.Text))
             {
                 if (linkedList.NumberOfNodes == 0)
                     MessageBox.Show("No Nodes to delete!");

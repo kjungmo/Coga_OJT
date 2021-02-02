@@ -109,7 +109,7 @@ namespace LinkedListOnly
         {
             if (NumberOfNodes == 0)
                 HeadNode = null;
-            else if (index == 1)
+            else if (index == 0)
                 DeleteAtHead();
             else if (NumberOfNodes < index)
                 DeleteAtTail();
@@ -142,7 +142,7 @@ namespace LinkedListOnly
         {
             Node nodeToBeLinked = new Node();
             Node temp = HeadNode;
-            int counter = 1;
+            int counter = 0;
             while (counter < (index - 1))
             {
                 temp = temp.NextNode;
