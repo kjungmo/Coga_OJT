@@ -10,18 +10,15 @@ namespace LinkedListOnly
     {
         public Node HeadNode { get; private set; }
         public int NumberOfNodes { get; private set; } // indicates how many nodes exists and count + 1 is the number of total nodes
-        public string ValueReturned { get; private set; }
 
         public LinkedList()
         {
-            HeadNode = null;
-            NumberOfNodes = 0;
         }
 
         // 3 types of adding ( in front, at the back, in the middle ) 
         public void CreateLinkedList(string dataInput, int index) 
         {
-            if (NumberOfNodes == 0 || index == 1) // when there are no nodes + index = 1 meaning in the front
+            if (NumberOfNodes == 0 || index == 0) // when there are no nodes + index = 1 meaning in the front
                 AddToHead(dataInput);
             else if (NumberOfNodes < index) // when index is out of range add at the back of the list
                 AddToTail(dataInput);
@@ -36,7 +33,7 @@ namespace LinkedListOnly
         {
             Node newNode = new Node(inputData); 
             Node temp = HeadNode;
-            int counter = 1;
+            int counter = 0;
             while (counter < index - 1)  
             {
                 temp = temp.NextNode;
@@ -50,7 +47,15 @@ namespace LinkedListOnly
         // to add a node at the tail of the linked list
         public void AddToTail(string inputData)
         {
-            HeadNode.AddToTail(inputData);
+            Node newNode = new Node(inputData);
+            Node temp = HeadNode;
+            int counter = 0;
+            while (counter < (NumberOfNodes - 1))
+            {
+                temp = temp.NextNode;
+                counter++;
+            }
+            temp.NextNode = newNode; 
             NumberOfNodes++;
         }
 
@@ -73,7 +78,7 @@ namespace LinkedListOnly
         public string ReadNode(int index) // where > 0
         {
             Node readTarget = HeadNode;
-            int counter = 1;
+            int counter = 0;
             string readNodeData = "";
 
             if (NumberOfNodes == 0 || NumberOfNodes < index) // if user-targeted value index is out of range
@@ -92,7 +97,7 @@ namespace LinkedListOnly
         {
             Node temp = HeadNode;
             int counter = 0;
-            while (counter < index - 1)
+            while (counter < (index - 1))
             {
                 temp = temp.NextNode;
                 counter++;
@@ -138,7 +143,7 @@ namespace LinkedListOnly
             Node nodeToBeLinked = new Node();
             Node temp = HeadNode;
             int counter = 1;
-            while (counter < index - 1)
+            while (counter < (index - 1))
             {
                 temp = temp.NextNode;
                 counter++;

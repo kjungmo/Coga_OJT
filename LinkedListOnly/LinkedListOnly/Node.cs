@@ -20,15 +20,5 @@ namespace LinkedListOnly
         public Node()
         {
         }
-
-        public void AddToTail(string input)
-        {
-            if (NextNode == null)
-                NextNode = new Node(input);
-            else
-                NextNode.AddToTail(input);
-        }
-
-
     }
 }

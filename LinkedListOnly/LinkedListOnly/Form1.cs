@@ -37,12 +37,6 @@ namespace LinkedListOnly
             }
             int index = Convert.ToInt32(createIndex.Text);
             string created = "";
-            if (index == 0)
-            {
-                MessageBox.Show("Index ZERO not allowed!");
-                displayMyLinkedList();
-                return;
-            }
             created += createValue.Text;
             linkedList.CreateLinkedList(created, index);
             displayMyLinkedList();
@@ -63,15 +57,6 @@ namespace LinkedListOnly
 
             int index = Convert.ToInt32(readIndex.Text);
             string read = "";
-
-            if (index == 0)
-            {
-                MessageBox.Show("Index ZERO not allowed!");
-                displayMyLinkedList();
-                readIndex.Text = "";
-                return;
-
-            }
             readValue.Text = linkedList.ReadNode(index);
             read += readValue.Text;
 
@@ -103,14 +88,12 @@ namespace LinkedListOnly
             // if both values are input to the textbox
             string updated = updateValue.Text;
             int index = Convert.ToInt32(updateIndex.Text);
-            if (linkedList.NumberOfNodes == 0 || index > linkedList.NumberOfNodes || index == 0)
+            if (linkedList.NumberOfNodes == 0 || index > linkedList.NumberOfNodes)
             {
                 if (linkedList.NumberOfNodes == 0)
                     MessageBox.Show("There is no node!");
-                else if (index > linkedList.NumberOfNodes)
+                else 
                     MessageBox.Show("Index inappropriate!");
-                else
-                    MessageBox.Show("Index ZERO not allowed!");
                 updateValue.Text = "";
                 updateIndex.Text = "";
                 return;
@@ -137,8 +120,6 @@ namespace LinkedListOnly
                     MessageBox.Show("No Nodes to delete!");
                 else if (string.IsNullOrEmpty(deleteIndex.Text))
                     MessageBox.Show("Index NEEDED!");
-                else
-                    MessageBox.Show("Index ZERO not allowed!");
                 deleteIndex.Text = "";
                 displayMyLinkedList();
                 return;
