@@ -56,6 +56,22 @@ namespace AgainSaveTheHumans
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+
+            enemyTimer.Tick += enemyTimer_Tick;
+            enemyTimer.Interval = TimeSpan.FromSeconds(2);
+
+            targetTimer.Tick += targetTimer_Tick;
+            targetTimer.Interval = TimeSpan.FromSeconds(.1);
+        }
+
+        void targetTimer_Tick(object sender, object e)
+        {
+            throw new NotImplementedException();
+        }
+
+        void enemyTimer_Tick(object sender, object e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
