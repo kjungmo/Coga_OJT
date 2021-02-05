@@ -181,5 +181,14 @@ namespace AgainSaveTheHumans
             storyboard.Children.Add(animation);
             storyboard.Begin();
         }
+
+        private void human_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (enemyTimer.IsEnabled)
+            {
+                humanCaptured = true;
+                human.IsHitTestVisible = false;
+            }
+        }
     }
 }
