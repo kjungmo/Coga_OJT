@@ -54,9 +54,9 @@
                 <Button x:Name="startButton" Content="Start the Game!" Margin="20,0"/>
             </StackPanel>
             <TextBlock Grid.Row="2" Text="Game progress" Margin="0,20,0,20" Style="{StaticResource SubheaderTextBlockStyle}"/>
-            <TextBlock HorizontalAlignment="Left" Margin="124,404,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
             <ScrollViewer Grid.Row="3" Width="100" FontSize="24" Background="White" Foreground="Black"/>
-            <ScrollViewer HorizontalAlignment="Left" Height="100" Margin="142,470,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
+            <TextBlock Grid.Row="4" Text="Books" Padding="0,20,0,20" Style="{StaticResource SubheaderTextBlockStyle}"/>
+            <ScrollViewer Grid.Row="5" FontSize="24" Grid.RowSpan="2" Background="White" Foreground="Black"/>
             <TextBlock HorizontalAlignment="Left" Margin="764,51,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
             <ScrollViewer HorizontalAlignment="Left" Height="100" Margin="764,141,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
             <Button Content="Button" HorizontalAlignment="Left" Margin="767,330,0,0" Grid.Row="1" VerticalAlignment="Top"/>
