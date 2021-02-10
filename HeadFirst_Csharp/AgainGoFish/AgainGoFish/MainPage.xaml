@@ -57,10 +57,11 @@
             <ScrollViewer Grid.Row="3" Width="100" FontSize="24" Background="White" Foreground="Black"/>
             <TextBlock Grid.Row="4" Text="Books" Padding="0,20,0,20" Style="{StaticResource SubheaderTextBlockStyle}"/>
             <ScrollViewer Grid.Row="5" FontSize="24" Grid.RowSpan="2" Background="White" Foreground="Black"/>
-            <TextBlock Text="Your hand" Grid.Row="0" Style="{StaticResource SubheaderTextBlockStyle}" Grid.Column="2" Margin="0,0,0,20"/>
+            <TextBlock Text="Your hand" Grid.Row="0" Style="{StaticResource SubheaderTextBlockStyle}" Grid.Column="2" Margin="0,0,0,20" FontFamily="Global User Interface"/>
             <ListBox x:Name="Cards" Background="#CCFFFFFF" FontSize="24" Margin="0,0,0,20" Grid.Row="1" Grid.RowSpan="5" Grid.Column="2"/>
+            <Button x:Name="askForACard" Content="Ask for a card" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch" Grid.Column="2"/>
             <ScrollViewer HorizontalAlignment="Left" Height="100" Margin="764,141,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="767,330,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+            
             
         </Grid>
     </Grid>
