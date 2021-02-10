@@ -61,8 +61,20 @@
             <ListBox x:Name="Cards" Background="#CCFFFFFF" FontSize="24" Margin="0,0,0,20" Grid.Row="1" Grid.RowSpan="5" Grid.Column="2"/>
             <Button x:Name="askForACard" Content="Ask for a card" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch" Grid.Column="2"/>
             <ScrollViewer HorizontalAlignment="Left" Height="100" Margin="764,141,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
-            
-            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" MinHeight="150"/>
+            </Grid.RowDefinitions>
         </Grid>
     </Grid>
 </Page>
