@@ -30,6 +30,31 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="1" Margin="120,0">
+            <TextBlock/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <TextBlock/>
+                    <ComboBox>
+                        <ComboBoxItem/>
+                        <ComboBoxItem/>
+                        <ComboBoxItem/>
+                        <ComboBoxItem/>
+                        <ComboBoxItem/>
+                        <ComboBoxItem/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock/>
+                    <TextBox/>
+                </StackPanel>
+                <Button/>
+            </StackPanel>
+            <Button/>
+            <TextBlock/>
+            <ScrollViewer/>
+        </StackPanel>
 
         <!-- Back button and page title -->
         <Grid>
