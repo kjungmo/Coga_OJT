@@ -12,7 +12,7 @@
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+        <x:String x:Key="AppName">Again Beehive</x:String>
     </Page.Resources>
 
     <!--
@@ -33,27 +33,34 @@
         
         <StackPanel Grid.Row="1" Margin="120,0">
             <TextBlock Text="Worker Bee Assignments" Style="{StaticResource SubheaderTextBlockStyle}"/>
-            <StackPanel Orientation="Horizontal">
-                <StackPanel>
-                    <TextBlock/>
-                    <ComboBox>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
-                        <ComboBoxItem/>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <StackPanel Margin="0,0,20,0">
+                    <TextBlock Text="Job" Margin="0,0,0,10" Style="{StaticResource BodyTextBlockStyle}"/>
+                    <ComboBox SelectedIndex="0">
+                        <ComboBoxItem Content="Baby bee tutoring"/>
+                        <ComboBoxItem Content="Egg care"/>
+                        <ComboBoxItem Content="Hive maintenance"/>
+                        <ComboBoxItem Content="Honey manufacturing"/>
+                        <ComboBoxItem Content="Nectar collector"/>
+                        <ComboBoxItem Content="Sting patrol"/>
                     </ComboBox>
                 </StackPanel>
                 <StackPanel>
-                    <TextBlock/>
+                    <TextBlock Text="Shifts" Margin="0,0,0,10"/>
                     <TextBox/>
                 </StackPanel>
-                <Button/>
+                <Button Content="Assign this job to a bee" Margin="20,20,0,0" Style="{StaticResource TextBlockButtonStyle}"/>
             </StackPanel>
-            <Button/>
-            <TextBlock/>
-            <ScrollViewer/>
+            <Button Content="Work the next shift" Margin="0,20,0,0"/>
+            <TextBlock Text="Shift report" Margin="0,40,0,20" Style="{StaticResource SubheaderTextBlockStyle}"/>
+            <ScrollViewer BorderThickness="2" BorderBrush="White" Height="250" Content="
+                          Report for shift #20&#13;
+                          Worker #1 will be done with 'Nectar collector' after this shift&#13;
+                          Worker #2 finished the job&#13;
+                          Worker #2 is not working&#13;
+                          Worker #3 is doing 'Sting patrol' for 3 more shifts&#13;
+                          Worker #4 is doing 'Baby bee tutoring' for 6 more shifts
+                          "/>
         </StackPanel>
 
         <!-- Back button and page title -->
