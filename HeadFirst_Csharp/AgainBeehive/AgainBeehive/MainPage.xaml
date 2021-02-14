@@ -32,7 +32,7 @@
         </Grid.RowDefinitions>
         
         <StackPanel Grid.Row="1" Margin="120,0">
-            <TextBlock/>
+            <TextBlock Text="Worker Bee Assignments" Style="{StaticResource SubheaderTextBlockStyle}"/>
             <StackPanel Orientation="Horizontal">
                 <StackPanel>
                     <TextBlock/>
