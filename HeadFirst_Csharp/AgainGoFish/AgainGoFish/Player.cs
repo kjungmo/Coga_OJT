@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace AgainGoFish
 {
@@ -13,15 +14,15 @@ namespace AgainGoFish
         public string Name { get { return name; } }
         private Random random;
         private Deck cards;
-        private TextBox textBoxOnForm;
+        private Game game;
 
-        public Player(string name, Random random, TextBox textBoxOnForm)
+        public Player(string name, Random random, Game game)
         {
             this.name = name;
             this.random = random;
-            this.textBoxOnForm = textBoxOnForm;
+            this.game = game;
             this.cards = new Deck(new Card[] { });
-            textBoxOnForm.Text += name + " has just joined the game" + Environment.NewLine;
+            game.AddProgress(name + " has just joined the game");
         }
 
         public IEnumerable<Value> PullOutBooks()
@@ -54,7 +55,7 @@ namespace AgainGoFish
         public Deck DoYouHaveAny(Value value)
         {
             Deck cardsIHave = cards.PullOutValues(value);
-            textBoxOnForm.Text += Name + " has " + cardsIHave.Count + " " + Card.Plural(value) + Environment.NewLine;
+            game.AddProgress(Name + " has " + cardsIHave.Count + " " + Card.Plural(value);
             return cardsIHave;
         }
 
@@ -75,7 +76,7 @@ namespace AgainGoFish
 
         public void AskForACard(List<Player> players, int myIndex, Deck stock, Value value)
         {
-            textBoxOnForm.Text += Name + " asks if anyone has a " + value + Environment.NewLine;
+            game.AddProgress(Name + " asks if anyone has a " + value);
             int totalCardsGiven = 0;
             for (int i = 0; i < players.Count; i++)
             {
@@ -92,7 +93,7 @@ namespace AgainGoFish
             }
             if (totalCardsGiven == 0 && stock.Count > 0)
             {
-                textBoxOnForm.Text += Name + " must draw from the stock." + Environment.NewLine;
+                game.AddProgress(Name + " must draw from the stock.");
                 cards.Add(stock.Deal());
             }
         }

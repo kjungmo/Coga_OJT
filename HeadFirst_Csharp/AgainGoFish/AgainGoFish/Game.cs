@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace AgainGoFish
 {
@@ -12,6 +13,14 @@ namespace AgainGoFish
         private Dictionary<Value, Player> books;
         private Deck stock;
         private TextBox textBoxOnForm;
+
+        public bool GameInProgress { get; private set; }
+        public bool GameNotStarted { get { return !GameInProgress; } }
+        public string PlayerName { get; set; }
+        public ObservableCollection<string> Hand { get; private set; }
+        public string Books { get { return DescribeBooks(); } }
+        public string GameProgress { get; private set; }
+
 
         public Game(string playerName, IEnumerable<string> opponentNames, TextBox textBoxOnForm)
         {

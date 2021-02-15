@@ -44,7 +44,6 @@ namespace AgainGoFish
             get { return this.navigationHelper; }
         }
 
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -102,5 +101,15 @@ namespace AgainGoFish
         }
 
         #endregion
+
+        private void startButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void askForACard_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
