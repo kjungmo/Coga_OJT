@@ -118,5 +118,10 @@ namespace GuyToXML
         {
 
         }
+
+        private void ReadNewGuy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
