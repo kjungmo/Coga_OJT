@@ -130,17 +130,45 @@ namespace ExcuseManagerXAML
 
         public async Task ReadExcuseAsync()
         {
-            throw new NotImplementedException();
+            using (IRandomAccessStream stream = await excuseFile.OpenAsync(FileAccessMode.Read))
+            using (Stream inputStream = stream.AsStreamForRead())
+            {
+                DataContractSerializer serializer = new DataContractSerializer(typeof(Excuse));
+                CurrentExcuse = serializer.ReadObject(inputStream) as Excuse;
+            }
+
+            await new MessageDialog("Excuse read from " + excuseFile.Name).ShowAsync();
+            OnPropertyChanged("CurrentExcuse");
+            await UpdateFileDateAsync();
         }
 
         public async Task WriteExcuseAsync()
         {
-            throw new NotImplementedException();
+            using(IRandomAccessStream stream = await excuseFile.OpenAsync(FileAccessMode.ReadWrite))
+            using (Stream outputStream = stream.AsStreamForWrite())
+            {
+                DataContractSerializer serializer = new DataContractSerializer(typeof(Excuse));
+                serializer.WriteObject(outputStream, CurrentExcuse);
+            }
+            await new MessageDialog("Excuse written to " + excuseFile.Name).ShowAsync();
+            await UpdateFileDateAsync();
         }
 
         public async void SaveCurrentExcuseAsAsync()
         {
-
+            FileSavePicker picker = new FileSavePicker
+            {
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
+                SuggestedFileName = CurrentExcuse.Description,
+                CommitButtonText = "Save Excuse File"
+            };
+            picker.FileTypeChoices.Add("XML File", new List<string>() { ".xml" });
+            IStorageFile newExcuseFile = await picker.PickSaveFileAsync();
+            if (NewExcuseFile != null)
+            {
+                excuseFile = newExcuseFile;
+                await WriteExcuseAsync();
+            }
         }
 
     }
