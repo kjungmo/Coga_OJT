@@ -115,7 +115,7 @@ namespace ExcuseManagerXAML
                 await new MessageDialog("No excuse loaded").ShowAsync();
                 return;
             }
-            if (string.IsNullOrEmpty(CurrentExcuse.Description)
+            if (string.IsNullOrEmpty(CurrentExcuse.Description))
             {
                 await new MessageDialog("Current excuse does not have a description").ShowAsync();
                 return;
@@ -164,7 +164,7 @@ namespace ExcuseManagerXAML
             };
             picker.FileTypeChoices.Add("XML File", new List<string>() { ".xml" });
             IStorageFile newExcuseFile = await picker.PickSaveFileAsync();
-            if (NewExcuseFile != null)
+            if (newExcuseFile != null)
             {
                 excuseFile = newExcuseFile;
                 await WriteExcuseAsync();
