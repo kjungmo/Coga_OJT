@@ -42,6 +42,8 @@ namespace AgainSloppyJoe
                 Menu.Add(CreateMenuItem());
             }
             GeneratedDate = DateTime.Now;
+
+            OnPropertyChanged("GeneratedDate");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
