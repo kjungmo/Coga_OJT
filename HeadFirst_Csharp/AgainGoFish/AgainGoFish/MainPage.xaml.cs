@@ -104,17 +104,23 @@ namespace AgainGoFish
 
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            game.StartGame();
         }
 
         private void askForACard_Click(object sender, RoutedEventArgs e)
         {
-
+            if (cards.SelectedIndex >= 0)
+            {
+                game.PlayOneRound(cards.SelectedIndex);
+            }
         }
 
         private void Cards_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-
+            if (cards.SelectedIndex >= 0)
+            {
+                game.PlayOneRound(cards.SelectedIndex);
+            }
         }
     }
 }

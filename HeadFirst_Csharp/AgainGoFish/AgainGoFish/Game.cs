@@ -116,6 +116,7 @@ namespace AgainGoFish
                         card++;
                     }
                 }
+                OnPropertyChanged("Books");
                 players[0].SortHand();
                 if (stock.Count == 0)
                 {
