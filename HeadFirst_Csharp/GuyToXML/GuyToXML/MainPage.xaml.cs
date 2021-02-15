@@ -102,5 +102,21 @@ namespace GuyToXML
         }
 
         #endregion
+
+
+        private void WriteJoe_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void WriteBob_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void WriteEd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
