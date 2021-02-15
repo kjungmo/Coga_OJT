@@ -105,12 +105,42 @@ namespace ExcuseManagerXAML
 
         private void SetToCurrentTimeClick(object sender, RoutedEventArgs e)
         {
-
+            excuseManager.SetToCurrentTime();
         }
 
-        private void saveButton_Click(object sender, RoutedEventArgs e)
+        private void SaveButtonClick(object sender, RoutedEventArgs e)
         {
+            excuseManager.SaveCurrentExcuseAsync();
+        }
 
+        private void OpenButtonClick(object sender, RoutedEventArgs e)
+        {
+            excuseManager.OpenExcuseAsync();
+        }
+
+        private void NewExcuseButtonClick(object sender, RoutedEventArgs e)
+        {
+            excuseManager.NewExcuseAsync();
+        }
+
+        private void SaveAsButtonClick(object sender, RoutedEventArgs e)
+        {
+            excuseManager.SaveCurrentExcuseAsAsync();
+        }
+
+        private void RandomButtonClick(object sender, RoutedEventArgs e)
+        {
+            excuseManager.OpenRandomExcuseAsync();
+        }
+
+        private async void FolderButtonClick(object sender, RoutedEventArgs e)
+        {
+            bool folderChosen = await excuseManager.ChooseNewFolderAsync();
+            if (folderChosen)
+            {
+                saveButton.IsEnabled = true;
+                randomButton.IsEnabled = true;
+            }
         }
     }
 }

@@ -34,7 +34,7 @@ namespace ExcuseManagerXAML
             NewExcuseAsync();
         }
 
-        async private void NewExcuseAsync()
+        async public void NewExcuseAsync()
         {
             CurrentExcuse = new Excuse();
             excuseFile = null;
