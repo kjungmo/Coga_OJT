@@ -11,6 +11,9 @@
     mc:Ignorable="d">
 
     <Page.Resources>
+        <local:MenuMaker x:Name="menuMaker"/>
+        
+        
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">Welcome to Sloppy Joe's</x:String>
     </Page.Resources>
@@ -32,7 +35,7 @@
         </Grid.RowDefinitions>
 
         <!-- newMenu button -->
-        <StackPanel Grid.Row="1" Margin="120,0" x:Name="pageLayoutStackPanel">
+        <StackPanel Grid.Row="1" Margin="120,0" DataContext="{StaticResource ResourceKey=menuMaker}">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
                 <StackPanel Margin="0,0,20,0">
                     <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Number of items" Margin="0,0,0,10" />
@@ -40,7 +43,22 @@
                 </StackPanel>
             </StackPanel>
             <Button x:Name="newMenu" VerticalAlignment="Bottom" Click="newMenu_Click" Content="Make a new menu" Margin="0,0,20,0"/>
-            <ListView ItemsSource="{Binding Menu}" Margin="0,0,20,0"/>
+            <ListView ItemsSource="{Binding Menu}" Margin="0,0,20,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Bread}"/>
+                                <TextBlock Text="{Binding Bread}"/>
+                                <TextBlock Text="{Binding Bread}"/>
+                            </StackPanel>
+                            <Ellipse Fill="DarkSlateBlue" Height="Auto" Width="10" Margin="10,0"/>
+                            <Button Content="{Binding Condiment}" FontFamily="Segoe Script"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
             <TextBlock Style="{StaticResource CaptionTextBlockStyle}">
             <Run Text="This menu was generated on "/>
             <Run Text="{Binding GeneratedDate}"/>
