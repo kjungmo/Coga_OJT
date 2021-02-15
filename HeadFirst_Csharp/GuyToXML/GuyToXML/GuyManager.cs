@@ -29,7 +29,7 @@ namespace GuyToXML
 
         public string Path { get; set; }
 
-        public async void ReadGuyAsync()
+        public async Task ReadGuyAsync()
         {
             if (String.IsNullOrEmpty(Path))
                 return;
@@ -73,5 +73,11 @@ namespace GuyToXML
                 propertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        private async void MethodThatReadsGuys()
+        {
+            await ReadGuyAsync();
+        }
+
     }
 }
