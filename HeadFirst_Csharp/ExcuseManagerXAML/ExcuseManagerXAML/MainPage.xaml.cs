@@ -102,5 +102,10 @@ namespace ExcuseManagerXAML
         }
 
         #endregion
+
+        private void SetToCurrentTimeClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

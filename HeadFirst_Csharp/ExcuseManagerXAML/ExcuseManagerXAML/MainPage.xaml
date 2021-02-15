@@ -32,6 +32,22 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <StackPanel Grid.Row="1" Margin="120,0,0,0" DataContext="{StaticResource ResourceKey=excuseManager}">
+            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="Excuse" Margin="0,0,0,10"/>
+            <TextBox Text="{Binding CurrentExcuse.Description, Mode=TwoWay}" Margin="0,0,20,20"/>
+            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="Results" Margin="0,0,0,10"/>
+            <TextBox Text="{Binding CurrentExcuse.Results, Mode=TwoWay}" Margin="0,0,20,20"/>
+            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="Last Used" Margin="0,0,0,10"/>
+            <StackPanel Orientation="Horizontal" Margin="   0,0,0,20">
+                <TextBox Text="{Binding CurrentExcuse.LastUsed, Mode=TwoWay}" MinWidth="300" Margin="0,0,20,0"/>
+                <Button Content="Set to current time" Click="SetToCurrentTimeClick" Margin="0,0,20,0"/>
+                <TextBlock Foreground="Red" Text="{Binding CurrentExcuse.DateWarning}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+            </StackPanel>
+            
+            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="File Date" Margin="0,0,0,10"/>
+            <TextBlock Text="{Binding FileDate}" Style="{StaticResource CaptionTextBlockStyle}"/>
+        </StackPanel>
+        
         <!-- Back button and page title -->
         <Grid>
             <Grid.ColumnDefinitions>
