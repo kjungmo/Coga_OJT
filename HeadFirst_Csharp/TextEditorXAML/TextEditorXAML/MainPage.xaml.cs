@@ -13,16 +13,18 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.System;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.UI.Popups;
+
 
 
 // 기본 페이지 항목 템플릿에 대한 설명은 http://go.microsoft.com/fwlink/?LinkId=234237에 나와 있습니다.
 
 namespace TextEditorXAML
 {
+    using Windows.System;
+    using Windows.Storage;
+    using Windows.Storage.Pickers;
+    using Windows.UI.Popups;
+
     /// <summary>
     /// 대부분의 응용 프로그램에 공통되는 특성을 제공하는 기본 페이지입니다.
     /// </summary>
@@ -174,7 +176,7 @@ namespace TextEditorXAML
 
         private async void SaveFile()
         {
-            if (saveFile != null)
+            if (saveFile == null)
             {
                 FileSavePicker picker = new FileSavePicker
                 {
@@ -189,7 +191,7 @@ namespace TextEditorXAML
                     return;
                 }
             }
-            await FileIO.WriteTextAsync(saveFile, text.Text);
+            await FileIO.WriteTextAsync(saveFile, text.Text); 
             await new MessageDialog("Wrote " + saveFile.Name).ShowAsync();
             textChanged = false;
             filename.Text = saveFile.Name;
