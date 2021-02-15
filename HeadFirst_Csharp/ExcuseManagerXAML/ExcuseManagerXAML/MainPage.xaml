@@ -15,6 +15,23 @@
         <local:ExcuseManager x:Name="excuseManager"/>
         <x:String x:Key="AppName">My Application</x:String>
     </Page.Resources>
+    <Page.BottomAppBar>
+        <AppBar>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <AppBarButton Label="New Excuse" Click="NewExcuseButtonClick">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="&#x26F1;"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Icon="Folder" Label="Folder" Click="FolderButtonClick"/>
+                <AppBarButton Icon="Help" Label="Random Excuse" Click="RandomButtonClick" x:Name="randomButton" IsEnabled="False"/>
+                <AppBarSeparator/>
+                <AppBarButton Icon="OpenFile" Label="Open" Click="OpenButtonClick"/>
+                <AppBarButton Icon="Save" Label="Save" x:Name="saveButton" IsEnabled="False" Click="SaveButtonClick"/>
+                <AppBarButton Icon="Save" Label="Save as..." Click="SaveAsButtonClick"/>
+            </StackPanel>   
+        </AppBar>
+    </Page.BottomAppBar>
 
     <!--
         This grid acts as a root panel for the page that defines two rows:
