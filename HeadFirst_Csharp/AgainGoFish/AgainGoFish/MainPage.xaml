@@ -13,7 +13,8 @@
     <Page.Resources>
         
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">Go Fish!</x:String>
+        <x:String x:Key="AppName">AgainGoFish</x:String>
+        <local:Game x:Name="game"/>
     </Page.Resources>
 
     <!--
@@ -48,19 +49,19 @@
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
 
-        <Grid Grid.Row="1" Margin="120,0,60,60">
+        <Grid Grid.Row="1" Margin="120,0,60,60" DataContext="{StaticResource ResourceKey=game}">
             <TextBlock Text="Your Name" Margin="0,0,0,20" Style="{StaticResource SubheaderTextBlockStyle}"/>
             <StackPanel Orientation="Horizontal" Grid.Row="1">
-                <TextBox x:Name="playerName" FontSize="24" Width="500" MinWidth="300"/>
-                <Button x:Name="startButton" Content="Start the Game!" Margin="20,0" Click="startButton_Click"/>
+                <TextBox x:Name="playerName" FontSize="24" Width="500" MinWidth="300" Text="{Binding PlayerName, Mode=TwoWay}" IsEnabled="{Binding GameNotStarted}"/>
+                <Button x:Name="startButton" Content="Start the Game!" Margin="20,0" Click="startButton_Click" IsEnabled="{Binding GameNotStarted}"/>
             </StackPanel>
             <TextBlock Grid.Row="2" Text="Game progress" Margin="0,20,0,20" Style="{StaticResource SubheaderTextBlockStyle}" FontFamily="Global User Interface"/>
-            <ScrollViewer Grid.Row="3" FontSize="24" Background="White" Foreground="Black"/>
+            <ScrollViewer Grid.Row="3" FontSize="24" Background="White" Foreground="Black" Content="{Binding GameProgress}"/>
             <TextBlock Grid.Row="4" Text="Books" Padding="0,20,0,20" Style="{StaticResource SubheaderTextBlockStyle}"/>
-            <ScrollViewer Grid.Row="5" FontSize="24" Grid.RowSpan="2" Background="White" Foreground="Black"/>
+            <ScrollViewer Grid.Row="5" FontSize="24" Grid.RowSpan="2" Background="White" Foreground="Black" Content="{Binding Books}"/>
             <TextBlock Text="Your hand" Grid.Row="0" Style="{StaticResource SubheaderTextBlockStyle}" Grid.Column="2" Margin="0,0,0,20" FontFamily="Global User Interface"/>
-            <ListBox x:Name="Cards" Background="#CCFFFFFF" FontSize="24" Margin="0,0,0,20" Grid.Row="1" Grid.RowSpan="5" Grid.Column="2"/>
-            <Button x:Name="askForACard" Content="Ask for a card" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch" Grid.Column="2" Click="askForACard_Click"/>
+            <ListBox x:Name="Cards" Background="#CCFFFFFF" FontSize="24" Margin="0,0,0,20" Grid.Row="1" Grid.RowSpan="5" Grid.Column="2" ItemsSource="{Binding Hand}" IsEnabled="{Binding GameInProgress}" DoubleTapped="Cards_DoubleTapped"/>
+            <Button x:Name="askForACard" Content="Ask for a card" HorizontalAlignment="Stretch" Grid.Row="6" VerticalAlignment="Stretch" Grid.Column="2" Click="askForACard_Click" IsEnabled="{Binding GameInProgress}"/>
             <ScrollViewer HorizontalAlignment="Left" Height="100" Margin="764,141,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>

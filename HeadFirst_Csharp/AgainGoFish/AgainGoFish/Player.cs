@@ -55,7 +55,7 @@ namespace AgainGoFish
         public Deck DoYouHaveAny(Value value)
         {
             Deck cardsIHave = cards.PullOutValues(value);
-            game.AddProgress(Name + " has " + cardsIHave.Count + " " + Card.Plural(value);
+            game.AddProgress(Name + " has " + cardsIHave.Count + " " + Card.Plural(value));
             return cardsIHave;
         }
 

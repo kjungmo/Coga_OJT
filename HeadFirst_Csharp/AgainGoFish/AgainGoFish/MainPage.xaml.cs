@@ -111,5 +111,10 @@ namespace AgainGoFish
         {
 
         }
+
+        private void Cards_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+
+        }
     }
 }
