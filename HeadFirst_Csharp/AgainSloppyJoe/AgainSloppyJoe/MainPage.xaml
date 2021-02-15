@@ -30,8 +30,25 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <!-- newMenu button -->
+        <StackPanel Grid.Row="1" Margin="120,0" x:Name="pageLayoutStackPanel">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <StackPanel Margin="0,0,20,0">
+                    <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Number of items" Margin="0,0,0,10" />
+                    <TextBox Width="100" HorizontalAlignment="Left" Text="{Binding NumberOfItems, Mode=TwoWay}"/>
+                </StackPanel>
+            </StackPanel>
+            <Button x:Name="newMenu" VerticalAlignment="Bottom" Click="newMenu_Click" Content="Make a new menu" Margin="0,0,20,0"/>
+            <ListView ItemsSource="{Binding Menu}" Margin="0,0,20,0"/>
+            <TextBlock Style="{StaticResource CaptionTextBlockStyle}">
+            <Run Text="This menu was generated on "/>
+            <Run Text="{Binding GeneratedDate}"/>
+            </TextBlock>
+        </StackPanel>
         
         
+
 
         <!-- Back button and page title -->
         <Grid>

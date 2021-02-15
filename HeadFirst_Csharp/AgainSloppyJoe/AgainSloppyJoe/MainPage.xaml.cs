@@ -44,6 +44,7 @@ namespace AgainSloppyJoe
             get { return this.navigationHelper; }
         }
 
+        MenuMaker menuMaker = new MenuMaker();
 
         public MainPage()
         {
@@ -51,6 +52,7 @@ namespace AgainSloppyJoe
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+            pageLayoutStackPanel.DataContext = menuMaker;
         }
 
         /// <summary>
@@ -102,5 +104,10 @@ namespace AgainSloppyJoe
         }
 
         #endregion
+
+        private void newMenu_Click(object sender, RoutedEventArgs e)
+        {
+            menuMaker.UpdateMenu();
+        }
     }
 }
