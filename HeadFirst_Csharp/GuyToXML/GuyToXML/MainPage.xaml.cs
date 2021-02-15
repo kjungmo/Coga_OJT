@@ -106,22 +106,22 @@ namespace GuyToXML
 
         private void WriteJoe_Click(object sender, RoutedEventArgs e)
         {
-
+            guyManager.WriteGuyAsync(guyManager.Joe);
         }
 
         private void WriteBob_Click(object sender, RoutedEventArgs e)
         {
-
+            guyManager.WriteGuyAsync(guyManager.Bob);
         }
 
         private void WriteEd_Click(object sender, RoutedEventArgs e)
         {
-
+            guyManager.WriteGuyAsync(guyManager.Ed);
         }
 
         private void ReadNewGuy_Click(object sender, RoutedEventArgs e)
         {
-
+            guyManager.ReadGuyAsync();
         }
     }
 }
