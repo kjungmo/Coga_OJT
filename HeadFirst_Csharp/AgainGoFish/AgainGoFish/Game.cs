@@ -7,12 +7,11 @@ using System.Collections.ObjectModel;
 
 namespace AgainGoFish
 {
-    class Game
+    class Game : INotifyPropertyChanged
     {
         private List<Player> players;
         private Dictionary<Value, Player> books;
         private Deck stock;
-        private TextBox textBoxOnForm;
 
         public bool GameInProgress { get; private set; }
         public bool GameNotStarted { get { return !GameInProgress; } }
@@ -22,21 +21,51 @@ namespace AgainGoFish
         public string GameProgress { get; private set; }
 
 
-        public Game(string playerName, IEnumerable<string> opponentNames, TextBox textBoxOnForm)
+        public Game()
         {
+            PlayerName = "Ed";
+            Hand = new ObservableCollection<string>();
+            ResetGame();
+        }
+
+        public void AddProgress(string progress)
+        {
+            GameProgress = progress + Environment.NewLine + GameProgress;
+            OnPropertyChanged("GameProgress");
+        }
+
+        public void ClearProgress()
+        {
+            GameProgress = string.Empty;
+            OnPropertyChanged("GameProgress");
+        }
+
+        public void StartGame()
+        {
+            ClearProgress();
+            GameInProgress = true;
+            OnPropertyChanged("GameInProgress");
+            OnPropertyChanged("GameNotStarted");
             Random random = new Random();
-            this.textBoxOnForm = textBoxOnForm;
             players = new List<Player>();
-            players.Add(new Player(playerName, random, textBoxOnForm));
-            foreach (string player in opponentNames)
-            {
-                players.Add(new Player(player, random, textBoxOnForm));
-            }
-            books = new Dictionary<Value, Player>();
-            stock = new Deck();
+            players.Add(new Player(PlayerName, random, this));
+            players.Add(new Player("Bob", random, this));
+            players.Add(new Player("Joe", random, this));
             Deal();
             players[0].SortHand();
+            Hand.Clear();
+            foreach (string cardName in GetPlayerCardNames())
+            {
+                Hand.Add(cardName);
+            }
+            if (!GameInProgress)
+            {
+                AddProgress(DescribePlayerHands());
+            }
+            OnPropertyChanged("Books");
         }
+
+
 
         private void Deal()
         {
@@ -68,7 +97,7 @@ namespace AgainGoFish
             return false;
         }
 
-        public bool PlayOneRound(int selectedPlayerCard)
+        public void PlayOneRound(int selectedPlayerCard)
         {
             Value cardToAskFor = players[0].Peek(selectedPlayerCard).Values;
             for (int i = 0; i < players.Count; i++)
@@ -79,7 +108,7 @@ namespace AgainGoFish
                     players[i].AskForACard(players, i, stock);
                 if (PullOutBooks(players[i]))
                 {
-                    textBoxOnForm.Text += players[i].Name + " drew a new hand" + Environment.NewLine;
+                    AddProgress(players[i].Name + " drew a new hand");
                     int card = 1;
                     while (card <= 5 && stock.Count > 0)
                     {
@@ -90,12 +119,32 @@ namespace AgainGoFish
                 players[0].SortHand();
                 if (stock.Count == 0)
                 {
-                    textBoxOnForm.Text = "The stock is out of cards. Game over!" + Environment.NewLine;
-                    return true;
+                    AddProgress("The stock is out of cards. Game over!");
+                    AddProgress("The winner is... " + GetWinnerName());
+                    ResetGame();
+                    return;
                 }
             }
-            return false;
+            Hand.Clear();
+            foreach (string cardName in GetPlayerCardNames())
+            {
+                Hand.Add(cardName);
+            }
+            if (!GameInProgress)
+            {
+                AddProgress(DescribePlayerHands());
+            }
         }
+        public void ResetGame()
+        {
+            GameInProgress = false;
+            OnPropertyChanged("GameInProgress");
+            OnPropertyChanged("GameNotStarted");
+            books = new Dictionary<Value, Player>();
+            stock = new Deck();
+            Hand.Clear();
+        }
+
 
         public string DescribeBooks()
         {
@@ -172,6 +221,17 @@ namespace AgainGoFish
             else
             {
                 return winnerList;
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler propertyChangedEvent = PropertyChanged;
+            if (propertyChangedEvent != null)
+            {
+                propertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }
