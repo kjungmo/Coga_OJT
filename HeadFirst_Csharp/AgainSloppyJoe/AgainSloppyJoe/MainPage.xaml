@@ -12,7 +12,7 @@
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+        <x:String x:Key="AppName">Welcome to Sloppy Joe's</x:String>
     </Page.Resources>
 
     <!--
@@ -30,6 +30,8 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        
 
         <!-- Back button and page title -->
         <Grid>
