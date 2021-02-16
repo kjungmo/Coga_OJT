@@ -92,6 +92,11 @@ namespace ExcuseManagerXAML
         public async void OpenRandomExcuseAsync()
         {
             IReadOnlyList<IStorageFile> files = await excuseFolder.GetFilesAsync();
+            if (files.Count() == 0)
+            {
+                await new MessageDialog("The current excuse folder is empty.").ShowAsync();
+                return;
+            }
             excuseFile = files[random.Next(0, files.Count())];
             await ReadExcuseAsync();
         }
