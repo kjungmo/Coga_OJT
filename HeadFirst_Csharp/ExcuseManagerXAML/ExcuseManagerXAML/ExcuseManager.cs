@@ -151,10 +151,11 @@ namespace ExcuseManagerXAML
             catch (SerializationException)
             {
                 new MessageDialog("Unable to read " + excuseFile.Name).ShowAsync();
+                NewExcuseAsync();
             }
             finally
             {
-                OnPropertyChanged("CurrentExcuse")
+                OnPropertyChanged("CurrentExcuse");
             }
         }
 
