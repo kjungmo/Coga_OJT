@@ -135,16 +135,23 @@ namespace ExcuseManagerXAML
 
         public async Task ReadExcuseAsync()
         {
-            using (IRandomAccessStream stream = await excuseFile.OpenAsync(FileAccessMode.Read))
-            using (Stream inputStream = stream.AsStreamForRead())
+            try
             {
-                DataContractSerializer serializer = new DataContractSerializer(typeof(Excuse));
-                CurrentExcuse = serializer.ReadObject(inputStream) as Excuse;
-            }
+                using (IRandomAccessStream stream = await excuseFile.OpenAsync(FileAccessMode.Read))
+                using (Stream inputStream = stream.AsStreamForRead())
+                {
+                    DataContractSerializer serializer = new DataContractSerializer(typeof(Excuse));
+                    CurrentExcuse = serializer.ReadObject(inputStream) as Excuse;
+                }
 
-            await new MessageDialog("Excuse read from " + excuseFile.Name).ShowAsync();
-            OnPropertyChanged("CurrentExcuse");
-            await UpdateFileDateAsync();
+                await new MessageDialog("Excuse read from " + excuseFile.Name).ShowAsync();
+                OnPropertyChanged("CurrentExcuse");
+                await UpdateFileDateAsync();
+            }
+            catch(SerializationException)
+            {
+                new MessageDialog("Unable to read " + excuseFile.Name).ShowAsync();
+            }
         }
 
         public async Task WriteExcuseAsync()
