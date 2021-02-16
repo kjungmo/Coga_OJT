@@ -148,9 +148,13 @@ namespace ExcuseManagerXAML
                 OnPropertyChanged("CurrentExcuse");
                 await UpdateFileDateAsync();
             }
-            catch(SerializationException)
+            catch (SerializationException)
             {
                 new MessageDialog("Unable to read " + excuseFile.Name).ShowAsync();
+            }
+            finally
+            {
+                OnPropertyChanged("CurrentExcuse")
             }
         }
 
