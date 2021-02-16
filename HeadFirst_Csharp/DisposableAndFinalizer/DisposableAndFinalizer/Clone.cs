@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace DisposableAndFinalizer
 {
+    [Serializable]
     class Clone : IDisposable
     {
         public int Id { get; private set; }

@@ -16,5 +16,24 @@ namespace DisposableAndFinalizer
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (Clone clone1 = new Clone(1))
+            {
+                
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Clone clone2 = new Clone(2);
+            clone2 = null;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            GC.Collect();
+        }
     }
 }
