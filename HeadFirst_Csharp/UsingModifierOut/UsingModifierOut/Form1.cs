@@ -52,5 +52,27 @@ namespace UsingModifierOut
             Console.WriteLine("q = {0}, b.Text = {1}", q, b.Text);
         }
 
+        void CheckTemperature(double temperature, double tooHigh = 99.5, double tooLow = 96.5)
+        {
+            if (temperature < tooHigh && temperature > tooLow)
+            {
+                Console.WriteLine("Feeling good!");
+            }
+            else
+                Console.WriteLine("Uh-oh -- better see a doctor!");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // this is a normal person's average temperature
+            CheckTemperature(101.3);
+
+            // the temperature of a dog should be in range of 100.5 ~ 102.5 fahrenheit
+            CheckTemperature(101.3, 102.5, 100.5);
+
+            // Bob's temperature is always a bit low, so set tooLow at 95.5
+            CheckTemperature(96.2, tooLow: 95.5);
+        }
+
     }
 }
