@@ -15,11 +15,17 @@ namespace JimmysApp
 
         public string Title { get;  private set; }
 
+        public ComicQueryManager()
+        {
+            UpdateAvailableQueries();
+            CurrentQueryResults = new ObservableCollection<object>();
+        }
+
         private void UpdateAvailableQueries()
         {
             AvailableQueries = new ObservableCollection<ComicQuery>{
                 new ComicQuery("LINQ makes queries easy", "A sample query", "Let's show Jimmy how flexible LINQ is", "Assets/purple_250x250.jpg"),
-                new ComicQuery("Expensive comics", "Comics over $500", "Comics whose value is over 500 bucks." + " Jimmy can use this to figure out which comics are most coveted.", "Assets/captiain_amazing_250x250.jpg"),
+                new ComicQuery("Expensive comics", "Comics over $500", "Comics whose value is over 500 bucks." + " Jimmy can use this to figure out which comics are most coveted.", "Assets/captain_amazing_250x250.jpg"),
 
             };
         }
