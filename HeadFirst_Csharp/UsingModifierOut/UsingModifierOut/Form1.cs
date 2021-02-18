@@ -35,5 +35,22 @@ namespace UsingModifierOut
             a = ReturnThreeValues(out b, out c);
             Console.WriteLine("value = {0}, half = {1}, double = {2}", a, b, c);
         }
+
+        public void ModifyAnIntAndButton(ref int value, ref Button button)
+        {
+            int i = value;
+            i *= 5;
+            value = i - 3;
+            button = button1;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int q = 100;
+            Button b = button1;
+            ModifyAnIntAndButton(ref q, ref b);
+            Console.WriteLine("q = {0}, b.Text = {1}", q, b.Text);
+        }
+
     }
 }
