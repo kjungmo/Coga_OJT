@@ -42,7 +42,73 @@ namespace JimmysApp
             {
                 case "LINQ makes queries easy": LinqMakesQueriesEasy(); break;
                 case "Expensive comics": ExpensiveComics(); break;
+                case "LINQ is versatile 1": LinqIsVersatile1(); break;
+                case "LINQ is versatile 2": LinqIsVersatile2(); break;
+                case "LINQ is versatile 3": LinqIsVersatile3(); break;
             }
+        }
+
+        private void LinqIsVersatile3()
+        {
+            List<int> listOfNumbers = new List<int>();
+            for (int i = 0; i <= 10000; i++)
+            {
+                listOfNumbers.Add(i);
+            }
+            var under50sorted = from number in listOfNumbers
+                                where number < 50
+                                orderby number descending
+                                select number;
+
+            var firstFive = under50sorted.Take(6);
+
+            List<int> shortLIst = firstFive.ToList();
+            foreach (int n in shortLIst)
+            {
+                CurrentQueryResults.Add(CreateAnonymousListViewItems(n.ToString(), "bluegray_250x250.jpg"));
+            }
+        }
+
+        private void LinqIsVersatile2()
+        {
+            Random random = new Random();
+            List<int> listOfNumbers = new List<int>();
+            int length = random.Next(50, 150);
+            for (int i = 0; i < length; i++)
+            {
+                listOfNumbers.Add(random.Next(100));
+            }
+
+            CurrentQueryResults.Clear();
+            CurrentQueryResults.Add(CreateAnonymousListViewItems(string.Format("There are {0} numbers", listOfNumbers.Count())));
+            CurrentQueryResults.Add(CreateAnonymousListViewItems(string.Format("The biggest is {0}", listOfNumbers.Max())));
+            CurrentQueryResults.Add(CreateAnonymousListViewItems(string.Format("The smallest is {0}", listOfNumbers.Min())));
+            CurrentQueryResults.Add(CreateAnonymousListViewItems(string.Format("The sum is {0}", listOfNumbers.Sum())));
+            CurrentQueryResults.Add(CreateAnonymousListViewItems(string.Format("The average is {0:F2}", listOfNumbers.Average())));
+        }
+
+
+
+        private void LinqIsVersatile1()
+        {
+            string[] sandwiches = { "ham and cheese", "salami with mayo", "turkey and swiss", "chicken cutlet" };
+            var sandwichesOnRye = from sandwich in sandwiches
+                                  select sandwich + " on rye";
+
+            CurrentQueryResults.Clear();
+            foreach (var sandwich in sandwiches)
+            {
+                CurrentQueryResults.Add(CreateAnonymousListViewItems(sandwich, "bluegray_250x250.jpg"));
+            }
+        }
+
+        private object CreateAnonymousListViewItems(string title, string imageFilename = "purple_250x250.jpg")
+        {
+            return new
+            {
+                Title = title,
+                ImagePath = "Assets/" + imageFilename,
+            };
         }
 
         public static IEnumerable<Comic> BuildCatalog()
