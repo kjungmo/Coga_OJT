@@ -93,6 +93,12 @@ namespace JimmysApp
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            ComicQuery comicQuery = e.Parameter as ComicQuery;
+            if (comicQuery != null)
+            {
+                comicQueryManager.UpdateQueryResults(comicQuery);
+                pageTitle.Text = comicQueryManager.Title;
+            }
             navigationHelper.OnNavigatedTo(e);
         }
 
@@ -102,16 +108,5 @@ namespace JimmysApp
         }
 
         #endregion
-
-        protected override void OnNavigationTo(NavigationEventArgs e)
-        {
-            ComicQuery comicQuery = e.Parameter as ComicQuery;
-            if (comicQuery != null)
-            {
-                comicQueryManager.UpdateQueryResults(comicQuery);
-                pageTitle.Text = comicQueryManager.Title;
-            }
-            navigationHelper.OnNavigatedTo(e);
-        }
     }
 }
