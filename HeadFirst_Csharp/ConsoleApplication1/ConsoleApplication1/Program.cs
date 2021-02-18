@@ -10,6 +10,13 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Enter birthday: ");
+            string birthday = Console.ReadLine();
+            Console.Write("Enter height in inches: ");
+            string height = Console.ReadLine();
+            RobustGuy guy = new RobustGuy(birthday, height);
+            Console.WriteLine(guy.ToString());
+            Console.ReadKey();
         }
     }
 }
