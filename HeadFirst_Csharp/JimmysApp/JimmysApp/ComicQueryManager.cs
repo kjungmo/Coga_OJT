@@ -7,8 +7,10 @@ using System.Collections.ObjectModel;
 
 namespace JimmysApp
 {
+
     class ComicQueryManager
     {
+
         public ObservableCollection<ComicQuery> AvailableQueries { get; private set; }
 
         public ObservableCollection<object> CurrentQueryResults { get; private set; }
@@ -26,7 +28,9 @@ namespace JimmysApp
             AvailableQueries = new ObservableCollection<ComicQuery>{
                 new ComicQuery("LINQ makes queries easy", "A sample query", "Let's show Jimmy how flexible LINQ is", "Assets/purple_250x250.jpg"),
                 new ComicQuery("Expensive comics", "Comics over $500", "Comics whose value is over 500 bucks." + " Jimmy can use this to figure out which comics are most coveted.", "Assets/captain_amazing_250x250.jpg"),
-
+                new ComicQuery("LINQ is versatile 1", "Modify every item returned from the query", "This code will add a string onto the end of each string in an array.", "Assets/bluegray_250x250.jpg"),
+                new ComicQuery("LINQ is versatile 2", "Perform calculations on collections", "LINQ provides extension methods for your collections (and anything else" + " that implements IEnumerable<T>).", "Assets/purple_250x250.jpg"),
+                new ComicQuery("LINQ is versatile 3", "Store all or part of your results in a new sequence", "Sometimes you'll want to keep your results from a LINQ query around.", "Assets/bluegray_250x250.jpg"),
             };
         }
 
@@ -96,6 +100,8 @@ namespace JimmysApp
 	        }
 
         }
+
+
 
     }
 }

@@ -51,6 +51,7 @@ namespace JimmysApp
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+
         }
 
         /// <summary>
