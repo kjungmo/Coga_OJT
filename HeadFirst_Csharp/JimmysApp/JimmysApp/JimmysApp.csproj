@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Comic.cs" />
     <Compile Include="ComicQuery.cs" />
+    <Compile Include="ComicQueryManager.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
@@ -137,7 +138,9 @@
     <None Include="JimmysApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\captain_amazing_250x250.jpg" />
     <Content Include="Assets\Logo.scale-100.png" />
+    <Content Include="Assets\purple_250x250.jpg" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
