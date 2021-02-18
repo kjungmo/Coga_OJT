@@ -102,5 +102,10 @@ namespace JimmysApp
         }
 
         #endregion
+
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
     }
 }

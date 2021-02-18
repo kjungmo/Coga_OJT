@@ -12,6 +12,7 @@
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+        <local:ComicQueryManager x:Name="comicQueryManager"/>
         <x:String x:Key="AppName">My Application</x:String>
     </Page.Resources>
 
@@ -31,6 +32,32 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <Grid Grid.Row="1" Margin="120,0" DataContext="{StaticResource ResourceKey=comicQueryManager}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="Choose a query to run" Margin="10,0,0,20"/>
+            <ListView Grid.Row="1" ItemsSource="{Binding AvailableQueries}" SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}"/>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
+                                <TextBlock Text="{Binding Title}" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="NoWrap"/>
+                                <TextBlock Text="{Binding Subtitle}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap"/>
+                                <TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextBlockStyle}" MaxHeight="60"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        
         <!-- Back button and page title -->
         <Grid>
             <Grid.ColumnDefinitions>
