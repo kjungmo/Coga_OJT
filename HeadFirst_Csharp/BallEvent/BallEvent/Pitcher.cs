@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace BallEvent
 {
+    using System.Collections.ObjectModel;
+
     class Pitcher
     {
+        public ObservableCollection<string> PitcherSays = new ObservableCollection<string>();
+        private int pitchNumber = 0;
+
         public Pitcher(Ball ball)
         {
             ball.BallInPlay += ball_BallInPlay;
@@ -15,6 +20,7 @@ namespace BallEvent
 
         void ball_BallInPlay(object sender, EventArgs e)
         {
+            pitchNumber++;
             if (e is BallEventArgs)
             {
                 BallEventArgs ballEventArgs = e as BallEventArgs;
@@ -25,6 +31,16 @@ namespace BallEvent
                 else
                     CoverFirstBase();
             }
+        }
+
+        private void CoverFirstBase()
+        {
+            PitcherSays.Add("Pitch #" + pitchNumber + ": I covered first base");
+        }
+
+        private void CatchBall()
+        {
+            PitcherSays.Add("Pitch #" + pitchNumber + ": I caught the ball");
         }
     }
 }

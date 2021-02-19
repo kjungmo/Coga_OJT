@@ -12,7 +12,8 @@
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+        <x:String x:Key="AppName">Baseball Simulator</x:String>
+        <local:BaseballSimulator x:Name="baseballSimulator"/>
     </Page.Resources>
 
     <!--
@@ -30,6 +31,27 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="1" Margin="120,0" DataContext="{StaticResource ResourceKey=baseballSimulator}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="0,0,40,0">
+                <TextBlock Text="Trajectory" Style="{StaticResource SubheaderTextBlockStyle}" Margin="0,0,0,20"/>
+                <TextBox Text="{Binding Trajectory, Mode=TwoWay}" Margin="0,0,0,20"/>
+                <TextBlock Text="Distance" Style="{StaticResource SubheaderTextBlockStyle}" Margin="0,0,0,20"/>
+                <TextBox Text="{Binding Distance, Mode=TwoWay}" Margin="0,0,0,20"/>
+                <Button Content="Play ball!" Click="Button_Click"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="Pitcher says" Style="{StaticResource SubheaderTextBlockStyle}" Margin="0,0,0,20"/>
+                <ListView ItemsSource="{Binding PitcherSays}" Height="150"/>
+                <TextBlock Text="Fan says" Style="{StaticResource SubheaderTextBlockStyle}" Margin="0,0,0,20"/>
+                <ListView ItemsSource="{Binding FanSays}" Height="150"/>
+            </StackPanel>
+        </Grid>
+        
 
         <!-- Back button and page title -->
         <Grid>

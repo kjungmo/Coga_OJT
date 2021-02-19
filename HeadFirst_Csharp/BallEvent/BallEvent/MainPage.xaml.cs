@@ -53,6 +53,11 @@ namespace BallEvent
             this.navigationHelper.SaveState += navigationHelper_SaveState;
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            baseballSimulator.PlayBall();
+        }
+
         /// <summary>
         /// 탐색 중 전달된 콘텐츠로 페이지를 채웁니다. 이전 세션의 페이지를
         /// 다시 만들 때 저장된 상태도 제공됩니다.
