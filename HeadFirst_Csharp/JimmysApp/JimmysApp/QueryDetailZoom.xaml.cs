@@ -21,7 +21,7 @@ namespace JimmysApp
     /// <summary>
     /// 대부분의 응용 프로그램에 공통되는 특성을 제공하는 기본 페이지입니다.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class QueryDetailZoom : Page
     {
 
         private NavigationHelper navigationHelper;
@@ -45,13 +45,12 @@ namespace JimmysApp
         }
 
 
-        public MainPage()
+        public QueryDetailZoom()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
-
         }
 
         /// <summary>
@@ -94,6 +93,12 @@ namespace JimmysApp
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            ComicQuery comicQuery = e.Parameter as ComicQuery;
+            if (comicQuery != null)
+            {
+                comicQueryManager.UpdateQueryResults(comicQuery);
+                pageTitle.Text = comicQueryManager.Title;
+            }
             navigationHelper.OnNavigatedTo(e);
         }
 
@@ -103,17 +108,5 @@ namespace JimmysApp
         }
 
         #endregion
-
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            ComicQuery query = e.ClickedItem as ComicQuery;
-            if (query != null)
-            {
-                if (query.Title == "All comics in the collection")
-                    this.Frame.Navigate(typeof(QueryDetailZoom), query);
-                else
-                    this.Frame.Navigate(typeof(QueryDetail), query);
-            }
-        }
     }
 }
