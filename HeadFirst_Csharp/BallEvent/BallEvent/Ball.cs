@@ -11,6 +11,7 @@ namespace BallEvent
         public event EventHandler BallInPlay;
         public void OnBallInPlay(BallEventArgs e)
         {
+            EventHandler ballInPlay = BallInPlay;
             if (BallInPlay != null)
             {
                 BallInPlay(this, e);
