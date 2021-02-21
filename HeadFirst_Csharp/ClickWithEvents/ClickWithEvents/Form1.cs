@@ -16,5 +16,10 @@ namespace ClickWithEvents
         {
             InitializeComponent();
         }
+
+        private void Form1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("You just clicked on the form");
+        }
     }
 }
