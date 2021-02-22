@@ -15,7 +15,7 @@ namespace BallEvent
 
         public Pitcher(Ball ball)
         {
-            ball.BallInPlay += ball_BallInPlay;
+            ball.BallInPlay += new EventHandler<BallEventArgs>(ball_BallInPlay);
         }
 
         void ball_BallInPlay(object sender, EventArgs e)

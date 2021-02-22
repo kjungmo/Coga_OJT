@@ -8,10 +8,10 @@ namespace BallEvent
 {
     class Ball
     {
-        public event EventHandler BallInPlay;
+        public event EventHandler<BallEventArgs> BallInPlay;
         public void OnBallInPlay(BallEventArgs e)
         {
-            EventHandler ballInPlay = BallInPlay;
+            EventHandler<BallEventArgs> ballInPlay = BallInPlay;
             if (BallInPlay != null)
             {
                 BallInPlay(this, e);
