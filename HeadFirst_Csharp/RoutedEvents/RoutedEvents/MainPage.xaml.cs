@@ -21,8 +21,11 @@ namespace RoutedEvents
     /// <summary>
     /// 대부분의 응용 프로그램에 공통되는 특성을 제공하는 기본 페이지입니다.
     /// </summary>
+
+    using System.Collections.ObjectModel;
     public sealed partial class MainPage : Page
     {
+        ObservableCollection<string> outputItems = new ObservableCollection<string>();
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -51,6 +54,7 @@ namespace RoutedEvents
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+            output.ItemsSource = outputItems;
         }
 
         /// <summary>
