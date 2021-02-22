@@ -109,27 +109,70 @@ namespace RoutedEvents
 
         private void StackPanel_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-
+            if (sender == e.OriginalSource)
+            {
+                outputItems.Clear();
+            }
+            outputItems.Add("The panel was pressed");
         }
 
         private void border_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-
+            if (sender == e.OriginalSource)
+            {
+                outputItems.Clear();
+            }
+            outputItems.Add("The border was pressed");
+            if (borderSetHandled.IsOn)
+            {
+                e.Handled = true;
+            }
         }
 
         private void grid_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-
+            if (sender == e.OriginalSource)
+            {
+                outputItems.Clear();
+            }
+            outputItems.Add("The grid was pressed");
+            if (gridSetHandled.IsOn)
+            {
+                e.Handled = true;
+            }
         }
 
         private void Ellipse_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-
+            if (sender == e.OriginalSource)
+            {
+                outputItems.Clear();
+            }
+            outputItems.Add("The ellipse was pressed");
+            if (ellipseSetsHandled.IsOn)
+            {
+                e.Handled = true;
+            }
         }
 
         private void Rectangle_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-
+            if (sender == e.OriginalSource)
+            {
+                outputItems.Clear();
+            }
+            outputItems.Add("The rectangle was pressed");
+            if (rectangleSetsHandled.IsOn)
+            {
+                e.Handled = true;
+            }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            grayRectangle.IsHitTestVisible = newHitTestVisibleValue.IsOn;
+        }
+
+
     }
 }

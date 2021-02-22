@@ -39,7 +39,7 @@
             
             <StackPanel x:Name="panel" PointerPressed="StackPanel_PointerPressed">
                 <Border BorderThickness="10" BorderBrush="Blue" Width="155" x:Name="border" Margin="20" PointerPressed="border_PointerPressed">
-                    <Grid x:Name="grid" PointerPressed="Ellipse_PointerPressed">
+                    <Grid x:Name="grid" PointerPressed="grid_PointerPressed">
                         <Ellipse Fill="Red" Width="100" Height="100" PointerPressed="Ellipse_PointerPressed"/>
                         <Rectangle Fill="Gray" Width="50" Height="50" PointerPressed="Rectangle_PointerPressed" x:Name="grayRectangle"/>
                     </Grid>
@@ -52,7 +52,7 @@
                 <ToggleSwitch Header="Grid sets handled" x:Name="gridSetHandled"/>
                 <ToggleSwitch Header="Ellipse sets handled" x:Name="ellipseSetsHandled"/>
                 <ToggleSwitch Header="Rectangle sets handled" x:Name="rectangleSetsHandled"/>
-                <Button Content="Update Rectangle IsHitTestVisible" Click="UpdateHitTestButton" Margin="0,20,20,0"/>
+                <Button Content="Update Rectangle IsHitTestVisible" Click="Button_Click" Margin="0,20,20,0"/>
                 <ToggleSwitch IsOn="True" Header="New IsHitTestVisible value" x:Name="newHitTestVisibleValue"/>
             </StackPanel>
         </Grid>
