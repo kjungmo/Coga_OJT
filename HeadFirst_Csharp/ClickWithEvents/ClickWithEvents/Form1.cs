@@ -21,5 +21,26 @@ namespace ClickWithEvents
         {
             MessageBox.Show("You just clicked on the form");
         }
+
+        private void SaySomething(object sender, EventArgs e)
+        {
+            MessageBox.Show("Something");
+        }
+
+        private void SaySomethingElse(object sender, EventArgs e)
+        {
+            MessageBox.Show("Something else");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Click += new EventHandler(SaySomething);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Click += new EventHandler(SaySomethingElse);
+        }
+
     }
 }
