@@ -39,7 +39,7 @@ namespace JimmysApp
         /// 응용 프로그램에서 특정 파일을 열기 시작할 때 사용됩니다.
         /// </summary>
         /// <param name="e">시작 요청 및 프로세스에 대한 정보입니다.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        async protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 
 #if DEBUG
@@ -64,7 +64,7 @@ namespace JimmysApp
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    //TODO: 이전에 일시 중지된 응용 프로그램에서 상태를 로드합니다.
+                    await SuspensionManager.RestoreAsync();
                 }
 
                 // 현재 창에 프레임 넣기
@@ -76,7 +76,25 @@ namespace JimmysApp
                 // 탐색 스택이 복원되지 않으면 첫 번째 페이지로 돌아가고
                 // 필요한 정보를 탐색 매개 변수로 전달하여 새 페이지를
                 // 구성합니다.
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
+                    throw new Exception("Failed to create initial page");
+                if (!string.IsNullOrEmpty(SuspensionManager.CurrentQuery))
+                {
+                    var currentQuerySequence = from query in new ComicQueryManager().AvailableQueries
+                                               where query.Title == SuspensionManager.CurrentQuery
+                                               select query;
+                    if (currentQuerySequence.Count() == 1)
+                    {
+                        ComicQuery query = currentQuerySequence.First();
+                        if (query != null)
+                        {
+                            if (query.Title == "All comics in the collection")
+                                rootFrame.Navigate(typeof(QueryDetailZoom), query);
+                            else
+                                rootFrame.Navigate(typeof(QueryDetail), query);
+                        }
+                    }
+                }
             }
             // 현재 창이 활성 창인지 확인
             Window.Current.Activate();
