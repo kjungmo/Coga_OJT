@@ -99,10 +99,10 @@ namespace JimmysApp
         /// </summary>
         /// <param name="sender">일시 중지된 요청의 소스입니다.</param>
         /// <param name="e">일시 중지된 요청에 대한 세부 정보입니다.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        async private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: 응용 프로그램 상태를 저장하고 백그라운드 작업을 모두 중지합니다.
+            await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
     }
