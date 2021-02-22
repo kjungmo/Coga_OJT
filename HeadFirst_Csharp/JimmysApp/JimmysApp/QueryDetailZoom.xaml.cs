@@ -104,8 +104,11 @@ namespace JimmysApp
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            SuspensionManager.CurrentQuery = null;
             navigationHelper.OnNavigatedFrom(e);
         }
+
+
 
         #endregion
     }

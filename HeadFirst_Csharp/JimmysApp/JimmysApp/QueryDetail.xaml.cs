@@ -23,6 +23,7 @@ namespace JimmysApp
     /// </summary>
     public sealed partial class QueryDetail : Page
     {
+        
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -106,6 +107,8 @@ namespace JimmysApp
         {
             navigationHelper.OnNavigatedFrom(e);
         }
+        
+        
 
         #endregion
     }
