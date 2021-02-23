@@ -27,6 +27,8 @@ namespace DelegateChef
             {
                 Console.WriteLine("I'll add " + ingredientMethod((int)amount.Value));
             }
+            else
+                Console.WriteLine("I don't have a secret ingredient!");
         }
 
         private void getSuzanne_Click(object sender, EventArgs e)
