@@ -42,6 +42,8 @@
             this.readButton = new System.Windows.Forms.Button();
             this.createButton = new System.Windows.Forms.Button();
             this.createValue = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // deleteIndex
@@ -161,11 +163,35 @@
             this.createValue.Size = new System.Drawing.Size(59, 21);
             this.createValue.TabIndex = 21;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Resource.ko-KR.resx",
+            "Resource.en-US.resx"});
+            this.comboBox1.Location = new System.Drawing.Point(379, 77);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(79, 20);
+            this.comboBox1.TabIndex = 35;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Location = new System.Drawing.Point(305, 83);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(70, 14);
+            this.textBox1.TabIndex = 36;
+            this.textBox1.Text = "Language :";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 434);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.deleteIndex);
             this.Controls.Add(this.updateIndex);
             this.Controls.Add(this.readIndex);
@@ -205,6 +231,8 @@
         private System.Windows.Forms.Button readButton;
         private System.Windows.Forms.Button createButton;
         private System.Windows.Forms.TextBox createValue;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

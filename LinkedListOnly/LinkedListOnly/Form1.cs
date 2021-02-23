@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Threading;
 
 namespace LinkedListOnly
 {
@@ -142,6 +144,31 @@ namespace LinkedListOnly
                 counter--;
             }
             showLinkedList.Items.Add("Tail");
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == 0)
+            {
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("ko-KR");
+                SetTextLanguage();
+            }
+            else if (comboBox1.SelectedIndex == 1)
+            {
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+                SetTextLanguage();
+            }
+        }
+
+        private void SetTextLanguage()
+        {
+            label4.Text = LinkedListOnly.Language.Resource.label4;
+            label1.Text = LinkedListOnly.Language.Resource.label1;
+            DeleteButton.Text = LinkedListOnly.Language.Resource.DeleteButton;
+            updateButton.Text = LinkedListOnly.Language.Resource.updateButton;
+            readButton.Text = LinkedListOnly.Language.Resource.readButton;
+            createButton.Text = LinkedListOnly.Language.Resource.createButton;
+            textBox1.Text = LinkedListOnly.Language.Resource.textBox1s;
         }
     }
 }
