@@ -167,8 +167,8 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Resource.ko-KR.resx",
-            "Resource.en-US.resx"});
+            "한국어",
+            "영어"});
             this.comboBox1.Location = new System.Drawing.Point(379, 77);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(79, 20);

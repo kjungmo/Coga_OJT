@@ -168,7 +168,7 @@ namespace LinkedListOnly
             updateButton.Text = LinkedListOnly.Language.Resource.updateButton;
             readButton.Text = LinkedListOnly.Language.Resource.readButton;
             createButton.Text = LinkedListOnly.Language.Resource.createButton;
-            textBox1.Text = LinkedListOnly.Language.Resource.textBox1s;
+            textBox1.Text = LinkedListOnly.Language.Resource.textBox1;
         }
     }
 }
