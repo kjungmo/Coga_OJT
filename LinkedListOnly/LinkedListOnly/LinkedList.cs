@@ -81,7 +81,7 @@ namespace LinkedListOnly
             int counter = 0;
             string readNodeData = "";
 
-            if (NumberOfNodes == 0 || NumberOfNodes < index) // if user-targeted value index is out of range
+            if (NumberOfNodes == 0 || NumberOfNodes <= index) // if user-targeted value index is out of range
             {
                 return readNodeData;
             }
