@@ -61,9 +61,13 @@
     <Compile Include="Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.de-DE.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Language\Resource.de-DE.resx" />
     <EmbeddedResource Include="Language\Resource.en-US.resx" />
     <EmbeddedResource Include="Language\Resource.ko-KR.resx" />
     <EmbeddedResource Include="Language\Resource.resx">
