@@ -123,6 +123,9 @@
   <data name="DeleteButton" xml:space="preserve">
     <value>삭제</value>
   </data>
+  <data name="head" xml:space="preserve">
+    <value>머리</value>
+  </data>
   <data name="label1" xml:space="preserve">
     <value>값</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="readButton" xml:space="preserve">
     <value>읽어오기</value>
+  </data>
+  <data name="tail" xml:space="preserve">
+    <value>꼬리</value>
   </data>
   <data name="textBox1" xml:space="preserve">
     <value>언어</value>

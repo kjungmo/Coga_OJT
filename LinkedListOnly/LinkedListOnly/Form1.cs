@@ -44,6 +44,8 @@ namespace LinkedListOnly
             displayMyLinkedList();
             createValue.Text = "";
             createIndex.Text = "";
+            
+            WriteLog("!@yes");
 
         }
 
@@ -131,11 +133,14 @@ namespace LinkedListOnly
             displayMyLinkedList();
         }
 
+        
+
         private void displayMyLinkedList()
         {
+            
             Node myNode = linkedList.HeadNode;
             showLinkedList.Items.Clear();
-            showLinkedList.Items.Add("Head");
+            showLinkedList.Items.Add(head);
             int counter = linkedList.NumberOfNodes;
             while (counter > 0)
             {
@@ -143,7 +148,7 @@ namespace LinkedListOnly
                 myNode = myNode.NextNode;
                 counter--;
             }
-            showLinkedList.Items.Add("Tail");
+            showLinkedList.Items.Add(tail);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -159,6 +164,8 @@ namespace LinkedListOnly
                 SetTextLanguage();
             }
         }
+        public string tail = "Tail";
+        public string head = "Head";
 
         private void SetTextLanguage()
         {
@@ -169,6 +176,15 @@ namespace LinkedListOnly
             readButton.Text = LinkedListOnly.Language.Resource.readButton;
             createButton.Text = LinkedListOnly.Language.Resource.createButton;
             textBox1.Text = LinkedListOnly.Language.Resource.textBox1;
+            head = LinkedListOnly.Language.Resource.head;
+            tail = LinkedListOnly.Language.Resource.tail;
+            
+        }
+
+        private void WriteLog(string log)
+        {
+            richTextBox1.Text += log + "\n";
+
         }
     }
 }

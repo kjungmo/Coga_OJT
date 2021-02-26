@@ -123,6 +123,9 @@
   <data name="DeleteButton" xml:space="preserve">
     <value>DELETE</value>
   </data>
+  <data name="head" xml:space="preserve">
+    <value>HEAD</value>
+  </data>
   <data name="label1" xml:space="preserve">
     <value>VALUE</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="readButton" xml:space="preserve">
     <value>READ</value>
+  </data>
+  <data name="tail" xml:space="preserve">
+    <value>TAIL</value>
   </data>
   <data name="textBox1" xml:space="preserve">
     <value>LANGUAGE</value>
