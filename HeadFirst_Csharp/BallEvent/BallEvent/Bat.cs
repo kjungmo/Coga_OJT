@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace BallEvent
 {
+    delegate void BatCallback(BallEventArgs e);
+
     class Bat
     {
         private BatCallback hitBallCallback;
