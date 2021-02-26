@@ -9,13 +9,18 @@ namespace BallEvent
     class Ball
     {
         public event EventHandler<BallEventArgs> BallInPlay;
-        public void OnBallInPlay(BallEventArgs e)
+        protected void OnBallInPlay(BallEventArgs e)
         {
             EventHandler<BallEventArgs> ballInPlay = BallInPlay;
-            if (BallInPlay != null)
+            if (ballInPlay != null)
             {
-                BallInPlay(this, e);
+                ballInPlay(this, e);
             }
+        }
+
+        public Bat GetNewBat()
+        {
+            return new Bat(new BatCallback(OnBallInPlay));
         }
     }
 }

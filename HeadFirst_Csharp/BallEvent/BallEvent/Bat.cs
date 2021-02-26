@@ -15,6 +15,7 @@ namespace BallEvent
         {
             this.hitBallCallback = new BatCallback(callbackDelegate);
         }
+        
         public void HitTheBall(BallEventArgs e)
         {
             if (hitBallCallback != null)
