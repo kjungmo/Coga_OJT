@@ -132,10 +132,10 @@
   <data name="label4" xml:space="preserve">
     <value />
   </data>
-  <data name="readButton" xml:space="preserve">
+  <data name="no" xml:space="preserve">
     <value />
   </data>
-  <data name="something" xml:space="preserve">
+  <data name="readButton" xml:space="preserve">
     <value />
   </data>
   <data name="tail" xml:space="preserve">
@@ -145,6 +145,9 @@
     <value />
   </data>
   <data name="updateButton" xml:space="preserve">
+    <value />
+  </data>
+  <data name="yes" xml:space="preserve">
     <value />
   </data>
 </root>

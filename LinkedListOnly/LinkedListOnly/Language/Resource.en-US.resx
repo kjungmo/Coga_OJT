@@ -132,6 +132,9 @@
   <data name="label4" xml:space="preserve">
     <value>INDEX</value>
   </data>
+  <data name="no" xml:space="preserve">
+    <value>noooo</value>
+  </data>
   <data name="readButton" xml:space="preserve">
     <value>READ</value>
   </data>
@@ -143,5 +146,8 @@
   </data>
   <data name="updateButton" xml:space="preserve">
     <value>UPDATE</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>yeeee</value>
   </data>
 </root>

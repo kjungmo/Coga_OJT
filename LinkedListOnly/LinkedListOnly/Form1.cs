@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace LinkedListOnly
 {
@@ -45,7 +46,7 @@ namespace LinkedListOnly
             createValue.Text = "";
             createIndex.Text = "";
             
-            WriteLog("!@yes");
+            WriteLog("!@yes !@no 111");
 
         }
 
@@ -166,7 +167,6 @@ namespace LinkedListOnly
         }
         public string tail = "Tail";
         public string head = "Head";
-
         private void SetTextLanguage()
         {
             label4.Text = LinkedListOnly.Language.Resource.label4;
@@ -178,12 +178,15 @@ namespace LinkedListOnly
             textBox1.Text = LinkedListOnly.Language.Resource.textBox1;
             head = LinkedListOnly.Language.Resource.head;
             tail = LinkedListOnly.Language.Resource.tail;
-            
         }
 
-        private void WriteLog(string log)
+        private void WriteLog(string something)
         {
-            richTextBox1.Text += log + "\n";
+            string pattern = @"!@([a-z, 0-9, A-Z])\w+";
+
+            var match = Regex.Match(something, pattern);
+            //Regex.Replace(something, pattern, m => LinkedListOnly.Language.Resource.ResourceManager.GetString(m.Value.Substring(2)));
+            richTextBox1.Text += Regex.Replace(something, pattern, m => LinkedListOnly.Language.Resource.ResourceManager.GetString(m.Value.Substring(2))) + "\n";
 
         }
     }

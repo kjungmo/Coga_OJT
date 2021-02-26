@@ -108,18 +108,18 @@ namespace LinkedListOnly.Language {
         /// <summary>
         ///   과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string readButton {
+        internal static string no {
             get {
-                return ResourceManager.GetString("readButton", resourceCulture);
+                return ResourceManager.GetString("no", resourceCulture);
             }
         }
         
         /// <summary>
         ///   과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string something {
+        internal static string readButton {
             get {
-                return ResourceManager.GetString("something", resourceCulture);
+                return ResourceManager.GetString("readButton", resourceCulture);
             }
         }
         
@@ -147,6 +147,15 @@ namespace LinkedListOnly.Language {
         internal static string updateButton {
             get {
                 return ResourceManager.GetString("updateButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string yes {
+            get {
+                return ResourceManager.GetString("yes", resourceCulture);
             }
         }
     }
