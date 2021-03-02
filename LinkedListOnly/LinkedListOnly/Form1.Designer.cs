@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.deleteIndex = new System.Windows.Forms.TextBox();
             this.updateIndex = new System.Windows.Forms.TextBox();
             this.readIndex = new System.Windows.Forms.TextBox();
@@ -49,156 +50,110 @@
             // 
             // deleteIndex
             // 
-            this.deleteIndex.Location = new System.Drawing.Point(303, 384);
+            resources.ApplyResources(this.deleteIndex, "deleteIndex");
             this.deleteIndex.Name = "deleteIndex";
-            this.deleteIndex.Size = new System.Drawing.Size(59, 21);
-            this.deleteIndex.TabIndex = 34;
             // 
             // updateIndex
             // 
-            this.updateIndex.Location = new System.Drawing.Point(302, 344);
+            resources.ApplyResources(this.updateIndex, "updateIndex");
             this.updateIndex.Name = "updateIndex";
-            this.updateIndex.Size = new System.Drawing.Size(59, 21);
-            this.updateIndex.TabIndex = 33;
             // 
             // readIndex
             // 
-            this.readIndex.Location = new System.Drawing.Point(303, 302);
+            resources.ApplyResources(this.readIndex, "readIndex");
             this.readIndex.Name = "readIndex";
-            this.readIndex.Size = new System.Drawing.Size(58, 21);
-            this.readIndex.TabIndex = 32;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(311, 242);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 12);
-            this.label4.TabIndex = 31;
-            this.label4.Text = "Index";
             // 
             // createIndex
             // 
-            this.createIndex.Location = new System.Drawing.Point(302, 257);
+            resources.ApplyResources(this.createIndex, "createIndex");
             this.createIndex.Name = "createIndex";
-            this.createIndex.Size = new System.Drawing.Size(59, 21);
-            this.createIndex.TabIndex = 30;
             // 
             // updateValue
             // 
-            this.updateValue.Location = new System.Drawing.Point(399, 344);
+            resources.ApplyResources(this.updateValue, "updateValue");
             this.updateValue.Name = "updateValue";
-            this.updateValue.Size = new System.Drawing.Size(59, 21);
-            this.updateValue.TabIndex = 29;
             // 
             // readValue
             // 
-            this.readValue.Location = new System.Drawing.Point(400, 302);
+            resources.ApplyResources(this.readValue, "readValue");
             this.readValue.Name = "readValue";
             this.readValue.ReadOnly = true;
-            this.readValue.Size = new System.Drawing.Size(58, 21);
-            this.readValue.TabIndex = 28;
             // 
             // showLinkedList
             // 
+            resources.ApplyResources(this.showLinkedList, "showLinkedList");
             this.showLinkedList.FormattingEnabled = true;
-            this.showLinkedList.ItemHeight = 12;
-            this.showLinkedList.Location = new System.Drawing.Point(41, 65);
             this.showLinkedList.Name = "showLinkedList";
-            this.showLinkedList.Size = new System.Drawing.Size(238, 304);
-            this.showLinkedList.TabIndex = 27;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(408, 242);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 12);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "Value";
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(480, 380);
+            resources.ApplyResources(this.DeleteButton, "DeleteButton");
             this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(75, 23);
-            this.DeleteButton.TabIndex = 25;
-            this.DeleteButton.Text = "Delete";
             this.DeleteButton.UseVisualStyleBackColor = true;
             this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(480, 340);
+            resources.ApplyResources(this.updateButton, "updateButton");
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(75, 23);
-            this.updateButton.TabIndex = 24;
-            this.updateButton.Text = "Update";
             this.updateButton.UseVisualStyleBackColor = true;
             this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // readButton
             // 
-            this.readButton.Location = new System.Drawing.Point(480, 298);
+            resources.ApplyResources(this.readButton, "readButton");
             this.readButton.Name = "readButton";
-            this.readButton.Size = new System.Drawing.Size(75, 23);
-            this.readButton.TabIndex = 23;
-            this.readButton.Text = "Read";
             this.readButton.UseVisualStyleBackColor = true;
             this.readButton.Click += new System.EventHandler(this.readButton_Click);
             // 
             // createButton
             // 
-            this.createButton.Location = new System.Drawing.Point(480, 253);
+            resources.ApplyResources(this.createButton, "createButton");
             this.createButton.Name = "createButton";
-            this.createButton.Size = new System.Drawing.Size(75, 23);
-            this.createButton.TabIndex = 22;
-            this.createButton.Text = "Create";
             this.createButton.UseVisualStyleBackColor = true;
             this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
             // createValue
             // 
-            this.createValue.Location = new System.Drawing.Point(399, 257);
+            resources.ApplyResources(this.createValue, "createValue");
             this.createValue.Name = "createValue";
-            this.createValue.Size = new System.Drawing.Size(59, 21);
-            this.createValue.TabIndex = 21;
             // 
             // comboBox1
             // 
+            resources.ApplyResources(this.comboBox1, "comboBox1");
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "한국어",
-            "영어"});
-            this.comboBox1.Location = new System.Drawing.Point(379, 77);
+            resources.GetString("comboBox1.Items"),
+            resources.GetString("comboBox1.Items1")});
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(79, 20);
-            this.comboBox1.TabIndex = 35;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // textBox1
             // 
+            resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(305, 83);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(70, 14);
-            this.textBox1.TabIndex = 36;
-            this.textBox1.Text = "Language :";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(331, 123);
+            resources.ApplyResources(this.richTextBox1, "richTextBox1");
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(210, 96);
-            this.richTextBox1.TabIndex = 37;
-            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 434);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBox1);
@@ -219,7 +174,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
-            this.Text = "Meine Liste";
             this.ResumeLayout(false);
             this.PerformLayout();
 
